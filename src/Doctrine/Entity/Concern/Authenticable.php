@@ -25,9 +25,6 @@ trait Authenticable
     #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
     private ?string $confirmationToken = null;
 
-    #[ORM\Column(type: Types::BOOLEAN)]
-    private bool $enable;
-
     public function getEmail(): string
     {
         return $this->email;
