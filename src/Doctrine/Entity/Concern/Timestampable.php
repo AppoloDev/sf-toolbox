@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Domain\Shared\Concern;
+namespace AppoloDev\SFToolbox\Doctrine\Entity\Concern;
 
 use DateTime;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 trait Timestampable
 {
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DateTime $createdAt = null;
+    private ?DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DateTime $updatedAt = null;
+    private ?DateTimeInterface $updatedAt = null;
 
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
@@ -25,24 +26,24 @@ trait Timestampable
         }
     }
 
-    public function getCreatedAt(): ?DateTime
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?DateTime $createdAt): self
+    public function setCreatedAt(?DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?DateTime
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?DateTime $updatedAt): self
+    public function setUpdatedAt(?DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

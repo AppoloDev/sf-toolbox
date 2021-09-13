@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Shared\Concern;
+namespace AppoloDev\SFToolbox\Doctrine\Entity\Concern;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;

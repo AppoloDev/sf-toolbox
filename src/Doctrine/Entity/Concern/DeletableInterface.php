@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Shared\Concern;
+namespace AppoloDev\SFToolbox\Doctrine\Entity\Concern;
 
 interface DeletableInterface
 {

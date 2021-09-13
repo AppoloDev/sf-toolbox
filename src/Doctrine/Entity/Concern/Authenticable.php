@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Shared\Concern;
+namespace AppoloDev\SFToolbox\Doctrine\Entity\Concern;
 
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
@@ -28,7 +28,7 @@ trait Authenticable
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $enable;
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -114,18 +114,6 @@ trait Authenticable
     public function setConfirmationTokenExpiredAt(?DateTimeInterface $confirmationTokenExpiredAt): self
     {
         $this->confirmationTokenExpiredAt = $confirmationTokenExpiredAt;
-
-        return $this;
-    }
-
-    public function isEnable(): bool
-    {
-        return $this->enable;
-    }
-
-    public function setEnable(bool $enable): self
-    {
-        $this->enable = $enable;
 
         return $this;
     }
