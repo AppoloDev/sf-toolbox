@@ -1,0 +1,24 @@
+{
+    "name": "appolodev/sf-toolbox",
+    "description": "Toolbox for Symfony",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fredxd",
+            "email": "frederic@appolo.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.0",
+        "doctrine/orm": "^2.9",
+        "symfony/uid": "^5.3",
+        "symfony/doctrine-bridge": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "AppoloDev\\SFToolbox\\": "src/"
+        }
+    }
+}
