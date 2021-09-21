@@ -94,40 +94,6 @@ trait WhereCriteria
         return $this;
     }
 
-    /**
-     * @deprecated
-     * @param string $field
-     * @param bool $is
-     * @param string|null $customAlias
-     * @return $this
-     */
-    public function is(string $field, bool $is, ?string $customAlias = null): self
-    {
-        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $this->qb
-            ->andWhere($this->qb->expr()->eq($alias.'.'.$field, ':isField'.$field))
-            ->setParameter('isField'.$field, $is);
-
-        return $this;
-    }
-
-    /**
-     * @deprecated
-     * @param string $field
-     * @param string|null $id
-     * @param string|null $customAlias
-     * @return $this
-     */
-    public function eqBinary(string $field, ?string $id, ?string $customAlias = null): self
-    {
-        if (!is_null($id)) {
-            $binary = Uuid::fromString($id)->toBinary();
-            $this->eq($field, $binary, $customAlias);
-        }
-
-        return $this;
-    }
-
     public function eq(string $field, null|int|bool|string $value, ?string $customAlias = null): self
     {
         if (is_null($value)) {
@@ -211,32 +177,24 @@ trait WhereCriteria
         return $this;
     }
 
-    public function dateNotExpired(
-        string $field,
-        ?string $customAlias = null
-    ): self {
+    public function dateNotExpired(string $field, ?string $customAlias = null): self {
         $currentDate = (new DateTimeImmutable());
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
         $this->qb
-            ->andWhere(
-                $this->qb->expr()->gte($alias.'.'.$field, ':date'.$field))
-            ->setParameter('date'.$field, $currentDate->setTime(0, 0, 0, 0));
+            ->andWhere($this->qb->expr()->gte($alias.'.'.$field, ':date'.$field))
+            ->setParameter('date'.$field, $currentDate);
 
         return $this;
     }
 
-    public function dateExpired(
-        string $field,
-        ?string $customAlias = null
-    ): self {
+    public function dateExpired(string $field, ?string $customAlias = null): self {
         $currentDate = (new DateTimeImmutable());
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
         $this->qb
-            ->andWhere(
-                $this->qb->expr()->lte($alias.'.'.$field, ':date'.$field))
-            ->setParameter('date'.$field, $currentDate->setTime(0, 0, 0, 0));
+            ->andWhere($this->qb->expr()->lte($alias.'.'.$field, ':date'.$field))
+            ->setParameter('date'.$field, $currentDate);
 
         return $this;
     }
