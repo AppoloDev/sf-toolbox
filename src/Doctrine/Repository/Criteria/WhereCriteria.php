@@ -119,6 +119,11 @@ trait WhereCriteria
             return $this;
         }
 
+        $isUuid = UuidUtils::isUuid($value);
+        if ($isUuid) {
+            $value = Uuid::fromString($value)->toBinary();
+        }
+
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
         $this->qb
             ->andWhere($this->qb->expr()->neq($alias.'.'.$field, ':value'.$field))
