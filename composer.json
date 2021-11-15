@@ -11,7 +11,9 @@
     ],
     "minimum-stability": "stable",
     "require": {
+        "ext-intl": "*",
         "php": ">=8.0",
+        "twig/twig": "^2.12|^3.0",
         "doctrine/orm": "^2.9",
         "symfony/uid": "^5.3",
         "symfony/doctrine-bridge": "^5.3"
