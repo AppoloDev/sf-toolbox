@@ -170,8 +170,12 @@ trait WhereCriteria
         return $this;
     }
 
-    public function dateBetween(string $field, DateTimeInterface $from, DateTimeInterface $to, ?string $customAlias = null): self
-    {
+    public function dateBetween(
+        string $field,
+        DateTimeInterface $from,
+        DateTimeInterface $to,
+        ?string $customAlias = null
+    ): self {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
         $this->qb
@@ -182,7 +186,11 @@ trait WhereCriteria
         return $this;
     }
 
-    public function dateNotExpired(string $field, ?string $customAlias = null, ?DateTimeInterface $customDate): self {
+    public function dateNotExpired(
+        string $field,
+        ?string $customAlias = null,
+        ?DateTimeInterface $customDate = null
+    ): self {
         $currentDate = is_null($customDate) ? new DateTimeImmutable() : $customDate;
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
@@ -193,7 +201,11 @@ trait WhereCriteria
         return $this;
     }
 
-    public function dateExpired(string $field, ?string $customAlias = null, ?DateTimeInterface $customDate): self {
+    public function dateExpired(
+        string $field,
+        ?string $customAlias = null,
+        ?DateTimeInterface $customDate = null
+    ): self {
         $currentDate = is_null($customDate) ? new DateTimeImmutable() : $customDate;
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
