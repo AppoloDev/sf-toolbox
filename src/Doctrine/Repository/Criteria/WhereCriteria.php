@@ -182,8 +182,8 @@ trait WhereCriteria
         return $this;
     }
 
-    public function dateNotExpired(string $field, ?string $customAlias = null): self {
-        $currentDate = (new DateTimeImmutable());
+    public function dateNotExpired(string $field, ?string $customAlias = null, ?DateTimeInterface $customDate): self {
+        $currentDate = is_null($customDate) ? new DateTimeImmutable() : $customDate;
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
         $this->qb
@@ -193,8 +193,8 @@ trait WhereCriteria
         return $this;
     }
 
-    public function dateExpired(string $field, ?string $customAlias = null): self {
-        $currentDate = (new DateTimeImmutable());
+    public function dateExpired(string $field, ?string $customAlias = null, ?DateTimeInterface $customDate): self {
+        $currentDate = is_null($customDate) ? new DateTimeImmutable() : $customDate;
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
         $this->qb
