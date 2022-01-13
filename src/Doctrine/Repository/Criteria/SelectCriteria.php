@@ -43,6 +43,15 @@ trait SelectCriteria
         return $this;
     }
 
+    public function select(string $field, ?string $customAlias = null, bool $addSelect = false): self
+    {
+        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+
+        $this->qb->select($alias.'.'.$field);
+
+        return $this;
+    }
+
     public function addSelect(string $alias): self
     {
         $this->qb->addSelect($alias);
