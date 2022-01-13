@@ -28,4 +28,12 @@ trait GroupAndOrderCriteria
 
         return $this;
     }
+
+    public function indexBy(string $field, ?string $customAlias = null): self
+    {
+        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+
+        $this->qb->indexBy($alias, $alias.'.'.$field);
+        return $this;
+    }
 }
