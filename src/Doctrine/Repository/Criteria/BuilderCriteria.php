@@ -22,6 +22,13 @@ trait BuilderCriteria
         return $this->qb;
     }
 
+    public function useQBMethod(string $methodName, array $params = []): self
+    {
+        $this->qb->$methodName(...$params);
+
+        return $this;
+    }
+
     public function limit(int $limit): self
     {
         $this->qb->setMaxResults($limit);
