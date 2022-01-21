@@ -12,7 +12,7 @@ trait Identifiable
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     #[ORM\Id]
-    private ?Uuid $id;
+    private ?Uuid $id = null;
 
     public function getId(): ?Uuid
     {
