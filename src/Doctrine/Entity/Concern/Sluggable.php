@@ -5,10 +5,12 @@ namespace AppoloDev\SFToolbox\Doctrine\Entity\Concern;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 trait Sluggable
 {
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    #[Groups(['slug'])]
     private ?string $slug = null;
 
     public function getSlug(): ?string

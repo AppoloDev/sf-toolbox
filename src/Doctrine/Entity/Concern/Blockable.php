@@ -4,10 +4,12 @@ namespace AppoloDev\SFToolbox\Doctrine\Entity\Concern;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 trait Blockable
 {
     #[ORM\Column(type: Types::BOOLEAN)]
+    #[Groups(['block'])]
     private bool $blocked = false;
 
     public function isBlocked(): bool

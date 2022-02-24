@@ -5,13 +5,16 @@ namespace AppoloDev\SFToolbox\Doctrine\Entity\Concern;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 trait Authenticable
 {
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
+    #[Groups(['authentication'])]
     private string $email;
 
     #[ORM\Column(type: Types::JSON)]
+    #[Groups(['authentication'])]
     private array $roles = [];
 
     #[ORM\Column(type: Types::STRING)]

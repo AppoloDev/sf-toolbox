@@ -4,16 +4,20 @@ namespace AppoloDev\SFToolbox\Doctrine\Entity\Concern;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 trait Localisable
 {
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['localisation'])]
     private ?string $address;
 
     #[ORM\Column(type: Types::STRING, length: 5, nullable: true)]
+    #[Groups(['localisation'])]
     private ?string $zipCode;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Groups(['localisation'])]
     private ?string $city;
 
     public function getAddress(): ?string
