@@ -96,7 +96,7 @@ trait WhereCriteria
 
     public function eq(string $field, null|int|bool|string $value, ?string $customAlias = null): self
     {
-        if (is_null($value)) {
+        if (is_null($value) || '' === $value) {
             return $this;
         }
 
