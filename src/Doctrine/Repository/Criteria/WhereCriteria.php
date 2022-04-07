@@ -42,10 +42,10 @@ trait WhereCriteria
 
             foreach ($fieldsToSearch as $fieldToSearch) {
                 $value = ('id' === $fieldToSearch && $isUuid ? Uuid::fromString($term)->toBinary() : $term);
-                $paramName = $alias.$fieldToSearch;
-                $orX->add($this->qb->expr()->like('LOWER('.$alias.'.'.$fieldToSearch.')', ':likeSearchInto'.$paramName));
-                $orX->add($this->qb->expr()->like($alias.'.'.$fieldToSearch, ':likeSearchInto'.$paramName));
-                $this->qb->setParameter('likeSearchInto'.$paramName, '%'.strtolower($value).'%');
+                $paramName = 'likeSearchInto'.$alias.$fieldToSearch;
+                $orX->add($this->qb->expr()->like('LOWER('.$alias.'.'.$fieldToSearch.')', ':'.$paramName));
+                $orX->add($this->qb->expr()->like($alias.'.'.$fieldToSearch, ':'.$paramName));
+                $this->qb->setParameter($paramName, '%'.strtolower($value).'%');
             }
 
             $composite->add($orX);
@@ -56,9 +56,10 @@ trait WhereCriteria
     {
         if (count($params) > 0) {
             $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+            $paramName = 'inParam'.$alias.$field;
             $this->qb
-                ->andWhere($this->qb->expr()->in($alias.'.'.$field, ':inParam'.$field))
-                ->setParameter('inParam'.$field, $params);
+                ->andWhere($this->qb->expr()->in($alias.'.'.$field, ':'.$paramName))
+                ->setParameter($paramName, $params);
         }
 
         return $this;
@@ -68,9 +69,10 @@ trait WhereCriteria
     {
         if (count($params) > 0) {
             $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+            $paramName = 'notInParam'.$alias.$field;
             $this->qb
-                ->andWhere($this->qb->expr()->notIn($alias.'.'.$field, ':notInParam'.$field))
-                ->setParameter('notInParam'.$field, $params);
+                ->andWhere($this->qb->expr()->notIn($alias.'.'.$field, ':'.$paramName))
+                ->setParameter($paramName, $params);
         }
 
         return $this;
@@ -106,9 +108,10 @@ trait WhereCriteria
         }
 
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+        $paramName = 'value'.$alias.$field;
         $this->qb
-            ->andWhere($this->qb->expr()->eq($alias.'.'.$field, ':value'.$field))
-            ->setParameter('value'.$field, $value);
+            ->andWhere($this->qb->expr()->eq($alias.'.'.$field, ':'.$paramName))
+            ->setParameter($paramName, $value);
 
         return $this;
     }
@@ -125,9 +128,10 @@ trait WhereCriteria
         }
 
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+        $paramName = 'value'.$alias.$field;
         $this->qb
-            ->andWhere($this->qb->expr()->neq($alias.'.'.$field, ':value'.$field))
-            ->setParameter('value'.$field, $value);
+            ->andWhere($this->qb->expr()->neq($alias.'.'.$field, ':'.$paramName))
+            ->setParameter($paramName, $value);
 
         return $this;
     }
@@ -135,9 +139,10 @@ trait WhereCriteria
     public function comparisonOperator(string $field, string $operator, string $value, ?string $customAlias = null): self
     {
         $alias = null !== $customAlias ? $customAlias : self::$alias;
+        $paramName = 'value'.$alias.$field;
         $this->qb
-            ->andWhere($this->qb->expr()->$operator($alias.'.'.$field, ':value'.$field))
-            ->setParameter('value'.$field, $value)
+            ->andWhere($this->qb->expr()->$operator($alias.'.'.$field, ':'.$paramName))
+            ->setParameter($paramName, $value)
         ;
 
         return $this;
@@ -162,10 +167,11 @@ trait WhereCriteria
     public function date(string $field, DateTimeInterface $date, ?string $customAlias = null): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+        $paramName = 'date'.$alias.$field;
 
         $this->qb
-            ->andWhere($this->qb->expr()->eq($alias.'.'.$field, ':date'.$field))
-            ->setParameter('date'.$field, $date);
+            ->andWhere($this->qb->expr()->eq($alias.'.'.$field, ':'.$paramName))
+            ->setParameter($paramName, $date);
 
         return $this;
     }
@@ -193,10 +199,11 @@ trait WhereCriteria
     ): self {
         $currentDate = is_null($customDate) ? new DateTimeImmutable() : $customDate;
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+        $paramName = 'date'.$alias.$field;
 
         $this->qb
-            ->andWhere($this->qb->expr()->gte($alias.'.'.$field, ':date'.$field))
-            ->setParameter('date'.$field, $currentDate);
+            ->andWhere($this->qb->expr()->gte($alias.'.'.$field, ':'.$paramName))
+            ->setParameter($paramName, $currentDate);
 
         return $this;
     }
@@ -208,10 +215,11 @@ trait WhereCriteria
     ): self {
         $currentDate = is_null($customDate) ? new DateTimeImmutable() : $customDate;
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+        $paramName = 'date'.$alias.$field;
 
         $this->qb
-            ->andWhere($this->qb->expr()->lte($alias.'.'.$field, ':date'.$field))
-            ->setParameter('date'.$field, $currentDate);
+            ->andWhere($this->qb->expr()->lte($alias.'.'.$field, ':'.$paramName))
+            ->setParameter($paramName, $currentDate);
 
         return $this;
     }
