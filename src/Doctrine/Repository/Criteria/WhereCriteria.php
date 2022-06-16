@@ -227,9 +227,21 @@ trait WhereCriteria
     public function published(
         string $fieldFrom = 'publicationStartDate',
         string $fieldTo = 'publicationEndDate',
-        ?string $customAlias = null
+        ?string $customAlias = null,
+        ?\DateTime $currentDate = null,
     ): self {
-        $currentDate = (new DateTimeImmutable());
+        if(is_null($currentDate)) {
+            $startDate = (new DateTimeImmutable());
+            $startDate->setTime(0, 0, 0, 0);
+            $endDate = (new DateTimeImmutable());
+            $endDate->setTime(23, 59, 59, 59);
+        } else {
+            $startDate = $currentDate;
+            $endDate = $currentDate;
+        }
+        $startDate->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $endDate->setTimezone(new \DateTimeZone('Europe/Paris'));
+
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
         $this->qb
@@ -241,10 +253,10 @@ trait WhereCriteria
                 $this->qb->expr()->gte($alias.'.'.$fieldTo, ':publishedFieldEnd'),
                 $this->qb->expr()->isNull($alias.'.'.$fieldTo)
             ))
-            ->setParameter('publishedFieldStart', $currentDate->setTime(0, 0, 0, 0))
+            ->setParameter('publishedFieldStart', $startDate)
             ->setParameter(
                 'publishedFieldEnd',
-                $currentDate->setTime(23, 59, 59, 59)
+                $endDate
             );
 
         return $this;
