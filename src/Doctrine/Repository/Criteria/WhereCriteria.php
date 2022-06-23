@@ -269,11 +269,12 @@ trait WhereCriteria
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
-        $sqlDistance = "(6378 * acos(cos(radians({$lat})) * cos(radians({$alias}.{$latField})) * cos(radians({$alias}.{$lngField}) - radians({$lng})) + sin(radians({$lat})) * sin(radians({$alias}.{$latField})))";
+        $sqlDistance = "(6378 * acos(cos(radians({$lat})) * cos(radians({$alias}.{$latField})) * cos(radians({$alias}.{$lngField}) - radians({$lng})) + sin(radians({$lat})) * sin(radians({$alias}.{$latField}))))";
 
         $this->qb
             ->andWhere($this->qb->expr()->lt($sqlDistance, ':radius'))
             ->setParameter('radius', $radius);
+
 
         return $this;
     }
