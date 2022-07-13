@@ -45,7 +45,7 @@ trait WhereCriteria
                 $paramName = 'likeSearchInto' . $alias . $fieldToSearch;
                 $orX->add($this->qb->expr()->like('LOWER(' . $alias . '.' . $fieldToSearch . ')', ':' . $paramName));
                 $orX->add($this->qb->expr()->like($alias . '.' . $fieldToSearch, ':' . $paramName));
-                $this->qb->setParameter($paramName, '%' . strtolower($value) . '%');
+                $this->qb->setParameter($paramName, '%' . strtolower($value) . '%', $isUuid ? 'uuid' : null);
             }
 
             $composite->add($orX);
@@ -111,7 +111,7 @@ trait WhereCriteria
         $paramName = 'value' . $alias . $field;
         $this->qb
             ->andWhere($this->qb->expr()->eq($alias . '.' . $field, ':' . $paramName))
-            ->setParameter($paramName, $value);
+            ->setParameter($paramName, $value, $isUuid ? 'uuid' : null);
 
         return $this;
     }
@@ -131,7 +131,7 @@ trait WhereCriteria
         $paramName = 'value' . $alias . $field;
         $this->qb
             ->andWhere($this->qb->expr()->neq($alias . '.' . $field, ':' . $paramName))
-            ->setParameter($paramName, $value);
+            ->setParameter($paramName, $value, $isUuid ? 'uuid' : null);
 
         return $this;
     }
@@ -257,10 +257,7 @@ trait WhereCriteria
                 $this->qb->expr()->isNull($alias . '.' . $fieldTo)
             ))
             ->setParameter('publishedFieldStart', $startDate)
-            ->setParameter(
-                'publishedFieldEnd',
-                $endDate
-            );
+            ->setParameter('publishedFieldEnd', $endDate);
 
         return $this;
     }
