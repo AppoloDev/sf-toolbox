@@ -64,9 +64,11 @@ trait BuilderCriteria
 
     public function getResultsIndexedById(): array
     {
-        return array_reduce($this->getQB()->getResults(), function (?array $acc, IdentifiableInterface $item) {
+        $results = array_reduce($this->getQB()->getResults(), function (?array $acc, IdentifiableInterface $item) {
             $acc[$item->getId()->__toString()] = $item;
             return $acc;
         });
+
+        return is_null($results) ? [] : $results;
     }
 }
