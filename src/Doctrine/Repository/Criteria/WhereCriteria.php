@@ -73,6 +73,11 @@ trait WhereCriteria
     public function notIn(string $field, array $params, ?string $customAlias = null): self
     {
         if (count($params) > 0) {
+            $params = array_map(function (mixed $param) {
+                $isUuid = UuidUtils::isUuid($param);
+                return $isUuid ? Uuid::fromString($param)->toBinary() : $param;
+            }, $params);
+
             $alias = !is_null($customAlias) ? $customAlias : self::$alias;
             $paramName = 'notInParam' . $alias . $field;
             $this->qb
