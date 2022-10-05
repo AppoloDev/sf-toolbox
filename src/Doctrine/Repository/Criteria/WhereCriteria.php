@@ -42,7 +42,7 @@ trait WhereCriteria
 
             foreach ($fieldsToSearch as $fieldToSearch) {
                 $value = ('id' === $fieldToSearch && $isUuid ? Uuid::fromString($term)->toBinary() : $term);
-                $paramName = 'likeSearchInto' . $alias . $fieldToSearch;
+                $paramName = 'likeSearchInto' . $alias . $fieldToSearch . uniqid();
                 $orX->add($this->qb->expr()->like('LOWER(' . $alias . '.' . $fieldToSearch . ')', ':' . $paramName));
                 $orX->add($this->qb->expr()->like($alias . '.' . $fieldToSearch, ':' . $paramName));
                 $this->qb->setParameter($paramName, '%' . strtolower($value) . '%', $isUuid ? 'uuid' : null);
@@ -61,7 +61,7 @@ trait WhereCriteria
             }, $params);
 
             $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-            $paramName = 'inParam' . $alias . $field;
+            $paramName = 'inParam' . $alias . $field . uniqid();
             $this->qb
                 ->andWhere($this->qb->expr()->in($alias . '.' . $field, ':' . $paramName))
                 ->setParameter($paramName, $params);
@@ -79,7 +79,7 @@ trait WhereCriteria
             }, $params);
 
             $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-            $paramName = 'notInParam' . $alias . $field;
+            $paramName = 'notInParam' . $alias . $field . uniqid();
             $this->qb
                 ->andWhere($this->qb->expr()->notIn($alias . '.' . $field, ':' . $paramName))
                 ->setParameter($paramName, $params);
@@ -118,7 +118,7 @@ trait WhereCriteria
         }
 
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $paramName = 'value' . $alias . $field;
+        $paramName = 'value' . $alias . $field . uniqid();
         $this->qb
             ->andWhere($this->qb->expr()->eq($alias . '.' . $field, ':' . $paramName))
             ->setParameter($paramName, $value, $isUuid ? 'uuid' : null);
@@ -138,7 +138,7 @@ trait WhereCriteria
         }
 
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $paramName = 'value' . $alias . $field;
+        $paramName = 'value' . $alias . $field . uniqid();
         $this->qb
             ->andWhere($this->qb->expr()->neq($alias . '.' . $field, ':' . $paramName))
             ->setParameter($paramName, $value, $isUuid ? 'uuid' : null);
@@ -149,7 +149,7 @@ trait WhereCriteria
     public function comparisonOperator(string $field, string $operator, string $value, ?string $customAlias = null): self
     {
         $alias = null !== $customAlias ? $customAlias : self::$alias;
-        $paramName = 'value' . $alias . $field;
+        $paramName = 'value' . $alias . $field . uniqid();
         $this->qb
             ->andWhere($this->qb->expr()->$operator($alias . '.' . $field, ':' . $paramName))
             ->setParameter($paramName, $value);
@@ -176,7 +176,7 @@ trait WhereCriteria
     public function date(string $field, DateTimeInterface $date, ?string $customAlias = null): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $paramName = 'date' . $alias . $field;
+        $paramName = 'date' . $alias . $field . uniqid();
 
         $this->qb
             ->andWhere($this->qb->expr()->eq($alias . '.' . $field, ':' . $paramName))
@@ -210,7 +210,7 @@ trait WhereCriteria
     {
         $currentDate = is_null($customDate) ? new DateTimeImmutable() : $customDate;
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $paramName = 'date' . $alias . $field;
+        $paramName = 'date' . $alias . $field . uniqid();
 
         $this->qb
             ->andWhere($this->qb->expr()->gte($alias . '.' . $field, ':' . $paramName))
@@ -227,7 +227,7 @@ trait WhereCriteria
     {
         $currentDate = is_null($customDate) ? new DateTimeImmutable() : $customDate;
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $paramName = 'date' . $alias . $field;
+        $paramName = 'date' . $alias . $field . uniqid();
 
         $this->qb
             ->andWhere($this->qb->expr()->lte($alias . '.' . $field, ':' . $paramName))
