@@ -42,10 +42,10 @@ trait WhereCriteria
 
             foreach ($fieldsToSearch as $fieldToSearch) {
                 $value = ('id' === $fieldToSearch && $isUuid ? Uuid::fromString($term)->toBinary() : $term);
-                $paramName = $alias.$fieldToSearch;
-                $orX->add($this->qb->expr()->like('LOWER('.$alias.'.'.$fieldToSearch.')', ':likeSearchInto'.$paramName));
-                $orX->add($this->qb->expr()->like($alias.'.'.$fieldToSearch, ':likeSearchInto'.$paramName));
-                $this->qb->setParameter('likeSearchInto'.$paramName, '%'.strtolower($value).'%');
+                $paramName = 'likeSearchInto' . $alias . $fieldToSearch . uniqid();
+                $orX->add($this->qb->expr()->like('LOWER(' . $alias . '.' . $fieldToSearch . ')', ':' . $paramName));
+                $orX->add($this->qb->expr()->like($alias . '.' . $fieldToSearch, ':' . $paramName));
+                $this->qb->setParameter($paramName, '%' . strtolower($value) . '%', $isUuid ? 'uuid' : null);
             }
 
             $composite->add($orX);
@@ -55,10 +55,16 @@ trait WhereCriteria
     public function in(string $field, array $params, ?string $customAlias = null): self
     {
         if (count($params) > 0) {
+            $params = array_map(function (mixed $param) {
+                $isUuid = UuidUtils::isUuid($param);
+                return $isUuid ? Uuid::fromString($param)->toBinary() : $param;
+            }, $params);
+
             $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+            $paramName = 'inParam' . $alias . $field . uniqid();
             $this->qb
-                ->andWhere($this->qb->expr()->in($alias.'.'.$field, ':inParam'.$field))
-                ->setParameter('inParam'.$field, $params);
+                ->andWhere($this->qb->expr()->in($alias . '.' . $field, ':' . $paramName))
+                ->setParameter($paramName, $params);
         }
 
         return $this;
@@ -67,10 +73,16 @@ trait WhereCriteria
     public function notIn(string $field, array $params, ?string $customAlias = null): self
     {
         if (count($params) > 0) {
+            $params = array_map(function (mixed $param) {
+                $isUuid = UuidUtils::isUuid($param);
+                return $isUuid ? Uuid::fromString($param)->toBinary() : $param;
+            }, $params);
+
             $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+            $paramName = 'notInParam' . $alias . $field . uniqid();
             $this->qb
-                ->andWhere($this->qb->expr()->notIn($alias.'.'.$field, ':notInParam'.$field))
-                ->setParameter('notInParam'.$field, $params);
+                ->andWhere($this->qb->expr()->notIn($alias . '.' . $field, ':' . $paramName))
+                ->setParameter($paramName, $params);
         }
 
         return $this;
@@ -80,7 +92,7 @@ trait WhereCriteria
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
         $this->qb
-            ->andWhere($this->qb->expr()->isNull($alias.'.'.$field));
+            ->andWhere($this->qb->expr()->isNull($alias . '.' . $field));
 
         return $this;
     }
@@ -89,14 +101,14 @@ trait WhereCriteria
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
         $this->qb
-            ->andWhere($this->qb->expr()->isNotNull($alias.'.'.$field));
+            ->andWhere($this->qb->expr()->isNotNull($alias . '.' . $field));
 
         return $this;
     }
 
     public function eq(string $field, null|int|bool|string $value, ?string $customAlias = null): self
     {
-        if (is_null($value)) {
+        if (is_null($value) || '' === $value) {
             return $this;
         }
 
@@ -106,9 +118,10 @@ trait WhereCriteria
         }
 
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+        $paramName = 'value' . $alias . $field . uniqid();
         $this->qb
-            ->andWhere($this->qb->expr()->eq($alias.'.'.$field, ':value'.$field))
-            ->setParameter('value'.$field, $value);
+            ->andWhere($this->qb->expr()->eq($alias . '.' . $field, ':' . $paramName))
+            ->setParameter($paramName, $value, $isUuid ? 'uuid' : null);
 
         return $this;
     }
@@ -125,9 +138,10 @@ trait WhereCriteria
         }
 
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+        $paramName = 'value' . $alias . $field . uniqid();
         $this->qb
-            ->andWhere($this->qb->expr()->neq($alias.'.'.$field, ':value'.$field))
-            ->setParameter('value'.$field, $value);
+            ->andWhere($this->qb->expr()->neq($alias . '.' . $field, ':' . $paramName))
+            ->setParameter($paramName, $value, $isUuid ? 'uuid' : null);
 
         return $this;
     }
@@ -135,10 +149,10 @@ trait WhereCriteria
     public function comparisonOperator(string $field, string $operator, string $value, ?string $customAlias = null): self
     {
         $alias = null !== $customAlias ? $customAlias : self::$alias;
+        $paramName = 'value' . $alias . $field . uniqid();
         $this->qb
-            ->andWhere($this->qb->expr()->$operator($alias.'.'.$field, ':value'.$field))
-            ->setParameter('value'.$field, $value)
-        ;
+            ->andWhere($this->qb->expr()->$operator($alias . '.' . $field, ':' . $paramName))
+            ->setParameter($paramName, $value);
 
         return $this;
     }
@@ -152,9 +166,9 @@ trait WhereCriteria
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
         $this->qb
-            ->andWhere($this->qb->expr()->between($alias.'.'.$field, ':from'.$field, ':to'.$field))
-            ->setParameter('from'.$field, $from)
-            ->setParameter('to'.$field, $to);
+            ->andWhere($this->qb->expr()->between($alias . '.' . $field, ':from' . $field, ':to' . $field))
+            ->setParameter('from' . $field, $from)
+            ->setParameter('to' . $field, $to);
 
         return $this;
     }
@@ -162,95 +176,112 @@ trait WhereCriteria
     public function date(string $field, DateTimeInterface $date, ?string $customAlias = null): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+        $paramName = 'date' . $alias . $field . uniqid();
 
         $this->qb
-            ->andWhere($this->qb->expr()->eq($alias.'.'.$field, ':date'.$field))
-            ->setParameter('date'.$field, $date);
+            ->andWhere($this->qb->expr()->eq($alias . '.' . $field, ':' . $paramName))
+            ->setParameter($paramName, $date);
 
         return $this;
     }
 
     public function dateBetween(
-        string $field,
+        string            $field,
         DateTimeInterface $from,
         DateTimeInterface $to,
-        ?string $customAlias = null
-    ): self {
+        ?string           $customAlias = null
+    ): self
+    {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
         $this->qb
-            ->andWhere($this->qb->expr()->between($alias.'.'.$field, ':from'.$field, ':to'.$field))
-            ->setParameter('from'.$field, $from)
-            ->setParameter('to'.$field, $to);
+            ->andWhere($this->qb->expr()->between($alias . '.' . $field, ':from' . $field, ':to' . $field))
+            ->setParameter('from' . $field, $from)
+            ->setParameter('to' . $field, $to);
 
         return $this;
     }
 
     public function dateNotExpired(
-        string $field,
-        ?string $customAlias = null,
+        string             $field,
+        ?string            $customAlias = null,
         ?DateTimeInterface $customDate = null
-    ): self {
+    ): self
+    {
         $currentDate = is_null($customDate) ? new DateTimeImmutable() : $customDate;
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+        $paramName = 'date' . $alias . $field . uniqid();
 
         $this->qb
-            ->andWhere($this->qb->expr()->gte($alias.'.'.$field, ':date'.$field))
-            ->setParameter('date'.$field, $currentDate);
+            ->andWhere($this->qb->expr()->gte($alias . '.' . $field, ':' . $paramName))
+            ->setParameter($paramName, $currentDate);
 
         return $this;
     }
 
     public function dateExpired(
-        string $field,
-        ?string $customAlias = null,
+        string             $field,
+        ?string            $customAlias = null,
         ?DateTimeInterface $customDate = null
-    ): self {
+    ): self
+    {
         $currentDate = is_null($customDate) ? new DateTimeImmutable() : $customDate;
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+        $paramName = 'date' . $alias . $field . uniqid();
 
         $this->qb
-            ->andWhere($this->qb->expr()->lte($alias.'.'.$field, ':date'.$field))
-            ->setParameter('date'.$field, $currentDate);
+            ->andWhere($this->qb->expr()->lte($alias . '.' . $field, ':' . $paramName))
+            ->setParameter($paramName, $currentDate);
 
         return $this;
     }
 
     public function published(
-        string $fieldFrom = 'publicationStartDate',
-        string $fieldTo = 'publicationEndDate',
-        ?string $customAlias = null
-    ): self {
-        $currentDate = (new DateTimeImmutable());
+        string     $fieldFrom = 'publicationStartDate',
+        string     $fieldTo = 'publicationEndDate',
+        ?string    $customAlias = null,
+        ?\DateTime $currentDate = null,
+    ): self
+    {
+        if (is_null($currentDate)) {
+            $startDate = (new DateTimeImmutable());
+            $startDate->setTime(0, 0, 0, 0);
+            $endDate = (new DateTimeImmutable());
+            $endDate->setTime(23, 59, 59, 59);
+        } else {
+            $startDate = $currentDate;
+            $endDate = $currentDate;
+        }
+        $startDate->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $endDate->setTimezone(new \DateTimeZone('Europe/Paris'));
+
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
         $this->qb
             ->andWhere($this->qb->expr()->orX(
-                $this->qb->expr()->lte($alias.'.'.$fieldFrom, ':publishedFieldStart'),
-                $this->qb->expr()->isNull($alias.'.'.$fieldFrom)
+                $this->qb->expr()->lte($alias . '.' . $fieldFrom, ':publishedFieldStart'),
+                $this->qb->expr()->isNull($alias . '.' . $fieldFrom)
             ))
             ->andWhere($this->qb->expr()->orX(
-                $this->qb->expr()->gte($alias.'.'.$fieldTo, ':publishedFieldEnd'),
-                $this->qb->expr()->isNull($alias.'.'.$fieldTo)
+                $this->qb->expr()->gte($alias . '.' . $fieldTo, ':publishedFieldEnd'),
+                $this->qb->expr()->isNull($alias . '.' . $fieldTo)
             ))
-            ->setParameter('publishedFieldStart', $currentDate->setTime(0, 0, 0, 0))
-            ->setParameter(
-                'publishedFieldEnd',
-                $currentDate->setTime(23, 59, 59, 59)
-            );
+            ->setParameter('publishedFieldStart', $startDate)
+            ->setParameter('publishedFieldEnd', $endDate);
 
         return $this;
     }
 
-    public function around(float $lat, float $lng, int $radius = 10, ?string $customAlias = null): self
+    public function around(float $lat, float $lng, int $radius = 10, ?string $customAlias = null, ?string $latField = 'lat', ?string $lngField = 'lng'): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
-        $sqlDistance = "(6378 * acos(cos(radians({$lat})) * cos(radians({$alias}.lat)) * cos(radians({$alias}.lng) - radians({$lng})) + sin(radians({$lat})) * sin(radians({$alias}.lat))))";
+        $sqlDistance = "(6378 * acos(cos(radians({$lat})) * cos(radians({$alias}.{$latField})) * cos(radians({$alias}.{$lngField}) - radians({$lng})) + sin(radians({$lat})) * sin(radians({$alias}.{$latField}))))";
 
         $this->qb
             ->andWhere($this->qb->expr()->lt($sqlDistance, ':radius'))
             ->setParameter('radius', $radius);
+
 
         return $this;
     }
@@ -261,15 +292,15 @@ trait WhereCriteria
 
         if (isset($bounds['slat']) && isset($bounds['nlat'])) {
             $this->qb
-                ->andWhere($this->qb->expr()->between($alias.'.'.$latField, ':fromLat', ':toLat'))
-                ->setParameter('fromLat', (float) $bounds['slat'])
-                ->setParameter('toLat', (float) $bounds['nlat']);
+                ->andWhere($this->qb->expr()->between($alias . '.' . $latField, ':fromLat', ':toLat'))
+                ->setParameter('fromLat', (float)$bounds['slat'])
+                ->setParameter('toLat', (float)$bounds['nlat']);
         }
         if (isset($bounds['slng']) && isset($bounds['nlng'])) {
             $this->qb
-                ->andWhere($this->qb->expr()->between($alias.'.'.$lngField, ':fromLng', ':toLng'))
-                ->setParameter('fromLng', (float) $bounds['slng'])
-                ->setParameter('toLng', (float) $bounds['nlng']);
+                ->andWhere($this->qb->expr()->between($alias . '.' . $lngField, ':fromLng', ':toLng'))
+                ->setParameter('fromLng', (float)$bounds['slng'])
+                ->setParameter('toLng', (float)$bounds['nlng']);
         }
 
         return $this;

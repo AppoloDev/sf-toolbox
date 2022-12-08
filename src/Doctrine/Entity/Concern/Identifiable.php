@@ -4,7 +4,8 @@ namespace AppoloDev\SFToolbox\Doctrine\Entity\Concern;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Uid\UuidInterface;
 
 trait Identifiable
 {
@@ -12,9 +13,10 @@ trait Identifiable
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     #[ORM\Id]
-    private ?Uuid $id;
+    #[Groups(['id'])]
+    private ?UuidInterface $id = null;
 
-    public function getId(): ?Uuid
+    public function getId(): ?UuidInterface
     {
         return $this->id;
     }

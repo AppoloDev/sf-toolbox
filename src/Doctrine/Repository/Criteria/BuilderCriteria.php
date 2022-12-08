@@ -2,6 +2,7 @@
 
 namespace AppoloDev\SFToolbox\Doctrine\Repository\Criteria;
 
+use AppoloDev\SFToolbox\Doctrine\Entity\Concern\IdentifiableInterface;
 use Doctrine\ORM\QueryBuilder;
 
 trait BuilderCriteria
@@ -20,6 +21,20 @@ trait BuilderCriteria
     public function getBuilder(): QueryBuilder
     {
         return $this->qb;
+    }
+
+    public function useQBMethod(string $methodName, array $params = []): self
+    {
+        $this->qb->$methodName(...$params);
+
+        return $this;
+    }
+
+    public function delete(): self
+    {
+        $this->qb->delete();
+
+        return $this;
     }
 
     public function limit(int $limit): self
@@ -45,5 +60,15 @@ trait BuilderCriteria
     public function getResults(): array
     {
         return $this->qb->getQuery()->getResult();
+    }
+
+    public function getResultsIndexedById(): array
+    {
+        $results = array_reduce($this->getQB()->getResults(), function (?array $acc, IdentifiableInterface $item) {
+            $acc[$item->getId()->__toString()] = $item;
+            return $acc;
+        });
+
+        return is_null($results) ? [] : $results;
     }
 }
