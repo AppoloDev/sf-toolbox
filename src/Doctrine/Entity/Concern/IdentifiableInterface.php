@@ -2,9 +2,9 @@
 
 namespace AppoloDev\SFToolbox\Doctrine\Entity\Concern;
 
-use Symfony\Component\Uid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 interface IdentifiableInterface
 {
-    public function getId(): ?UuidInterface;
+    public function getId(): ?Uuid;
 }
