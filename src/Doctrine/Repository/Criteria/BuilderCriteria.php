@@ -1,8 +1,8 @@
 <?php
 
-namespace AppoloDev\SFToolbox\Doctrine\Repository\Criteria;
+namespace AppoloDev\SFToolboxBundle\Doctrine\Repository\Criteria;
 
-use AppoloDev\SFToolbox\Doctrine\Entity\Concern\IdentifiableInterface;
+use AppoloDev\SFToolboxBundle\Doctrine\Entity\Concern\IdentifiableInterface;
 use Doctrine\ORM\QueryBuilder;
 
 trait BuilderCriteria

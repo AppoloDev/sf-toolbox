@@ -1,6 +1,6 @@
 <?php
 
-namespace AppoloDev\SFToolbox\Doctrine\Repository\Criteria;
+namespace AppoloDev\SFToolboxBundle\Doctrine\Repository\Criteria;
 
 trait JoinCriteria
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppoloDev\SFToolbox\Utils;
+namespace AppoloDev\SFToolboxBundle\Utils;
 
 use InvalidArgumentException;
 use Symfony\Component\Uid\Uuid;

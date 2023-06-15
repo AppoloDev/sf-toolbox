@@ -1,8 +1,8 @@
 <?php
 
-namespace AppoloDev\SFToolbox\Doctrine\Repository\Criteria;
+namespace AppoloDev\SFToolboxBundle\Doctrine\Repository\Criteria;
 
-use AppoloDev\SFToolbox\Utils\UuidUtils;
+use AppoloDev\SFToolboxBundle\Utils\UuidUtils;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Query\Expr\Composite;

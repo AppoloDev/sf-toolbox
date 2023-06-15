@@ -1,0 +1,25 @@
+{# TODO: A renomer #}
+{% block custom_radio_widget %}
+    <div class="w-full space-y-6">
+        {%- for child in form %}
+            <div class="custom-radio--item">
+                {{- form_widget(child) -}}
+
+                <label for="{{ child.vars.id }}">
+                    {% if child.vars.attr.icon is defined and child.vars.attr.icon is not null %}
+                        <div class="w-10 h-10 svg-full">
+                            {{ source('@icons/game/'~child.vars.attr.icon) }}
+                        </div>
+                    {% endif %}
+
+                    <div>
+                        <span>{{ child.vars.label }}</span>
+                        {% if child.vars.attr.description is defined and child.vars.attr.description is not null %}
+                            <p>{{ child.vars.attr.description }}</p>
+                        {% endif %}
+                    </div>
+                </label>
+            </div>
+        {% endfor -%}
+    </div>
+{% endblock %}

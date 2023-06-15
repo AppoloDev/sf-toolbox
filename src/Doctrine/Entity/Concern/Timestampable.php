@@ -1,6 +1,6 @@
 <?php
 
-namespace AppoloDev\SFToolbox\Doctrine\Entity\Concern;
+namespace AppoloDev\SFToolboxBundle\Doctrine\Entity\Concern;
 
 use DateTime;
 use DateTimeInterface;

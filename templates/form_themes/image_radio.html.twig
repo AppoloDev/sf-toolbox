@@ -1,0 +1,20 @@
+{# TODO: A renomer #}
+{% block image_radio_widget %}
+    <div class="w-full grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        {%- for child in form %}
+            <div class="custom-radio--item image">
+                <div class="w-full">
+                    {{- form_widget(child) -}}
+
+                    <label for="{{ child.vars.id }}">
+                        <span>{{ child.vars.label }}</span>
+
+                        {% if child.vars.attr.image is defined %}
+                            <img src="{{ asset(child.vars.attr.image) }}" alt="{{ child.vars.label }}"/>
+                        {% endif %}
+                    </label>
+                </div>
+            </div>
+        {% endfor -%}
+    </div>
+{% endblock %}

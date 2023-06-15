@@ -1,0 +1,7 @@
+twig:
+  #TODO: Path pour les icons ?
+    form_themes:
+      - '_shared/_form/tailwind_theme.html.twig'
+      - '_shared/_form/custom_radio.html.twig'
+      - '_shared/_form/image_radio.html.twig'
+      - '_shared/_form/tom_select.html.twig'

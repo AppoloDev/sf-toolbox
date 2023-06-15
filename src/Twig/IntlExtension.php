@@ -1,6 +1,6 @@
 <?php
 
-namespace AppoloDev\SFToolbox\Twig;
+namespace AppoloDev\SFToolboxBundle\Twig;
 
 use IntlDateFormatter;
 use RuntimeException;
