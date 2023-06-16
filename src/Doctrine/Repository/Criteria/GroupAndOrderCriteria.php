@@ -11,7 +11,7 @@ trait GroupAndOrderCriteria
         return $this;
     }
 
-    public function order(string $field, string $direction = 'ASC', ?string $customAlias = null): self
+    public function order(string $field, string $direction = 'ASC', string $customAlias = null): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
@@ -20,7 +20,7 @@ trait GroupAndOrderCriteria
         return $this;
     }
 
-    public function groupBy(string $field, ?string $customAlias = null): self
+    public function groupBy(string $field, string $customAlias = null): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
@@ -29,11 +29,12 @@ trait GroupAndOrderCriteria
         return $this;
     }
 
-    public function indexBy(string $field, ?string $customAlias = null): self
+    public function indexBy(string $field, string $customAlias = null): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
         $this->qb->indexBy($alias, $alias.'.'.$field);
+
         return $this;
     }
 }

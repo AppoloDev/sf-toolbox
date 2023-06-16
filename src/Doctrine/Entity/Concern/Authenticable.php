@@ -2,7 +2,6 @@
 
 namespace AppoloDev\SFToolboxBundle\Doctrine\Entity\Concern;
 
-use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -23,7 +22,7 @@ trait Authenticable
     private ?string $plainPassword = '';
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DateTimeInterface $confirmationTokenExpiredAt;
+    private ?\DateTimeInterface $confirmationTokenExpiredAt;
 
     #[ORM\Column(type: Types::STRING, length: 100, nullable: true)]
     private ?string $confirmationToken = null;
@@ -106,12 +105,12 @@ trait Authenticable
         return $this;
     }
 
-    public function getConfirmationTokenExpiredAt(): ?DateTimeInterface
+    public function getConfirmationTokenExpiredAt(): ?\DateTimeInterface
     {
         return $this->confirmationTokenExpiredAt;
     }
 
-    public function setConfirmationTokenExpiredAt(?DateTimeInterface $confirmationTokenExpiredAt): self
+    public function setConfirmationTokenExpiredAt(?\DateTimeInterface $confirmationTokenExpiredAt): self
     {
         $this->confirmationTokenExpiredAt = $confirmationTokenExpiredAt;
 

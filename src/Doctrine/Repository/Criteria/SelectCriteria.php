@@ -4,7 +4,7 @@ namespace AppoloDev\SFToolboxBundle\Doctrine\Repository\Criteria;
 
 trait SelectCriteria
 {
-    public function max(string $field, ?string $customAlias = null, bool $addSelect = false): self
+    public function max(string $field, string $customAlias = null, bool $addSelect = false): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
@@ -17,7 +17,7 @@ trait SelectCriteria
         return $this;
     }
 
-    public function countItem(string $field, ?string $customAlias = null, bool $addSelect = false): self
+    public function countItem(string $field, string $customAlias = null, bool $addSelect = false): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
@@ -30,7 +30,7 @@ trait SelectCriteria
         return $this;
     }
 
-    public function sum(string $field, ?string $customAlias = null, bool $addSelect = false): self
+    public function sum(string $field, string $customAlias = null, bool $addSelect = false): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
@@ -43,7 +43,7 @@ trait SelectCriteria
         return $this;
     }
 
-    public function select(string $field, ?string $customAlias = null, bool $addSelect = false): self
+    public function select(string $field, string $customAlias = null, bool $addSelect = false): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
@@ -52,7 +52,7 @@ trait SelectCriteria
         return $this;
     }
 
-    public function selectDistinct(string $field, ?string $customAlias = null): self
+    public function selectDistinct(string $field, string $customAlias = null): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 

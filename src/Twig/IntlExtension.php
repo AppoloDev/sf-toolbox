@@ -2,8 +2,6 @@
 
 namespace AppoloDev\SFToolboxBundle\Twig;
 
-use IntlDateFormatter;
-use RuntimeException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -11,8 +9,8 @@ class IntlExtension extends AbstractExtension
 {
     public function __construct()
     {
-        if (!class_exists(IntlDateFormatter::class)) {
-            throw new RuntimeException('The native PHP intl extension (http://php.net/manual/en/book.intl.php) is needed to use intl-based filters.');
+        if (!class_exists(\IntlDateFormatter::class)) {
+            throw new \RuntimeException('The native PHP intl extension (http://php.net/manual/en/book.intl.php) is needed to use intl-based filters.');
         }
     }
 
@@ -30,18 +28,19 @@ class IntlExtension extends AbstractExtension
         string $timeZone = 'Europe/Paris',
         bool $ucFirst = true
     ): string {
-        $formatter = IntlDateFormatter::create(
+        $formatter = \IntlDateFormatter::create(
             $locale,
-            IntlDateFormatter::FULL,
-            IntlDateFormatter::FULL,
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::FULL,
             $timeZone,
-            IntlDateFormatter::GREGORIAN,
+            \IntlDateFormatter::GREGORIAN,
             $format
         );
 
         $formattedDate = $formatter->format($date->getTimestamp());
+        $formattedDate = is_string($formattedDate) ? $formattedDate : '';
 
-        if(!$ucFirst) {
+        if (!$ucFirst) {
             return $formattedDate;
         }
 

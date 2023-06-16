@@ -13,7 +13,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\RuntimeException;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class IsNotGrantedAttributeListener implements EventSubscriberInterface
 {
@@ -22,11 +21,12 @@ class IsNotGrantedAttributeListener implements EventSubscriberInterface
         private ?ExpressionLanguage $expressionLanguage = null,
     ) {
     }
-    // TODO à FAIRE
+
     public function onKernelControllerArguments(ControllerArgumentsEvent $event): void
     {
-        /** @var IsNotGranted[] $attributes */
-        if (!\is_array($attributes = $event->getAttributes()[IsNotGranted::class] ?? null)) {
+        /** @var ?IsNotGranted[] $attributes */
+        $attributes = $event->getAttributes()[IsNotGranted::class] ?? null;
+        if (!\is_array($attributes)) {
             return;
         }
 

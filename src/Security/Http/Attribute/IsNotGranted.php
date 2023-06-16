@@ -2,11 +2,10 @@
 
 namespace AppoloDev\SFToolboxBundle\Security\Http\Attribute;
 
-
 use Attribute;
 use Symfony\Component\ExpressionLanguage\Expression;
 
-#[Attribute(Attribute::IS_REPEATABLE | Attribute::TARGET_CLASS | Attribute::TARGET_METHOD | Attribute::TARGET_FUNCTION)]
+#[\Attribute(\Attribute::IS_REPEATABLE | \Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD | \Attribute::TARGET_FUNCTION)]
 final class IsNotGranted
 {
     public function __construct(

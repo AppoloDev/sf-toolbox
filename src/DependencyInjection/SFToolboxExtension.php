@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class SFToolboxExtension extends Extension
 {
-
     public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader(
@@ -27,8 +26,11 @@ class SFToolboxExtension extends Extension
             return;
         }
 
+        /** @var array $resources */
+        $resources = $container->getParameter('twig.form.resources');
+
         $container->setParameter('twig.form.resources', array_merge(
-            $container->getParameter('twig.form.resources'),
+            $resources,
             [
                 '@SFToolbox/form_themes/tailwind_theme.html.twig',
                 '@SFToolbox/form_themes/custom_radio.html.twig', // TODO: A modifier

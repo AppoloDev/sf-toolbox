@@ -2,7 +2,6 @@
 
 namespace AppoloDev\SFToolboxBundle\Utils;
 
-use InvalidArgumentException;
 use Symfony\Component\Uid\Uuid;
 
 class UuidUtils
@@ -13,7 +12,7 @@ class UuidUtils
             Uuid::fromString($value);
 
             return true;
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             return false;
         }
     }

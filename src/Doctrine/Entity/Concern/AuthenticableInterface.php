@@ -2,8 +2,6 @@
 
 namespace AppoloDev\SFToolboxBundle\Doctrine\Entity\Concern;
 
-use DateTimeInterface;
-
 interface AuthenticableInterface
 {
     public function getEmail(): string;
@@ -32,9 +30,9 @@ interface AuthenticableInterface
 
     public function setPlainPassword(?string $plainPassword): self;
 
-    public function getConfirmationTokenExpiredAt(): ?DateTimeInterface;
+    public function getConfirmationTokenExpiredAt(): ?\DateTimeInterface;
 
-    public function setConfirmationTokenExpiredAt(?DateTimeInterface $confirmationTokenExpiredAt): self;
+    public function setConfirmationTokenExpiredAt(?\DateTimeInterface $confirmationTokenExpiredAt): self;
 
     public function getSalt(): ?string;
 

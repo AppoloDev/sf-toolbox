@@ -4,7 +4,7 @@ namespace AppoloDev\SFToolboxBundle\Doctrine\Repository\Criteria;
 
 trait JoinCriteria
 {
-    public function with(string $field, string $joinAlias, ?string $customAlias = null, ?bool $addSelect = false): self
+    public function with(string $field, string $joinAlias, string $customAlias = null, ?bool $addSelect = false): self
     {
         $alias = null !== $customAlias ? $customAlias : self::$alias;
 

@@ -9,7 +9,7 @@ trait BuilderCriteria
 {
     protected QueryBuilder $qb;
 
-    public function getQB(?string $customAlias = null): self
+    public function getQB(string $customAlias = null): self
     {
         $alias = !is_null($customAlias) ? $customAlias : self::$alias;
 
@@ -66,6 +66,7 @@ trait BuilderCriteria
     {
         $results = array_reduce($this->getQB()->getResults(), function (?array $acc, IdentifiableInterface $item) {
             $acc[$item->getId()->__toString()] = $item;
+
             return $acc;
         });
 
