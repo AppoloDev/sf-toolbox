@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>{{ site_title }}</title>
+    {# TODO: Add favicon #}
+    {# TODO: Style #}
+
+    {{ vite_entry_link_tags('theme') }}
+    {% block stylesheets %}{% endblock %}
+</head>
+<body class="page_error">
+<div class="container">
+    {% block logo %}
+        <a href="/" rel="noopener" class="logo">
+            <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" />
+        </a>
+    {% endblock %}
+
+    {% block title %}
+        <h1>Oups ! Une erreur est survenue</h1>
+    {% endblock %}
+
+    {% block message %}
+        <p>
+            Le page que vous demandez est inaccessible. Veuillez renouveler l'opération d'ici quelques instants. <br/>
+         </p>
+    {% endblock %}
+
+    <a href="/" class="button secondary">Page d'accueil</a>
+</div>
+</body>
+</html>
