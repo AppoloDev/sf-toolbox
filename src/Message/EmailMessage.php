@@ -2,29 +2,38 @@
 
 namespace AppoloDev\SFToolboxBundle\Message;
 
-use Symfony\Component\Mime\RawMessage;
+use Symfony\Component\Mime\Address;
 
-class EmailMessage extends RawMessage
+class EmailMessage
 {
-    protected array $emailData = [];
-    public function __construct(array $recipients, string $object, string $template, array $parameters = [])
-    {
-        $this->emailData = [
-            'recipients' => $recipients,
-            'object' => $object,
-            'template' => $template,
-            'parameters' => $parameters
-        ];
-        parent::__construct($this->emailData);
+    /** @var Address[] $recipients */
+    protected array $recipients = [];
+    public function __construct(
+        array $recipients,
+        private readonly string $object,
+        private readonly string $template,
+        private readonly  array $parameters = []
+    ) {
+        $this->recipients = array_map(fn ($recipient): Address => new Address($recipient), $recipients);
     }
 
-    public function __serialize(): array
+    public function getRecipients(): array
     {
-        return $this->emailData;
+        return $this->recipients;
     }
 
-    public function __unserialize(array $data): void
+    public function getObject(): string
     {
-        $this->emailData = $data;
+        return $this->object;
+    }
+
+    public function getTemplate(): string
+    {
+        return $this->template;
+    }
+
+    public function getParameters(): array
+    {
+        return $this->parameters;
     }
 }

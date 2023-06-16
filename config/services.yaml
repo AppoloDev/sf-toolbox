@@ -2,10 +2,18 @@ services:
     #bind:
     #    $senderEmail: '%env(SENDER_EMAIL)%' #TODO: A move
     #    $senderName: '%env(SENDER_NAME)%'
-    controller.is_not_granted_attribute_listener:
-        class: AppoloDev\SFToolboxBundle\Security\Http\EventListener\IsNotGrantedAttributeListener
+    AppoloDev\SFToolboxBundle\Security\Http\EventListener\IsNotGrantedAttributeListener:
         arguments:
             - '@security.authorization_checker'
             - '@security.is_granted_attribute_expression_language'
         tags: ['kernel.event_subscriber']
 
+    AppoloDev\SFToolboxBundle\MessageHandler\EmailSenderHandler:
+        arguments:
+            - '%env(SENDER_EMAIL)%'
+            - '%env(SENDER_NAME)%'
+            - '@mailer'
+            - '@kernel'
+            - '@assets.packages'
+        tags:
+            - { name: messenger.message_handler, transport: async }
