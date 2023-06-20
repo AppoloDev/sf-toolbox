@@ -1,11 +1,21 @@
 services:
-    AppoloDev\SFToolboxBundle\Maker\EntityFileCreator:
+    # FileCreator
+    AppoloDev\SFToolboxBundle\Maker\FileCreator\EntityFileCreator:
+        arguments:
+            - '%kernel.project_dir%'
+    AppoloDev\SFToolboxBundle\Maker\FileCreator\ScaffoldFileCreator:
         arguments:
             - '%kernel.project_dir%'
 
-    AppoloDev\SFToolboxBundle\Maker\Command\:
-        resource: '../../Maker/Command/*'
+    # Command
+    AppoloDev\SFToolboxBundle\Maker\Command\MakeDomainEntityCommand:
         arguments:
-            - '@AppoloDev\SFToolboxBundle\Maker\EntityFileCreator'
+            - '@AppoloDev\SFToolboxBundle\Maker\FileCreator\EntityFileCreator'
+        tags:
+            - { name: console.command }
+
+    AppoloDev\SFToolboxBundle\Maker\Command\MakeScaffoldCommand:
+        arguments:
+            - '@AppoloDev\SFToolboxBundle\Maker\FileCreator\ScaffoldFileCreator'
         tags:
             - { name: console.command }

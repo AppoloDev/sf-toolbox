@@ -2,7 +2,7 @@
 
 namespace AppoloDev\SFToolboxBundle\Maker\Command;
 
-use AppoloDev\SFToolboxBundle\Maker\EntityFileCreator;
+use AppoloDev\SFToolboxBundle\Maker\FileCreator\EntityFileCreator;
 use AppoloDev\SFToolboxBundle\Maker\Interact;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -48,7 +48,7 @@ class MakeDomainEntityCommand extends Command
             return Command::FAILURE;
         }
 
-        $this->fileCreator->init($domain, $entity);
+        $this->fileCreator->init(['domain' => $domain, 'entity' => $entity]);
 
         if ($this->fileCreator->filesExist()) {
             $io->warning('Entity already exist');
