@@ -26,7 +26,7 @@ class EntityFileCreator
         $this->domainDirectory = $domainDirectory;
     }
 
-    public function fileExist(): bool
+    public function filesExist(): bool
     {
         return file_exists($this->getEntityPath()) || file_exists($this->getRepositoryPath());
     }
