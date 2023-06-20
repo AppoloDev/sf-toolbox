@@ -1,7 +1,4 @@
 services:
-    #bind:
-    #    $senderEmail: '%env(SENDER_EMAIL)%' #TODO: A move
-    #    $senderName: '%env(SENDER_NAME)%'
     AppoloDev\SFToolboxBundle\Security\Http\EventListener\IsNotGrantedAttributeListener:
         arguments:
             - '@security.authorization_checker'

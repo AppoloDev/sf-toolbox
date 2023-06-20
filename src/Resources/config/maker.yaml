@@ -1,0 +1,11 @@
+services:
+    AppoloDev\SFToolboxBundle\Maker\EntityFileCreator:
+        arguments:
+            - '%kernel.project_dir%'
+
+    AppoloDev\SFToolboxBundle\Maker\Command\:
+        resource: '../../Maker/Command/*'
+        arguments:
+            - '@AppoloDev\SFToolboxBundle\Maker\EntityFileCreator'
+        tags:
+            - { name: console.command }

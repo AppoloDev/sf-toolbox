@@ -1,0 +1,4 @@
+services:
+    AppoloDev\SFToolboxBundle\Twig\IntlExtension:
+        tags:
+            - { name: twig.extension }
