@@ -7,6 +7,7 @@ use Twig\TwigFilter;
 
 class IntlExtension extends AbstractExtension
 {
+    // TODO: Refactor ?
     public function __construct()
     {
         if (!class_exists(\IntlDateFormatter::class)) {

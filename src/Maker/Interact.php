@@ -8,6 +8,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+// TODO: Move to AbstractCommand
 trait Interact
 {
     protected function askQuestion(string $argName, InputInterface $input, OutputInterface $output): void

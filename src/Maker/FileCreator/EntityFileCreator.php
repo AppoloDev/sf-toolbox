@@ -11,6 +11,7 @@ class EntityFileCreator extends AbstractFileCreator
 
     protected function replaceVars(string $value): string
     {
+        // TODO: Refactor
         return str_replace(
             ['__ENTITY__', '__DOMAIN__', '__ALIAS__'],
             [$this->entity, $this->domain, strtolower($this->entity)],

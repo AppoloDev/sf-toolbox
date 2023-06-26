@@ -32,6 +32,7 @@ class EmailSenderHandler extends AbstractController
      */
     public function __invoke(EmailMessage $emailMessage): void
     {
+        // TODO: refactor
         $logoPath = $this->kernel->getProjectDir().
             DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.
             $this->packages->getUrl('assets/images/logo.png')

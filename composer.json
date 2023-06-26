@@ -12,6 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "ext-intl": "*",
+        "ext-zip": "*",
         "php": ">=8.0",
         "twig/twig": "^2.12|^3.0",
         "doctrine/orm": "^2.15",
