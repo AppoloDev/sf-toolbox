@@ -6,7 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('alert', template: 'ui/components/generic/alert.html.twig')]
+#[AsTwigComponent('alert', template: '@SFToolbox/ui/components/generic/alert.html.twig')]
 class AlertComponent
 {
     public string $message;

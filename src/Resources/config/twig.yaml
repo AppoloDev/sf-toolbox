@@ -1,9 +1,0 @@
-services:
-    AppoloDev\SFToolboxBundle\Twig\IntlExtension:
-        tags:
-            - { name: twig.extension }
-
-    #AppoloDev\SFToolboxBundle\UI\Components\:
-    #    resource: '../../UI/Components/*'
-    #    tags:
-    #        - { name: twig.component }

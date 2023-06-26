@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('form_submit', template: 'ui/components/form/submit.html.twig')]
+#[AsTwigComponent('form_submit', template: '@SFToolbox/ui/components/form/submit.html.twig')]
 class FormSubmitComponent
 {
     public ?FormView $form = null;

@@ -6,7 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('flashes', template: 'ui/components/session/flashes.html.twig')]
+#[AsTwigComponent('flashes', template: '@SFToolbox/ui/components/session/flashes.html.twig')]
 class FlashesComponent
 {
     public array $flashes;

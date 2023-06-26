@@ -6,7 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('badge_yesno', template: 'ui/components/badge/yesno.html.twig')]
+#[AsTwigComponent('badge_yesno', template: '@SFToolbox/ui/components/badge/yesno.html.twig')]
 class BadgeYesNoComponent
 {
     public bool $value;

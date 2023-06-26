@@ -6,7 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('list_empty', template: 'ui/components/list/empty.html.twig')]
+#[AsTwigComponent('list_empty', template: '@SFToolbox/ui/components/list/empty.html.twig')]
 class ListEmptyComponent
 {
     public string $text = '';

@@ -6,7 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('button_action', template: 'ui/components/button/action.html.twig')]
+#[AsTwigComponent('button_action', template: '@SFToolbox/ui/components/button/action.html.twig')]
 class ButtonActionComponent
 {
     public ?bool $permission = null;

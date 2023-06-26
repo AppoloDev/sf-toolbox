@@ -6,7 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('user_profile_menu', template: 'ui/components/user/profile_menu.html.twig')]
+#[AsTwigComponent('user_profile_menu', template: '@SFToolbox/ui/components/user/profile_menu.html.twig')]
 class UserProfileMenu
 {
     public string $routePrefix = '';
