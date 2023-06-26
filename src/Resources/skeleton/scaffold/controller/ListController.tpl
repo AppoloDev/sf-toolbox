@@ -29,7 +29,7 @@ class List__ENTITY__Controller extends AbstractController
             $request->query->getInt('page', 1),
             12,
             [
-                'defaultSortFieldName' => $repository::$alias.'.updatedAt',
+                'defaultSortFieldName' => '__ALIAS__.updatedAt',
                 'defaultSortDirection' => 'desc',
             ]
         );

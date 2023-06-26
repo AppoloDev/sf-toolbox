@@ -1,6 +1,6 @@
 {% extends '_layout/admin.html.twig' %}
 
-{% block title %}{{ __ENTITYCAMEL__.id}}{# TODO: Implement #}{% endblock %}
+{% block title %}{{ __ENTITYCAMEL__.id}}{% endblock %}{# TODO: Implements #}
 
 {% block breadcrumb %}
     {% with {items: [

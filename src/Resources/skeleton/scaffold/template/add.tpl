@@ -1,6 +1,6 @@
 {% extends '_layout/admin.html.twig' %}
 
-{% block title %}Ajout d'un __ROUTE_PATH__{% endblock %}
+{% block title %}Ajout d'un __ROUTE_PATH__{% endblock %}{# TODO: Wording #}
 
 {% block breadcrumb %}
     {% with {items: [

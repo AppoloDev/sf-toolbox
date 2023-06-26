@@ -22,7 +22,7 @@ class __ENTITY__Repository extends ServiceEntityRepository
     use JoinCriteria;
     use SelectCriteria;
 
-    public static string $alias = '__ALIAS__';
+    protected static string $alias = '__ALIAS__';
 
     public function __construct(ManagerRegistry $registry)
     {

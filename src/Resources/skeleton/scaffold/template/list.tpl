@@ -1,6 +1,6 @@
 {% extends '_layout/admin.html.twig' %}
 
-{% block title %}Liste des __ROUTE_PATH__s{% endblock %}
+{% block title %}Liste des __ROUTE_PATH__s{% endblock %}{# TODO: Wording #}
 
 {% block breadcrumb %}
     {% with {items: [
@@ -15,9 +15,9 @@
     {% embed '_shared/_layout/listing.html.twig' with {
         title: block('title'),
         pagination: pagination,
-        emptyText: 'Essayez d\'ajouter un nouvel __ROUTE_PATH__s.',
+        emptyText: 'Essayez d\'ajouter un nouvel __ROUTE_PATH__s.', {# TODO: Wording #}
         columns: [
-            knp_pagination_sortable(pagination, 'ID', 'u.firstname'),
+            knp_pagination_sortable(pagination, 'ID', '__ALIAS__.id'), {# TODO: Implements #}
             ''
         ]
     } %}
@@ -25,7 +25,7 @@
             <div class="flex gap-4 items-center">
                 {{ component('button_action', {
                     permission: is_granted('__LOWER_AREA_____PREFIX___export'),
-                    path: path('__LOWER_AREA_____PREFIX___export'),
+                    path: path('__LOWER_AREA_____PREFIX___export'), {# TODO: Mettre le query paremeters pour le querySearch #}
                     class: 'py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-teal-500 text-white hover:bg-teal-600 transition-all text-sm',
                     labelAfter: 'Exporter',
                     icon: source('@icons/download.svg'),
