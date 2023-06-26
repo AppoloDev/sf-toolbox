@@ -1,6 +1,6 @@
 <?php
 
-namespace AppoloDev\SFToolboxBundle\Twig;
+namespace AppoloDev\SFToolboxBundle\Twig\Extension;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;

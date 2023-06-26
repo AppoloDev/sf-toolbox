@@ -7,6 +7,7 @@ use AppoloDev\SFToolboxBundle\Message\EmailMessage;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Asset\Packages;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -16,7 +17,9 @@ use Symfony\Component\Mime\Address;
 class EmailSenderHandler extends AbstractController
 {
     public function __construct(
+        #[Autowire('%env(SENDER_EMAIL)%')]
         private readonly string $senderEmail,
+        #[Autowire('%env(SENDER_NAME)%')]
         private readonly string $senderName,
         private readonly MailerInterface $mailer,
         private readonly Kernel $kernel,

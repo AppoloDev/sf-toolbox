@@ -2,6 +2,7 @@
 
 namespace AppoloDev\SFToolboxBundle\Maker\FileCreator;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Filesystem\Filesystem;
 
 class AbstractFileCreator
@@ -11,8 +12,10 @@ class AbstractFileCreator
 
     protected array $mapping = [];
 
-    public function __construct(protected readonly string $rootPath)
-    {
+    public function __construct(
+        #[Autowire('%kernel.project_dir%')]
+        protected readonly string $rootPath
+    ) {
     }
 
     public function init(array $options = []): void
@@ -64,6 +67,6 @@ class AbstractFileCreator
 
     protected function getTemplateContent(string $template): string
     {
-        return file_get_contents(__DIR__.'../../../Resources/skeleton/'.$template);
+        return file_get_contents(__DIR__.'../../../../maker/'.$template);
     }
 }

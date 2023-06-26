@@ -3,6 +3,7 @@
 namespace App\Http\__CAPITALIZED_AREA__\Voter;
 
 use App\Domain\__DOMAIN__\Entity\__ENTITY__;
+use AppoloDev\SFToolboxBundle\Security\Authorization\AbstractVoter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class __ENTITY__Voter extends AbstractVoter

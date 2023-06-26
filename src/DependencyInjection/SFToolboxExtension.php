@@ -12,7 +12,7 @@ class SFToolboxExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loader->load('services.yaml');
     }
 
@@ -21,12 +21,14 @@ class SFToolboxExtension extends Extension implements PrependExtensionInterface
         $bundles = $container->getParameter('kernel.bundles');
 
         if (isset($bundles['TwigBundle'])) {
-            $container->prependExtensionConfig('twig', ['form_themes' => [
-                '@SFToolbox/form/themes/tailwind_theme.html.twig',
-                '@SFToolbox/form/themes/custom_radio.html.twig', // TODO: A modifier
-                '@SFToolbox/form/themes/image_radio.html.twig', // TODO: A modifier
-                '@SFToolbox/form/themes/tom_select.html.twig', // TODO: A modifier
-            ]]);
+            $container->prependExtensionConfig('twig', [
+                'form_themes' => [
+                    '@SFToolbox/form/themes/tailwind_theme.html.twig',
+                    '@SFToolbox/form/themes/custom_radio.html.twig', // TODO: A modifier
+                    '@SFToolbox/form/themes/image_radio.html.twig', // TODO: A modifier
+                    '@SFToolbox/form/themes/tom_select.html.twig', // TODO: A modifier
+                ]
+            ]);
         }
     }
 }
