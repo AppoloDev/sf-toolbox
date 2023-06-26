@@ -35,8 +35,8 @@ class ScaffoldFileCreator extends AbstractFileCreator
     protected function replaceVars(string $value): string
     {
         return str_replace(
-            ['__ENTITY__', '__DOMAIN__', '__CAPITALIZED_AREA__', '__LOWER_AREA__', '__PREFIX__', '__ROUTE_PATH__'],
-            [$this->entity, $this->domain, $this->area, strtolower($this->area), $this->prefix, $this->routePath],
+            ['__ENTITY__', '__ENTITYCAMEL__', '__DOMAIN__', '__CAPITALIZED_AREA__', '__LOWER_AREA__', '__PREFIX__', '__ROUTE_PATH__'],
+            [$this->entity, lcfirst($this->entity), $this->domain, $this->area, strtolower($this->area), $this->prefix, $this->routePath],
             $value
         );
     }
