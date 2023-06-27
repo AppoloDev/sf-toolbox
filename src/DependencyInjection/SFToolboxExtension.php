@@ -22,11 +22,24 @@ class SFToolboxExtension extends Extension implements PrependExtensionInterface
 
         if (isset($bundles['TwigBundle'])) {
             $container->prependExtensionConfig('twig', [
+                'globals' => [
+                    'siteTitle' => '%env(SITE_TITLE)%',
+                    'themeColor' => '%env(THEME_COLOR)%'
+                ],
                 'form_themes' => [
                     '@SFToolbox/form/themes/tailwind_theme.html.twig',
                     '@SFToolbox/form/themes/custom_radio.html.twig', // TODO: A modifier
                     '@SFToolbox/form/themes/image_radio.html.twig', // TODO: A modifier
                     '@SFToolbox/form/themes/tom_select.html.twig', // TODO: A modifier
+                ]
+            ]);
+        }
+
+        if (isset($bundles['KnpPaginatorBundle'])) {
+            $container->prependExtensionConfig('knp_paginator', [
+                'template' => [
+                    'pagination' => '@SFToolbox/paginator/pagination.html.twig',
+                    'sortable' => '@SFToolbox/paginator/sortable.html.twig'
                 ]
             ]);
         }

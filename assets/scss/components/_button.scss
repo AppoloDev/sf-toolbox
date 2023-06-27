@@ -1,0 +1,94 @@
+$buttonColors: 'green', 'red', 'blue', 'orange', 'indigo', 'teal';
+
+.btn {
+    @apply py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-sm transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2;
+
+    &-solid {
+        @apply text-white focus:ring-offset-2;
+    }
+
+    &-outline {
+        @apply py-[.688rem] border-2 focus:ring-offset-2;
+    }
+
+    &-ghost {
+        @apply focus:ring-offset-2;
+    }
+
+    &-soft {
+        @apply ring-offset-white focus:ring-offset-2;
+    }
+
+    &-white {
+        @apply border-gray-200 font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-2 focus:ring-offset-white;
+    }
+
+    &-link {
+        @apply ring-offset-white focus:ring-offset-2;
+    }
+
+    .icon-full {
+        svg {
+            @apply max-h-[24px] max-w-[24px];
+        }
+    }
+}
+
+.btn-small {
+    @apply py-2 px-3;
+
+    &.btn-outline {
+        @apply sm:py-[.438rem];
+    }
+
+    .icon-full {
+        svg {
+            @apply max-h-[18px] max-w-[18px];
+        }
+    }
+}
+
+.btn-large {
+    @apply sm:p-5;
+
+    &.btn-outline {
+        @apply sm:py-[1.188rem];
+    }
+}
+
+@each $color in $buttonColors {
+    .btn-#{$color} {
+        &.btn-solid {
+            @apply bg-#{$color}-500 hover:bg-#{$color}-600 focus:ring-#{$color}-500;
+        }
+
+        &.btn-outline {
+            @apply border-#{$color}-200 text-#{$color}-500 hover:bg-#{$color}-500 hover:border-#{$color}-500 hover:text-white focus:ring-#{$color}-500;
+        }
+
+        &.btn-ghost {
+            @apply text-#{$color}-500 hover:bg-#{$color}-100 focus:ring-#{$color}-500;
+        }
+
+        &.btn-soft {
+            @apply bg-#{$color}-100 text-#{$color}-500 hover:bg-#{$color}-500 hover:text-white focus:ring-#{$color}-500;
+        }
+
+        &.btn-white {
+            @apply focus:ring-#{$color}-600;
+        }
+
+        &.btn-link {
+            @apply text-#{$color}-500 hover:text-#{$color}-700 focus:ring-#{$color}-500;
+        }
+    }
+}
+
+// TODO: Gérer la tooltip
+.btn.has-tooltip {
+    // @apply hs-tooltip-toggle;
+
+    .tooltip {
+        //@apply hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-white;
+    }
+}

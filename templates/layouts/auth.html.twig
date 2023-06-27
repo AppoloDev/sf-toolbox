@@ -3,9 +3,10 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <meta charset="utf-8">
-    <title>{% block title %}{% endblock %} — {{ site_title }}</title>
+    <title>{% block title %}{% endblock %} — {{ siteTitle }}</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    {# TODO: Add favicon #}
 
     {{ vite_entry_link_tags('theme') }}
     {% block stylesheets %}{% endblock %}
@@ -30,9 +31,11 @@
     </div>
 </div>
 
-{{ component('flashes', {
-    flashes: app.flashes,
-}) }}
+{% for type, messages in app.flashes %}
+    {% for message in messages %}
+        {{ component('toast', {message: message,type: type}) }}
+    {% endfor %}
+{% endfor %}
 
 {{ vite_entry_script_tags('theme') }}
 {% block javascripts %}{% endblock %}

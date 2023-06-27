@@ -3,11 +3,11 @@
 namespace App\Domain\__DOMAIN__\Repository;
 
 use App\Domain\__DOMAIN__\Entity\__ENTITY__;
-use AppoloDev\SFToolboxBundle\Doctrine\Repository\Criteria\BuilderCriteria;
-use AppoloDev\SFToolboxBundle\Doctrine\Repository\Criteria\GroupAndOrderCriteria;
-use AppoloDev\SFToolboxBundle\Doctrine\Repository\Criteria\JoinCriteria;
-use AppoloDev\SFToolboxBundle\Doctrine\Repository\Criteria\SelectCriteria;
-use AppoloDev\SFToolboxBundle\Doctrine\Repository\Criteria\WhereCriteria;
+use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\BuilderCriteria;
+use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\GroupAndOrderCriteria;
+use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\JoinCriteria;
+use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\SelectCriteria;
+use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\WhereCriteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

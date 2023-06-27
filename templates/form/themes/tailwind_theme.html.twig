@@ -1,6 +1,6 @@
 {% use 'form_div_layout.html.twig' %}
 
-{# TODO: A refactor #}
+{# TODO: Refactor Start #}
 
 {% block input_class %} py-2 px-3 block w-full border border-gray-200 text-sm rounded-lg focus:border-teal-500 focus:ring-teal-500{% endblock %}
 {% block input_color_class %} py-1/2 px-1 block border border-gray-200 rounded-lg focus:border-teal-500 focus:ring-teal-500 w-10 h-10 cursor-pointer{% endblock %}
@@ -70,11 +70,6 @@
     {{- parent() -}}
 {%- endblock form_widget_simple %}
 
-{% block submit_widget -%}
-    {%- set attr = attr|merge({class: (attr.class|default(''))|trim ~ '  py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-teal-500 text-white hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all text-sm'}) -%}
-    {{- parent() -}}
-{%- endblock submit_widget %}
-
 {% block form_help -%}
     {%- set help_attr = help_attr|merge({class: (help_attr.class|default('') ~ ' ')|trim ~ ' text-sm text-gray-500 mt-2'}) -%}
     {{- parent() -}}
@@ -97,4 +92,13 @@
         <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
     </div>
 {%- endblock textarea_widget -%}
+{# TODO: Refactor END #}
 
+{% block submit_widget -%}
+    {{ component('button', {
+        type: 'submit',
+        block: true,
+        label: label,
+        color: themeColor
+    }) }}
+{%- endblock submit_widget %}

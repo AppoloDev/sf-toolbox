@@ -1,0 +1,27 @@
+$alertColors: 'green', 'red', 'blue', 'orange', 'indigo';
+
+.alert {
+    @apply rounded-md p-4 space-y-4 border;
+
+    h3 {
+        @apply font-semibold;
+    }
+
+    .description {
+        @apply text-sm;
+    }
+}
+
+@each $color in $alertColors {
+    .alert-#{$color} {
+        @apply bg-#{$color}-50 border-#{$color}-200;
+
+        h3 {
+            @apply text-#{$color}-500;
+        }
+
+        .description {
+            @apply text-#{$color}-500;
+        }
+    }
+}

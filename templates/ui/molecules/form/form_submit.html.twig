@@ -1,0 +1,35 @@
+{# TODO: Refactor #}
+
+{% if form[submitField] is defined %}
+    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center">
+        <div class="space-x-2">
+            {{ form_widget(form[submitField]) }}
+
+            {{ component('button', {
+                type: 'reset',
+                label: 'Réinitialiser',
+                color: themeColor,
+                size: 'small',
+                mode: 'ghost'
+            }) }}
+        </div>
+
+        {% if deletePath %}
+            <div class="mt-4 lg:mt-0">
+                {% if swal.title is defined %}
+                    {# TODO: Component button swal #}
+                    <sweet-alert title="{{ swal.title }}" text="{{ swal.text }}" type="{{ swal.type }}">
+                        <a href="{{ deletePath is not null ? deletePath : '#' }}" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm">
+                            Supprimer ?
+                        </a>
+                    </sweet-alert>
+                {% else %}
+                    {# TODO: Component button link #}
+                    <a href="{{ deletePath is not null ? deletePath : '#' }}" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm">
+                        Supprimer ?
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

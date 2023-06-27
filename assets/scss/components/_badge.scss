@@ -1,0 +1,21 @@
+$badgeColors: 'gray', 'green', 'red', 'blue', 'yellow', 'orange', 'indigo', 'teal';
+
+.badge {
+    @apply inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium;
+
+    &-rounded {
+        &-large {
+            @apply rounded-lg;
+        }
+
+        &-full {
+            @apply rounded-full;
+        }
+    }
+}
+
+@each $color in $badgeColors {
+    .badge-#{$color} {
+        @apply bg-#{$color}-100 text-#{$color}-800;
+    }
+}

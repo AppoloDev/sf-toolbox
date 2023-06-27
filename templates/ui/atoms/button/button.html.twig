@@ -1,0 +1,21 @@
+<button
+        type="{{ type }}"
+        class="btn btn-{{ size }} btn-{{ color }} btn-{{ mode }} {{ tooltip ? 'has-tooltip' }} {{ block ? 'w-full' }}"
+>
+    {% if icon is not null and iconPlacement is same as ('left') %}
+        <span class="icon-full">{{ icon|raw }}</span>
+    {% endif %}
+
+    {{ label }}
+
+    {% if icon is not null and iconPlacement is same as ('right') %}
+        <span class="icon-full">{{ icon|raw }}</span>
+    {% endif %}
+
+    {% if tooltip is defined and tooltip is not null %}
+        <span class="tooltip" role="tooltip">
+            {{ tooltip }}
+        </span>
+    {% endif %}
+</button>
+{# TODO: Gérer le disable, et le sans label #}

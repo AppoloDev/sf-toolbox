@@ -13,11 +13,11 @@
 {% endblock %}
 
 {% block body %}
-    {% embed '_shared/_layout/form.html.twig' with {
-        title: block('title'),
+    {% component form_layout with {
+        headerTitle: block('title'),
     } %}
-        {% block formRender %}
+        {% block form_render %}
             {% include 'areas/__LOWER_AREA__/__PREFIX__/_form.html.twig' %}
         {% endblock %}
-    {% endembed %}
+    {% endcomponent %}
 {% endblock %}
