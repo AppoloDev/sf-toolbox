@@ -1,30 +1,18 @@
 $buttonColors: 'green', 'red', 'blue', 'orange', 'indigo', 'teal';
 
 .btn {
-    @apply text-neutral-500 hover:bg-neutral-100 focus:ring-neutral-500 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-sm transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2;
+    @apply text-neutral-500 hover:bg-neutral-100 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-sm transition-all duration-300 cursor-pointer ring-0;
 
     &-solid {
-        @apply text-white focus:ring-offset-2;
+        @apply text-white;
     }
 
     &-outline {
-        @apply py-[.688rem] border-2 focus:ring-offset-2;
-    }
-
-    &-ghost {
-        @apply focus:ring-offset-2;
-    }
-
-    &-soft {
-        @apply ring-offset-white focus:ring-offset-2;
+        @apply py-[.688rem] border-2;
     }
 
     &-white {
-        @apply border-gray-200 font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-2 focus:ring-offset-white;
-    }
-
-    &-link {
-        @apply ring-offset-white focus:ring-offset-2;
+        @apply border-gray-200 font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50;
     }
 
     .icon-full {
@@ -63,27 +51,23 @@ $buttonColors: 'green', 'red', 'blue', 'orange', 'indigo', 'teal';
 @each $color in $buttonColors {
     .btn-#{$color} {
         &.btn-solid {
-            @apply bg-#{$color}-500 hover:bg-#{$color}-600 focus:ring-#{$color}-500;
+            @apply bg-#{$color}-500 hover:bg-#{$color}-600;
         }
 
         &.btn-outline {
-            @apply border-#{$color}-200 text-#{$color}-500 hover:bg-#{$color}-500 hover:border-#{$color}-500 hover:text-white focus:ring-#{$color}-500;
+            @apply border-#{$color}-200 text-#{$color}-500 hover:bg-#{$color}-500 hover:border-#{$color}-500 hover:text-white;
         }
 
         &.btn-ghost {
-            @apply text-#{$color}-500 hover:bg-#{$color}-100 focus:ring-#{$color}-500;
+            @apply text-#{$color}-500 hover:bg-#{$color}-100;
         }
 
         &.btn-soft {
-            @apply bg-#{$color}-100 text-#{$color}-500 hover:bg-#{$color}-500 hover:text-white focus:ring-#{$color}-500;
-        }
-
-        &.btn-white {
-            @apply focus:ring-#{$color}-600;
+            @apply bg-#{$color}-100 text-#{$color}-500 hover:bg-#{$color}-500 hover:text-white;
         }
 
         &.btn-link {
-            @apply text-#{$color}-500 hover:text-#{$color}-700 focus:ring-#{$color}-500;
+            @apply text-#{$color}-500 hover:text-#{$color}-700;
         }
     }
 }

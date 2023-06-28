@@ -5,7 +5,7 @@
         @apply transition-[opacity,margin] mt-2 divide-y divide-gray-200 min-w-[10rem] z-20 bg-white shadow-2xl rounded-lg p-2;
 
         .btn {
-            @apply justify-start;
+            @apply justify-start font-medium;
         }
     }
 }
