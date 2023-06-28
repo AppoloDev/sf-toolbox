@@ -15,7 +15,7 @@
         <div class="pt-6 sm:pt-12">
             {{ component('form_submit', {
                 form: form,
-                deletePath: __ENTITYCAMEL__ is defined and is_granted('__LOWER_AREA_____PREFIX___delete', __ENTITYCAMEL__) ? path('__LOWER_AREA_____PREFIX___delete', {id: __ENTITYCAMEL__.id}) :null,
+                deletePath: ##ENTITYCAMEL## is defined and is_granted('##AREALOWER##_##PREFIX##_delete', ##ENTITYCAMEL##) ? path('##AREALOWER##_##PREFIX##_delete', {id: ##ENTITYCAMEL##.id}) :null,
                 swal: {
                 title: 'Supprimer cet élément',
                 text: 'Vous êtes sur le point d’effectuer une action totalement irréversible …',

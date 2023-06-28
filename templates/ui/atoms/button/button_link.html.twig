@@ -1,23 +1,13 @@
-<a
-        href="{{ link }}"
-        target="{{ target }}"
-        class="btn btn-{{ size }} btn-{{ color }} btn-{{ mode }} {{ tooltip ? 'has-tooltip' }} {{ block ? 'w-full' }}"
->
-    {% if icon is not null and iconPlacement is same as ('left') %}
-        <span class="icon-full">{{ icon|raw }}</span>
+{% extends '@SFToolbox/ui/atoms/button/_button.html.twig' %}
+
+{% block button_content %}
+    {% if allowDisplay is same as(true) %}
+        <a
+                href="{{ link }}"
+                target="{{ target }}"
+                class="btn btn-{{ size }} btn-{{ color }} btn-{{ mode }} {{ tooltip ? 'hs-tooltip-toggle' }} {{ block ? 'w-full' }}"
+        >
+            {{ parent() }}
+        </a>
     {% endif %}
-
-    {{ label }}
-
-    {% if icon is not null and iconPlacement is same as ('right') %}
-        <span class="icon-full">{{ icon|raw }}</span>
-    {% endif %}
-
-    {% if tooltip is defined and tooltip is not null %}
-        <span class="tooltip" role="tooltip">
-            {{ tooltip }}
-        </span>
-    {% endif %}
-</a>
-
-{# TODO: Gérer le sans label #}
+{% endblock %}

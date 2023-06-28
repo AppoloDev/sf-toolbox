@@ -1,0 +1,43 @@
+$swalColors: 'green', 'red', 'orange';
+
+.sweetalert {
+    &__container {
+        @apply fixed w-screen h-screen top-0 left-0 flex items-center justify-center z-50 bg-opacity-90 bg-stone-500;
+    }
+
+    &__popup {
+        @apply bg-white border shadow-sm rounded-xl p-8;
+    }
+
+    &__title {
+        @apply m-0 font-bold text-gray-800 text-xl;
+    }
+
+    &__content {
+        @apply my-4 text-gray-800;
+    }
+
+    &__actions {
+        @apply flex justify-end items-center gap-x-4 pt-6 border-t;
+    }
+}
+
+.swal2-timer-progress-bar-container {
+    @apply hidden;
+}
+
+@each $color in $swalColors {
+    .sweetalert {
+        &__container {
+            &__#{$color} {
+                @apply bg-opacity-50 bg-#{$color}-500;
+            }
+        }
+
+        &__title {
+            &.text__#{$color} {
+                @apply text-#{$color}-800;
+            }
+        }
+    }
+}

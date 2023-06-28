@@ -1,0 +1,16 @@
+{% if allowDisplay is same as (true) %}
+    <sweet-alert title="{{ swalTitle }}" text="{{ swalText }}" color="{{ swalColor }}">
+        {{ component('button_link',{
+            color:color,
+            mode:mode,
+            size:size,
+            block:block,
+            label:label,
+            link:link,
+            target:target,
+            tooltip:tooltip,
+            icon:icon,
+            iconPlacement:iconPlacement
+        }) }}
+    </sweet-alert>
+{% endif %}

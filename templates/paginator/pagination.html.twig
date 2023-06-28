@@ -1,42 +1,45 @@
 {% if pageCount > 1 %}
     <div class="inline-flex gap-x-2 justify-end">
         {% if previous is defined %}
-            {# TODO: Button component ? #}
-            <a
-                    href="{{ path(route, query|merge({(pageParameterName): previous})) }}"
-                    class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-teal-600 transition-all text-sm"
-            >
-                {{ source('@SFToolbox/icons/prev.svg') }}
-                Précédent
-            </a>
+            {{ component('button_link', {
+                link: path(route, query|merge({(pageParameterName): previous})),
+                label: 'Précédent',
+                icon: source('@SFToolbox/icons/chevron-left.svg'),
+                size: 'small',
+                mode: 'white',
+                color: themeColor
+            }) }}
         {% else %}
-            {# TODO: Button component ? #}
-            <button type="button" disabled
-                    class="cursor-not-allowed py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-300 shadow-sm text-sm"
-            >
-                {{ source('@SFToolbox/icons/prev.svg') }}
-                Précédent
-            </button>
+            {{ component('button', {
+                disabled: true,
+                label: 'Précédent',
+                icon: source('@SFToolbox/icons/chevron-left.svg'),
+                size: 'small',
+                mode: 'white',
+                color: themeColor
+            }) }}
         {% endif %}
 
         {% if next is defined %}
-            {# TODO: Button component ? #}
-            <a
-                    href="{{ path(route, query|merge({(pageParameterName): next})) }}"
-                    class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-teal-600 transition-all text-sm"
-            >
-                Suivant
-                {{ source('@SFToolbox/icons/next.svg') }}
-            </a>
+            {{ component('button_link', {
+                link: path(route, query|merge({(pageParameterName): next})),
+                label: 'Suivant',
+                icon: source('@SFToolbox/icons/chevron-right.svg'),
+                size: 'small',
+                mode: 'white',
+                iconPlacement: 'right',
+                color: themeColor
+            }) }}
         {% else %}
-            {# TODO: Button component ? #}
-            <button type="button"
-                    disabled
-                    class="cursor-not-allowed py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-300 shadow-sm text-sm"
-            >
-                Suivant
-                {{ source('@SFToolbox/icons/next.svg') }}
-            </button>
+            {{ component('button', {
+                disabled: true,
+                label: 'Suivant',
+                icon: source('@SFToolbox/icons/chevron-right.svg'),
+                size: 'small',
+                mode: 'white',
+                iconPlacement: 'right',
+                color: themeColor
+            }) }}
         {% endif %}
     </div>
 {% endif %}

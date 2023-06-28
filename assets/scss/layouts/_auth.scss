@@ -1,0 +1,5 @@
+body[class*="auth_"] {
+    button[type="submit"] {
+        @apply w-full;
+    }
+}

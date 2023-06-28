@@ -1,6 +1,6 @@
 <?php
 
-namespace AppoloDev\SFToolboxBundle\Maker;
+namespace AppoloDev\SFToolboxBundle\Maker\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -8,8 +8,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-// TODO: Move to AbstractCommand
-trait Interact
+trait InteractCommand
 {
     protected function askQuestion(string $argName, InputInterface $input, OutputInterface $output): void
     {

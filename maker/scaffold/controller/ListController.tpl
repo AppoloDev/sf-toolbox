@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\__CAPITALIZED_AREA__\Controller\__ENTITY__;
+namespace App\Http\##AREA##\Controller\##ENTITY##;
 
-use App\Domain\__DOMAIN__\Repository\__ENTITY__Repository;
-use App\Http\__CAPITALIZED_AREA__\Voter\__ENTITY__Voter;
+use App\Domain\##DOMAIN##\Repository\##ENTITY##Repository;
+use App\Http\##AREA##\Voter\##ENTITY##Voter;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,13 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route(path: '__ROUTE_PATH__s', name: '__PREFIX___list')]
-#[IsGranted(__ENTITY__Voter::LIST)]
-class List__ENTITY__Controller extends AbstractController
+#[Route(path: '__ROUTE_PATH__s', name: '##PREFIX##_list')]
+#[IsGranted(##ENTITY##Voter::LIST)]
+class List##ENTITY##Controller extends AbstractController
 {
     public function __invoke(
         Request $request,
-        __ENTITY__Repository $repository,
+        ##ENTITY##Repository $repository,
         PaginatorInterface $paginator,
     ): Response {
         $pagination = $paginator->paginate(
@@ -29,12 +29,12 @@ class List__ENTITY__Controller extends AbstractController
             $request->query->getInt('page', 1),
             12,
             [
-                'defaultSortFieldName' => '__ALIAS__.updatedAt',
+                'defaultSortFieldName' => '##ENTITYLOWER##.updatedAt',
                 'defaultSortDirection' => 'desc',
             ]
         );
 
-        return $this->render('areas/__LOWER_AREA__/__PREFIX__/list.html.twig', [
+        return $this->render('areas/##AREALOWER##/##PREFIX##/list.html.twig', [
             'pagination' => $pagination,
         ]);
     }

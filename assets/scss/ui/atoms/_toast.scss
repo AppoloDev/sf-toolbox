@@ -1,0 +1,27 @@
+$toastColors: 'green', 'red', 'orange';
+
+dismiss-toast {
+    @apply hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300 fixed top-5 right-5;
+}
+
+.toast {
+    @apply max-w-xs border text-sm rounded-md shadow-md;
+
+    .content {
+        @apply flex p-4 items-center gap-x-4;
+    }
+}
+
+@each $color in $toastColors {
+    .toast-#{$color} {
+        @apply bg-#{$color}-50 border-#{$color}-200 text-#{$color}-500;
+
+        h3 {
+            @apply text-#{$color}-500;
+        }
+
+        .description {
+            @apply text-#{$color}-500;
+        }
+    }
+}

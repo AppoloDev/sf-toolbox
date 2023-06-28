@@ -2,8 +2,8 @@
 
 {# TODO: Refactor Start #}
 
-{% block input_class %} py-2 px-3 block w-full border border-gray-200 text-sm rounded-lg focus:border-teal-500 focus:ring-teal-500{% endblock %}
-{% block input_color_class %} py-1/2 px-1 block border border-gray-200 rounded-lg focus:border-teal-500 focus:ring-teal-500 w-10 h-10 cursor-pointer{% endblock %}
+{% block input_class %} py-2 px-3 block w-full border border-gray-200 text-sm rounded-lg focus:border-{{ themeColor }}-500 focus:ring-{{ themeColor }}-500{% endblock %}
+{% block input_color_class %} py-1/2 px-1 block border border-gray-200 rounded-lg focus:border-{{ themeColor }}-500 focus:ring-{{ themeColor }}-500 w-10 h-10 cursor-pointer{% endblock %}
 {% block input_error_class %} border-red-500 focus:border-red-500 focus:ring-red-500 outline-red-500{% endblock %}
 {% block input_disable_class %} border-stone-300 text-stone-500{% endblock %}
 
@@ -97,7 +97,6 @@
 {% block submit_widget -%}
     {{ component('button', {
         type: 'submit',
-        block: true,
         label: label,
         color: themeColor
     }) }}

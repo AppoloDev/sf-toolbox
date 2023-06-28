@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\__DOMAIN__\Repository;
+namespace App\Domain\##DOMAIN##\Repository;
 
-use App\Domain\__DOMAIN__\Entity\__ENTITY__;
+use App\Domain\##DOMAIN##\Entity\##ENTITY##;
 use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\BuilderCriteria;
 use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\GroupAndOrderCriteria;
 use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\JoinCriteria;
@@ -12,9 +12,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<__ENTITY__>
+ * @extends ServiceEntityRepository<##ENTITY##>
 */
-class __ENTITY__Repository extends ServiceEntityRepository
+class ##ENTITY##Repository extends ServiceEntityRepository
 {
     use BuilderCriteria;
     use GroupAndOrderCriteria;
@@ -22,10 +22,10 @@ class __ENTITY__Repository extends ServiceEntityRepository
     use JoinCriteria;
     use SelectCriteria;
 
-    protected static string $alias = '__ALIAS__';
+    protected static string $alias = '##ENTITYLOWER##';
 
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, __ENTITY__::class);
+        parent::__construct($registry, ##ENTITY##::class);
     }
 }

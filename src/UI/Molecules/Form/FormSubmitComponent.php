@@ -12,20 +12,33 @@ class FormSubmitComponent
 {
     public ?FormView $form = null;
     public string $submitField = '';
-    public ?string $deletePath = null;
-    public array $swal = [];
+    public ?string $deleteButtonLink = null;
+    public string $deleteSwalTitle;
+    public string $deleteSwalText;
+    public string $deleteSwalColor;
 
     #[PreMount]
     public function preMount(array $data): array
     {
         $resolver = new OptionsResolver();
-        $resolver->setDefault('submitField', 'submit');
-        $resolver->setDefault('deletePath', null);
-        $resolver->setDefaults(['swal' => []]);
         $resolver->setRequired('form');
+        $resolver->setAllowedTypes('form', FormView::class);
+
+        $resolver->setDefault('submitField', 'submit');
         $resolver->setAllowedTypes('submitField', 'string');
-        $resolver->setAllowedTypes('deletePath', ['string', 'null']);
-        $resolver->setAllowedTypes('swal', 'array');
+
+        $resolver->setDefault('deleteButtonLink', null);
+        $resolver->setAllowedTypes('deleteButtonLink', ['string', 'null']);
+
+        $resolver->setDefaults(['deleteSwalTitle' => 'Êtes-vous sure ?']);
+        $resolver->setAllowedTypes('deleteSwalTitle', ['string', 'null']);
+
+        $resolver->setDefaults(['deleteSwalText' => 'Vous êtes sur le point d’effectuer une action totalement irréversible …']);
+        $resolver->setAllowedTypes('deleteSwalText', ['string', 'null']);
+
+        $resolver->setDefaults(['deleteSwalColor' => 'red']);
+        $resolver->setAllowedTypes('deleteSwalColor', ['string', 'null']);
+        $resolver->setAllowedValues('deleteSwalColor', ['orange', 'red', 'green', 'blue']);
 
         return $resolver->resolve($data);
     }

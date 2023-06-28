@@ -9,19 +9,19 @@ class ScaffoldFileCreator extends AbstractFileCreator
     protected string $routePath;
 
     protected array $mapping = [
-        'scaffold/controller/AddController.tpl' => '/src/Http/__CAPITALIZED_AREA__/Controller/__ENTITY__/Add__ENTITY__Controller.php',
-        'scaffold/controller/EditController.tpl' => '/src/Http/__CAPITALIZED_AREA__/Controller/__ENTITY__/Edit__ENTITY__Controller.php',
-        'scaffold/controller/DeleteController.tpl' => '/src/Http/__CAPITALIZED_AREA__/Controller/__ENTITY__/Delete__ENTITY__Controller.php',
-        'scaffold/controller/ListController.tpl' => '/src/Http/__CAPITALIZED_AREA__/Controller/__ENTITY__/List__ENTITY__Controller.php',
-        'scaffold/controller/ExportController.tpl' => '/src/Http/__CAPITALIZED_AREA__/Controller/__ENTITY__/Export__ENTITY__Controller.php',
-        'scaffold/form/FormType.tpl' => '/src/Http/__CAPITALIZED_AREA__/Form/__ENTITY__/__ENTITY__FormType.php',
-        'scaffold/voter/Voter.tpl' => '/src/Http/__CAPITALIZED_AREA__/Voter/__ENTITY__Voter.php',
-        'scaffold/template/_actions.tpl' => '/templates/areas/__LOWER_AREA__/__PREFIX__/_actions.html.twig',
-        'scaffold/template/_form.tpl' => '/templates/areas/__LOWER_AREA__/__PREFIX__/_form.html.twig',
-        'scaffold/template/_list_item.tpl' => '/templates/areas/__LOWER_AREA__/__PREFIX__/_list_item.html.twig',
-        'scaffold/template/add.tpl' => '/templates/areas/__LOWER_AREA__/__PREFIX__/add.html.twig',
-        'scaffold/template/edit.tpl' => '/templates/areas/__LOWER_AREA__/__PREFIX__/edit.html.twig',
-        'scaffold/template/list.tpl' => '/templates/areas/__LOWER_AREA__/__PREFIX__/list.html.twig',
+        'scaffold/controller/AddController.tpl' => '/src/Http/##AREA##/Controller/##ENTITY##/Add##ENTITY##Controller.php',
+        'scaffold/controller/EditController.tpl' => '/src/Http/##AREA##/Controller/##ENTITY##/Edit##ENTITY##Controller.php',
+        'scaffold/controller/DeleteController.tpl' => '/src/Http/##AREA##/Controller/##ENTITY##/Delete##ENTITY##Controller.php',
+        'scaffold/controller/ListController.tpl' => '/src/Http/##AREA##/Controller/##ENTITY##/List##ENTITY##Controller.php',
+        'scaffold/controller/ExportController.tpl' => '/src/Http/##AREA##/Controller/##ENTITY##/Export##ENTITY##Controller.php',
+        'scaffold/form/FormType.tpl' => '/src/Http/##AREA##/Form/##ENTITY##/##ENTITY##FormType.php',
+        'scaffold/voter/Voter.tpl' => '/src/Http/##AREA##/Voter/##ENTITY##Voter.php',
+        'scaffold/template/_actions.tpl' => '/templates/areas/##AREALOWER##/##PREFIX##/_actions.html.twig',
+        'scaffold/template/_form.tpl' => '/templates/areas/##AREALOWER##/##PREFIX##/_form.html.twig',
+        'scaffold/template/_list_item.tpl' => '/templates/areas/##AREALOWER##/##PREFIX##/_list_item.html.twig',
+        'scaffold/template/add.tpl' => '/templates/areas/##AREALOWER##/##PREFIX##/add.html.twig',
+        'scaffold/template/edit.tpl' => '/templates/areas/##AREALOWER##/##PREFIX##/edit.html.twig',
+        'scaffold/template/list.tpl' => '/templates/areas/##AREALOWER##/##PREFIX##/list.html.twig',
     ];
 
     public function init(array $options = []): void
@@ -34,10 +34,9 @@ class ScaffoldFileCreator extends AbstractFileCreator
 
     protected function replaceVars(string $value): string
     {
-        // TODO: refactor
         return str_replace(
-            ['__ENTITY__', '__ENTITYCAMEL__', '__DOMAIN__', '__CAPITALIZED_AREA__', '__LOWER_AREA__', '__PREFIX__', '__ROUTE_PATH__', '__ALIAS__'],
-            [$this->entity, lcfirst($this->entity), $this->domain, $this->area, strtolower($this->area), $this->prefix, $this->routePath, strtolower($this->entity)],
+            ['##DOMAIN##', '##ENTITY##', '##ENTITYCAMEL##', '##ENTITYLOWER##', '##AREA##', '##AREALOWER##', '##PREFIX##', '##ROUTEPATH##'],
+            [$this->domain, $this->entity, lcfirst($this->entity), strtolower($this->entity), $this->area, strtolower($this->area), $this->prefix, $this->routePath],
             $value
         );
     }

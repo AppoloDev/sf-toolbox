@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Http\__CAPITALIZED_AREA__\Voter;
+namespace App\Http\##AREA##\Voter;
 
-use App\Domain\__DOMAIN__\Entity\__ENTITY__;
+use App\Domain\##DOMAIN##\Entity\##ENTITY##;
 use AppoloDev\SFToolboxBundle\Security\Authorization\AbstractVoter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class __ENTITY__Voter extends AbstractVoter
+class ##ENTITY##Voter extends AbstractVoter
 {
-    public const LIST = '__LOWER_AREA_____PREFIX___list';
-    public const ADD = '__LOWER_AREA_____PREFIX___add';
-    public const EDIT = '__LOWER_AREA_____PREFIX___edit';
-    public const DELETE = '__LOWER_AREA_____PREFIX___delete';
-    public const EXPORT = '__LOWER_AREA_____PREFIX___export';
+    public const LIST = '##AREALOWER##_##PREFIX##_list';
+    public const ADD = '##AREALOWER##_##PREFIX##_add';
+    public const EDIT = '##AREALOWER##_##PREFIX##_edit';
+    public const DELETE = '##AREALOWER##_##PREFIX##_delete';
+    public const EXPORT = '##AREALOWER##_##PREFIX##_export';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
         return match ($attribute) {
             self::LIST, self::ADD, self::EXPORT => true,
-            self::EDIT, self::DELETE => $subject instanceof __ENTITY__,
+            self::EDIT, self::DELETE => $subject instanceof ##ENTITY##,
             default => false,
         };
     }

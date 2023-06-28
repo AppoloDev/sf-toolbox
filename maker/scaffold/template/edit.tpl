@@ -1,11 +1,11 @@
 {% extends '_layout/admin.html.twig' %}
 
-{% block title %}{{ __ENTITYCAMEL__.id}}{% endblock %}{# TODO: Implements #}
+{% block title %}{{ ##ENTITYCAMEL##.id}}{% endblock %}{# TODO: Implements #}
 
 {% block breadcrumb %}
     {% with {items: [
-        {path: path('__LOWER_AREA___dashboard'), label: 'Accueil'},
-        {path: path('__LOWER_AREA_____PREFIX___list'), label: '__ROUTE_PATH__s'},
+        {path: path('##AREALOWER##_dashboard'), label: 'Accueil'},
+        {path: path('##AREALOWER##_##PREFIX##_list'), label: '__ROUTE_PATH__s'},
         {path: null, label: block('title')},
     ]} %}
         {{ block('breadcrumb', '_shared/blocks/breadcrumb.html.twig') }}
@@ -17,7 +17,7 @@
         headerTitle: block('title'),
     } %}
         {% block form_render %}
-            {% include 'areas/__LOWER_AREA__/__PREFIX__/_form.html.twig' %}
+            {% include 'areas/##AREALOWER##/##PREFIX##/_form.html.twig' %}
         {% endblock %}
     {% endcomponent %}
 {% endblock %}

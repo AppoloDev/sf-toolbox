@@ -6,7 +6,7 @@
     <title>{% block title %}{% endblock %} — {{ siteTitle }}</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    {# TODO: Add favicon #}
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
 
     {{ vite_entry_link_tags('theme') }}
     {% block stylesheets %}{% endblock %}

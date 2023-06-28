@@ -6,7 +6,7 @@
     <title>{% block title %}{% endblock %} — {{ siteTitle }}</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    {# TODO: Add favicon #}
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
 
     {% block stylesheets %}
         {{ vite_entry_link_tags('theme') }}
@@ -27,7 +27,6 @@
                 {% endblock %}
 
                 <div class="sm:hidden">
-                    {# TODO: Button component ? #}
                     <button
                             type="button"
                             class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-md border border-white/[.5] font-medium text-white/[.5] shadow-sm align-middle hover:bg-white/[.1] hover:text-white transition-all text-sm"
@@ -36,11 +35,11 @@
                             aria-label="Toggle navigation"
                     >
                         <div class="hs-collapse-open:hidden w-4 h-4">
-                            {{ source('@SFToolbox/icons/menu.svg') }}
+                            {{ source('@SFToolbox/icons/bars.svg') }}
                         </div>
 
                         <div class="hs-collapse-open:block hidden w-4 h-4">
-                            {{ source('@SFToolbox/icons/cross.svg') }}
+                            {{ source('@SFToolbox/icons/xmark.svg') }}
                         </div>
                     </button>
                 </div>

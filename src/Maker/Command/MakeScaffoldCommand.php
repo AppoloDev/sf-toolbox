@@ -3,7 +3,6 @@
 namespace AppoloDev\SFToolboxBundle\Maker\Command;
 
 use AppoloDev\SFToolboxBundle\Maker\FileCreator\ScaffoldFileCreator;
-use AppoloDev\SFToolboxBundle\Maker\Interact;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -14,7 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(name: 'make:scaffold', description: 'Generate CRUD in specific area')]
 class MakeScaffoldCommand extends Command
 {
-    use Interact;
+    use InteractCommand;
 
     public function __construct(private readonly ScaffoldFileCreator $fileCreator, string $name = null) {
         parent::__construct($name);

@@ -13,7 +13,7 @@
 
         <td class="h-px w-px whitespace-nowrap">
             <div class="px-6 py-1.5 flex justify-end">
-                {{ block('actions', 'areas/__LOWER_AREA__/__PREFIX__/_actions.html.twig') }}
+                {{ block('actions', 'areas/##AREALOWER##/##PREFIX##/_actions.html.twig') }}
             </div>
         </td>
     </tr>

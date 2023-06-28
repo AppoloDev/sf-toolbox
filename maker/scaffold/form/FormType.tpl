@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\__CAPITALIZED_AREA__\Form\__ENTITY__;
+namespace App\Http\##AREA##\Form\##ENTITY##;
 
-use App\Domain\__DOMAIN__\Entity\__ENTITY__;
+use App\Domain\##DOMAIN##\Entity\##ENTITY##;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class __ENTITY__FormType extends AbstractType
+class ##ENTITY##FormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -17,7 +17,7 @@ class __ENTITY__FormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => __ENTITY__::class,
+            'data_class' => ##ENTITY##::class,
         ]);
     }
 }

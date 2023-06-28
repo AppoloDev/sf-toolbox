@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\__CAPITALIZED_AREA__\Controller\__ENTITY__;
+namespace App\Http\##AREA##\Controller\##ENTITY##;
 
-use App\Domain\__DOMAIN__\Repository\__ENTITY__Repository;
-use App\Http\__CAPITALIZED_AREA__\Voter\__ENTITY__Voter;
+use App\Domain\##DOMAIN##\Repository\##ENTITY##Repository;
+use App\Http\##AREA##\Voter\##ENTITY##Voter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route(path: '__ROUTE_PATH__s/exporter', name: '__PREFIX___export')]
-#[IsGranted(__ENTITY__Voter::EXPORT)]
-class Export__ENTITY__Controller extends AbstractController
+#[Route(path: '__ROUTE_PATH__s/exporter', name: '##PREFIX##_export')]
+#[IsGranted(##ENTITY##Voter::EXPORT)]
+class Export##ENTITY##Controller extends AbstractController
 {
     public function __invoke(
         Request $request,
-        __ENTITY__Repository $repository,
+        ##ENTITY##Repository $repository,
         PaginatorInterface $paginator,
     ): Response {
       // TODO: Implements

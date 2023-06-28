@@ -3,7 +3,6 @@
 namespace AppoloDev\SFToolboxBundle\Maker\Command;
 
 use AppoloDev\SFToolboxBundle\Maker\FileCreator\EntityFileCreator;
-use AppoloDev\SFToolboxBundle\Maker\Interact;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -15,7 +14,7 @@ use Symfony\Component\Process\Process;
 #[AsCommand(name: 'make:domain:entity', description: 'Create entity in specific domain namespace')]
 class MakeDomainEntityCommand extends Command
 {
-    use Interact;
+    use InteractCommand;
 
     public function __construct(private readonly EntityFileCreator $fileCreator, string $name = null)
     {

@@ -1,0 +1,23 @@
+<div class="hs-dropdown dropdown-menu">
+    {% if button is not null %}
+        {{ button|raw }}
+    {% else %}
+        {{ component('button', {
+            icon: source('@SFToolbox/icons/ellipsis.svg'),
+            mode: 'white',
+            color: themeColor
+        }) }}
+    {% endif %}
+    <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 duration hidden dropdown-menu-container">
+        <div class="py-2 first:pt-0 last:pb-0">
+            {% if headerLabel is not null %}
+                <span class="block py-2 px-3 text-xs font-medium uppercase text-gray-400">
+                    {{ headerLabel }}
+                  </span>
+            {% endif %}
+        </div>
+        {% for item in items %}
+            {{ item|raw }}
+        {% endfor %}
+    </div>
+</div>

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Domain\__DOMAIN__\Entity;
+namespace App\Domain\##DOMAIN##\Entity;
 
-use App\Domain\__DOMAIN__\Repository\__ENTITY__Repository;
+use App\Domain\##DOMAIN##\Repository\##ENTITY##Repository;
 use AppoloDev\SFToolboxBundle\Domain\Entity\Concern\Identifiable;
 use AppoloDev\SFToolboxBundle\Domain\Entity\Concern\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: __ENTITY__Repository::class)]
+#[ORM\Entity(repositoryClass: ##ENTITY##Repository::class)]
 #[ORM\HasLifecycleCallbacks()]
-class __ENTITY__
+class ##ENTITY##
 {
     use Identifiable;
     use Timestampable;
