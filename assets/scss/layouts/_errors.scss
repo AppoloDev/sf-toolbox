@@ -8,12 +8,6 @@ body.page_error {
     .container {
         @apply flex-col space-y-16 p-4 lg:p-8;
 
-        .logo {
-            img {
-                @apply h-24 w-auto object-contain;
-            }
-        }
-
         .content {
             @apply text-center;
 

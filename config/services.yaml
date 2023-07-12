@@ -8,8 +8,8 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Doctrine/Entity/'
-            - '../src/Doctrine/Repository/'
+            - '../src/Domain/Entity/'
+            - '../src/Domain/Repository/'
 
     # Security
     AppoloDev\SFToolboxBundle\Security\Http\EventListener\IsNotGrantedAttributeListener:

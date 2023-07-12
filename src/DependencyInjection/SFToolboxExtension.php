@@ -28,9 +28,10 @@ class SFToolboxExtension extends Extension implements PrependExtensionInterface
                 ],
                 'form_themes' => [
                     '@SFToolbox/form/themes/tailwind_theme.html.twig',
-                    '@SFToolbox/form/themes/custom_radio.html.twig', // TODO: A modifier
-                    '@SFToolbox/form/themes/image_radio.html.twig', // TODO: A modifier
-                    '@SFToolbox/form/themes/tom_select.html.twig', // TODO: A modifier
+                    '@SFToolbox/form/widgets/card_radio.html.twig',
+                    '@SFToolbox/form/widgets/card_image_radio.html.twig',
+                    '@SFToolbox/form/widgets/tom_select.html.twig',
+                    '@SFToolbox/form/widgets/geo_localizable.html.twig',
                 ]
             ]);
         }
@@ -43,5 +44,11 @@ class SFToolboxExtension extends Extension implements PrependExtensionInterface
                 ]
             ]);
         }
+
+        $container->prependExtensionConfig('framework', [
+            'router' => [
+                'default_uri' => '%env(DEFAULT_URI)%',
+            ]
+        ]);
     }
 }

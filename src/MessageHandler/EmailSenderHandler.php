@@ -2,11 +2,9 @@
 
 namespace AppoloDev\SFToolboxBundle\MessageHandler;
 
-use App\Kernel;
 use AppoloDev\SFToolboxBundle\Message\EmailMessage;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -22,8 +20,8 @@ class EmailSenderHandler extends AbstractController
         #[Autowire('%env(SENDER_NAME)%')]
         private readonly string $senderName,
         private readonly MailerInterface $mailer,
-        private readonly Kernel $kernel,
-        private readonly Packages $packages,
+        #[Autowire('%kernel.project_dir%')]
+        private readonly string $projectDir,
     ) {
     }
 
@@ -32,11 +30,7 @@ class EmailSenderHandler extends AbstractController
      */
     public function __invoke(EmailMessage $emailMessage): void
     {
-        // TODO: refactor
-        $logoPath = $this->kernel->getProjectDir().
-            DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.
-            $this->packages->getUrl('assets/images/logo.png')
-        ;
+        $logoPath = $this->projectDir.'/public/assets/images/logo.png';
 
         $email = (new TemplatedEmail())
             ->from(new Address($this->senderEmail, $this->senderName))

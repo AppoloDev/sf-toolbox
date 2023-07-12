@@ -10,17 +10,15 @@ class ArrayUtils
             return null;
         }
 
-        if (isset($haystack[$needle])) {
+        if (array_key_exists($needle, $haystack)) {
             return $haystack[$needle];
         }
 
         foreach ($haystack as $key => $value) {
             if ($key === $needle) {
                 return $value;
-            } else {
-                if (is_array($value)) {
-                    return self::recursiveFind($value, $needle);
-                }
+            } else if (is_array($value)) {
+                return self::recursiveFind($value, $needle);
             }
         }
 

@@ -5,8 +5,7 @@ namespace AppoloDev\SFToolboxBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-// TODO: Rename
-class ImageRadioType extends AbstractType
+class CardImageRadioType extends AbstractType
 {
     public function getParent(): string
     {
@@ -15,6 +14,6 @@ class ImageRadioType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'image_radio';
+        return 'card_image_radio';
     }
 }

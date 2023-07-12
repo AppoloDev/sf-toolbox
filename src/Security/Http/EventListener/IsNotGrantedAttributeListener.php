@@ -16,7 +16,6 @@ use Symfony\Component\Security\Core\Exception\RuntimeException;
 
 class IsNotGrantedAttributeListener implements EventSubscriberInterface
 {
-    // TODO: Refactor ??
     public function __construct(
         private readonly AuthorizationCheckerInterface $authChecker,
         private ?ExpressionLanguage $expressionLanguage = null,

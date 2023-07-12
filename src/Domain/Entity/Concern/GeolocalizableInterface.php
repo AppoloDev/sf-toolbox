@@ -2,7 +2,7 @@
 
 namespace AppoloDev\SFToolboxBundle\Domain\Entity\Concern;
 
-interface LocalisableInterface
+interface GeolocalizableInterface
 {
     public function getAddress(): ?string;
 
