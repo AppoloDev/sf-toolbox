@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route(path: '__ROUTE_PATH__/supprimer', name: '##PREFIX##_delete')]
+#[Route(path: '##ROUTEPATH##/supprimer', name: '##PREFIX##_delete')]
 #[IsGranted(##ENTITY##Voter::DELETE, '##ENTITYCAMEL##')]
 class Delete##ENTITY##Controller extends AbstractController
 {

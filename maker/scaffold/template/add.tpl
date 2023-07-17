@@ -1,15 +1,13 @@
 {% extends '_layout/admin.html.twig' %}
 
-{% block title %}Ajout d'un __ROUTE_PATH__{% endblock %}{# TODO: Wording #}
+{% block title %}Ajout d'un ##ROUTEPATH##{% endblock %}{# TODO: Wording #}
 
 {% block breadcrumb %}
-    {% with {items: [
+    {{ component('breadcrumb', {items: [
         {path: path('##AREALOWER##_dashboard'), label: 'Accueil'},
-        {path: path('##AREALOWER##_##PREFIX##_list'), label: '__ROUTE_PATH__s'},
+        {path: path('##AREALOWER##_##PREFIX##_list'), label: '##ROUTEPATH##s'},
         {path: null, label: block('title')},
-    ]} %}
-        {{ block('breadcrumb', '_shared/blocks/breadcrumb.html.twig') }}
-    {% endwith %}
+    ]}) }}
 {% endblock %}
 
 {% block body %}

@@ -1,14 +1,12 @@
 {% extends '_layout/admin.html.twig' %}
 
-{% block title %}Liste des __ROUTE_PATH__s{% endblock %}{# TODO: Wording #}
+{% block title %}Liste des ##ROUTEPATH##s{% endblock %}{# TODO: Wording #}
 
 {% block breadcrumb %}
-    {% with {items: [
+    {{ component('breadcrumb', {items: [
         {path: path('##AREALOWER##_dashboard'), label: 'Accueil'},
         {path: null, label: block('title')},
-    ]} %}
-        {{ block('breadcrumb', '_shared/blocks/breadcrumb.html.twig') }}
-    {% endwith %}
+    ]}) }}
 {% endblock %}
 
 {% block body %}
@@ -19,25 +17,28 @@
             ''
         ],
         pagination: pagination,
-        emptyText: 'Essayez d\'ajouter un nouvel __ROUTE_PATH__s.', {# TODO: Wording #}
+        emptyText: 'Essayez d\'ajouter un nouvel ##ROUTEPATH##s.', {# TODO: Wording #}
     } %}
         {% block header_actions %}
             <div class="flex gap-4 items-center">
-                {{ component('button_action', {
-                    permission: is_granted('##AREALOWER##_##PREFIX##_export'),
-                    path: path('##AREALOWER##_##PREFIX##_export'), {# TODO: Mettre le query paremeters pour le querySearch #}
-                    class: 'py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-{{themeColor}}-500 text-white hover:bg-{{themeColor}}-600 transition-all text-sm',
-                    labelAfter: 'Exporter',
-                    icon: source('@SFToolbox/icons/download.svg'),
-                }) }}
+                {% if is_granted('##AREALOWER##_##PREFIX##_export') %}
+                    {{ component('button_link', {
+                        link: path('##AREALOWER##_##PREFIX##_export', {q: app.request.query.get('q')}),
+                        label: 'Exporter',
+                        color: themeColor,
+                        mode: 'ghost',
+                        icon: source('@SFToolbox/icons/download.svg'),
+                    }) }}
+                {% endif %}
 
-                {{ component('button_action', {
-                    permission: is_granted('##AREALOWER##_##PREFIX##_add'),
-                    path: path('##AREALOWER##_##PREFIX##_add'),
-                    class: 'py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-{{themeColor}}-500 text-white hover:bg-{{themeColor}}-600 transition-all text-sm',
-                    labelAfter: 'Ajouter',
-                    icon: source('@SFToolbox/icons/plus.svg'),
-                }) }}
+                {% if is_granted('##AREALOWER##_##PREFIX##_add') %}
+                    {{ component('button_link', {
+                        link: path('##AREALOWER##_##PREFIX##_add'),
+                        label: 'Ajouter',
+                        color: themeColor,
+                        icon: source('@SFToolbox/icons/plus.svg')
+                    }) }}
+                {% endif %}
             </div>
         {% endblock %}
 

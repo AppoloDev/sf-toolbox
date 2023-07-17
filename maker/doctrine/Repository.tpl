@@ -28,4 +28,15 @@ class ##ENTITY##Repository extends ServiceEntityRepository
     {
         parent::__construct($registry, ##ENTITY##::class);
     }
+
+    public function querySearch(?string $queryString): self
+    {
+        if (is_null($queryString) || '' === $queryString) {
+            return $this;
+        }
+
+        // TODO: Implements
+
+        return $this;
+    }
 }

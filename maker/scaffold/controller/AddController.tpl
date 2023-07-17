@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route(path: '__ROUTE_PATH__/ajouter', name: '##PREFIX##_add')]
+#[Route(path: '##ROUTEPATH##/ajouter', name: '##PREFIX##_add')]
 #[IsGranted(##ENTITY##Voter::ADD)]
 class Add##ENTITY##Controller extends AbstractController
 {
