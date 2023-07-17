@@ -1,24 +1,21 @@
-<div class="max-w-sm w-full min-h-[200px] flex flex-col justify-center mx-auto px-6 py-4">
-    {% if title is not null %}
-        <div class="mt-5 font-semibold text-gray-800">
-            {{ title }}
-        </div>
-    {% endif %}
+<div class="max-w-sm w-full flex flex-col justify-center mx-auto space-y-5 p-8">
+    <div class="space-y-2">
+        {% if title is not null %}
+            <div class="font-semibold text-gray-800 text-center">
+                {{ title }}
+            </div>
+        {% endif %}
 
-    {% if description is not null %}
-        <p class="mt-2 text-sm text-gray-600">
-            {{ description }}
-        </p>
-    {% endif %}
+        {% if description is not null %}
+            <p class="text-sm text-gray-600 text-center">
+                {{ description }}
+            </p>
+        {% endif %}
+    </div>
 
-    {% if buttonLink is not null %}
-        <div class="mt-5 grid sm:flex gap-2">
-            {{ component('button_link', {
-                link: buttonLink,
-                label: buttonLabel,
-                color: themeColor
-            }) }}
-        </div>
-    {% endif %}
+    <div class="flex justify-center mt-5">
+        {% if button is not null %}
+            {{ button|raw }}
+        {% endif %}
+    </div>
 </div>
-{# TODO: export class #}

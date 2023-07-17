@@ -12,7 +12,6 @@ class TableListComponent
 {
     public ?string $headerTitle;
     public ?array $tableColumns;
-    public ?string $emptyText;
     public PaginationInterface $pagination;
     #[PreMount]
     public function preMount(array $data): array
@@ -24,8 +23,6 @@ class TableListComponent
         $resolver->setAllowedTypes('tableColumns', ['array', 'null']);
         $resolver->setRequired('pagination');
         $resolver->setAllowedTypes('pagination', [PaginationInterface::class]);
-        $resolver->setDefaults(['emptyText' => null]);
-        $resolver->setAllowedTypes('emptyText', ['string', 'null']);
 
         return $resolver->resolve($data);
     }

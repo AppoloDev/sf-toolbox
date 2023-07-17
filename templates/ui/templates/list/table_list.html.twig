@@ -104,19 +104,23 @@
 
                             {% block table_items %}
                                 <tbody class="divide-y divide-gray-200">
-                                    {% for item in pagination %}
-                                        {% block table_item %}{% endblock %}
-                                    {% endfor %}
+                                {% for item in pagination %}
+                                    {% block table_item %}{% endblock %}
+                                {% endfor %}
                                 </tbody>
                             {% endblock %}
                         </table>
                     </div>
                 {% else %}
-                    {% block emptyList %}
-                        {{ component('list_empty', {
-                            description: emptyText ?? ''
-                        }) }}
-                    {% endblock %}
+                    {% if app.request.query.has('q') %}
+                        {% block emptyListOnSearch %}
+                            {{ component('list_empty', {
+                                description: 'Nous n\'avons rien trouvé pour votre recherche: "'~app.request.query.get('q')~'"'
+                            }) }}
+                        {% endblock %}
+                    {% else %}
+                        {% block emptyList %}{% endblock %}
+                    {% endif %}
                 {% endif %}
             {% endblock %}
 

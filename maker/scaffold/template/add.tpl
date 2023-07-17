@@ -3,6 +3,7 @@
 {% block title %}Ajout d'un ##ROUTEPATH##{% endblock %}{# TODO: Wording #}
 
 {% block breadcrumb %}
+    {# TODO: Wording #}
     {{ component('breadcrumb', {items: [
         {path: path('##AREALOWER##_dashboard'), label: 'Accueil'},
         {path: path('##AREALOWER##_##PREFIX##_list'), label: '##ROUTEPATH##s'},

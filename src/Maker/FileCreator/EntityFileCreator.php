@@ -12,7 +12,7 @@ class EntityFileCreator extends AbstractFileCreator
     protected function replaceVars(string $value): string
     {
         return str_replace(
-            ['##DOMAIN##', '##ENTITY##', '##ALIAS##'],
+            ['##DOMAIN##', '##ENTITY##', '##ENTITYLOWER##'],
             [$this->domain, $this->entity, strtolower($this->entity)],
             $value
         );

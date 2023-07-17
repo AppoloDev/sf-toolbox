@@ -11,8 +11,7 @@ class ListEmptyComponent
 {
     public ?string $title = '';
     public ?string $description = '';
-    public ?string $buttonLink = null;
-    public ?string $buttonLabel = null;
+    public ?string $button = null;
 
     #[PreMount]
     public function preMount(array $data): array
@@ -24,11 +23,8 @@ class ListEmptyComponent
         $resolver->setDefault('description', 'Essayez d\'ajouter un nouvel élément.');
         $resolver->setAllowedTypes('description', ['string', 'null']);
 
-        $resolver->setDefault('buttonLabel', 'Ajouter');
-        $resolver->setAllowedTypes('buttonLabel', ['string', 'null']);
-
-        $resolver->setDefault('buttonLink', null);
-        $resolver->setAllowedTypes('buttonLink', ['string', 'null']);
+        $resolver->setDefault('button', null);
+        $resolver->setAllowedTypes('button', ['string', 'null']);
 
         return $resolver->resolve($data);
     }
