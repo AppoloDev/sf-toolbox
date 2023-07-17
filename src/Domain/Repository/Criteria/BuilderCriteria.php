@@ -2,7 +2,7 @@
 
 namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria;
 
-use AppoloDev\SFToolboxBundle\Domain\Entity\Concern\IdentifiableInterface;
+use AppoloDev\SFToolboxBundle\Domain\Entity\Concern\Identifiable\IdentifiableInterface;
 use Doctrine\ORM\QueryBuilder;
 
 trait BuilderCriteria
@@ -27,9 +27,12 @@ trait BuilderCriteria
     {
         $this->qb->$methodName(...$params);
 
+        // TODO: Bug quand il est tête
+
         return $this;
     }
 
+    // TODO: Add method update
     public function delete(): self
     {
         $this->qb->delete();
@@ -64,6 +67,7 @@ trait BuilderCriteria
 
     public function getResultsIndexedById(): array
     {
+        // TODO: Creer un getResultsIndexedBy
         $results = array_reduce($this->getQB()->getResults(), function (?array $acc, IdentifiableInterface $item) {
             $acc[$item->getId()->__toString()] = $item;
 

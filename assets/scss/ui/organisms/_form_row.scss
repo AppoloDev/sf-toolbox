@@ -4,6 +4,7 @@
         &.required {
             &:after {
                 content: '*';
+                @apply pl-2 text-red-500;
             }
         }
     }

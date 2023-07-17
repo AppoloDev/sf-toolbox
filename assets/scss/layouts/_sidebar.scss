@@ -1,0 +1,30 @@
+body.sidebar {
+    .menu-mobile {
+        @apply sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden;
+    }
+
+    .aside {
+        @apply px-6 py-10 space-y-6;
+
+        .logo {
+            @apply h-10;
+        }
+
+        .navigation {
+            @apply h-full;
+            height: calc(100vh - theme('height.10') - theme('height.12') - theme('padding.10') * 2 - theme('padding.6') * 2);
+        }
+
+        .sidebar_user_profile_menu {
+            @apply h-12;
+
+            .dropdownmenu {
+                @apply w-full;
+
+                button {
+                    @apply justify-between;
+                }
+            }
+        }
+    }
+}

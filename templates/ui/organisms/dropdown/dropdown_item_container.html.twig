@@ -1,5 +1,7 @@
-<div class="py-2 first:pt-0 last:pb-0 flex flex-col">
-    {% for item in items %}
-        {{ item|raw }}
-    {% endfor %}
-</div>
+{% if allowDisplay is defined and allowDisplay %}
+    <div class="py-2 first:pt-0 last:pb-0 flex flex-col">
+        {% for item in items %}
+            {{ item|raw }}
+        {% endfor %}
+    </div>
+{% endif %}

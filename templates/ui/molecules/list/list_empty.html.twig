@@ -1,8 +1,8 @@
 <div class="max-w-sm w-full min-h-[200px] flex flex-col justify-center mx-auto px-6 py-4">
     {% if title is not null %}
-        <h2 class="mt-5 font-semibold text-gray-800">
+        <div class="mt-5 font-semibold text-gray-800">
             {{ title }}
-        </h2>
+        </div>
     {% endif %}
 
     {% if description is not null %}
@@ -21,3 +21,4 @@
         </div>
     {% endif %}
 </div>
+{# TODO: export class #}

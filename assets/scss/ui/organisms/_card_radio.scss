@@ -1,0 +1,44 @@
+$cardColors: 'appolo';
+
+.card-radio {
+    @apply w-full space-y-6;
+    &--item {
+        @apply w-full relative;
+
+        input {
+            @apply absolute top-0 left-0 -z-10;
+        }
+
+        label {
+            @apply flex gap-8 items-center w-full h-full bg-white border border-dashed border-gray-200 transition-all cursor-pointer m-0 p-8 rounded-lg;
+
+            span {
+                @apply block font-bold text-base;
+            }
+
+            p {
+                @apply text-gray-500 text-sm;
+            }
+
+            svg {
+                @apply max-h-[24px] max-w-[24px];
+            }
+        }
+    }
+}
+
+@each $color in $cardColors {
+    .card-radio-#{$color} {
+        .card-radio--item {
+            &:hover {
+                label {
+                    @apply border-#{$color}-500 bg-#{$color}-50 text-#{$color}-500;
+                }
+            }
+
+            input:checked + label {
+                @apply border-#{$color}-500 bg-#{$color}-50 text-#{$color}-500;
+            }
+        }
+    }
+}

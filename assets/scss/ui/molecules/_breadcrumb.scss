@@ -17,3 +17,9 @@ ol.breadcrumb {
         }
     }
 }
+
+body.sidebar {
+    ol.breadcrumb {
+        @apply mt-0;
+    }
+}

@@ -19,7 +19,7 @@ class BadgeComponent
         $resolver = new OptionsResolver();
         $resolver->setDefaults(['color' => 'gray']);
         $resolver->setAllowedTypes('color', ['string', 'null']);
-        $resolver->setAllowedValues('color', ['gray', 'green', 'red', 'blue', 'yellow', 'orange', 'indigo', 'teal']);
+        $resolver->setAllowedValues('color', ['gray', 'green', 'red', 'blue', 'yellow', 'orange', 'indigo', 'appolo']);
 
         $resolver->setDefaults(['rounded' => 'default']);
         $resolver->setAllowedTypes('rounded', ['string', 'null']);

@@ -1,6 +1,6 @@
-{# TODO: Check du component js (attribut potentiel à passer) #}
+{# TODO: Check du component js  #}
 {% block tom_select_widget %}
-    <tom-select>
+    <tom-select options="{# TODO: jsonencode des options du form #}">
         {{ form_widget(form) }}
     </tom-select>
 {% endblock %}

@@ -1,21 +1,21 @@
-{# TODO: Style à revoir #}
 {% block card_radio_widget %}
-    <div class="w-full space-y-6">
-        {%- for child in form %}
-            <div class="custom-radio--item">
-                {{- form_widget(child) -}}
+    <div class="card-radio card-radio-{{ themeColor }}">
+        {%- for choice in form.vars.choices %}
+            {% set id = form.vars.id~loop.index %}
+            <div class="card-radio--item">
+                <input {% if choice.value in form.vars.value %}checked{% endif %} id={{ id }} type="{{ form.vars.multiple ? 'checkbox': 'radio' }}" name="{{ form.vars.full_name }}" value="{{ choice.value }}"/>
 
-                <label for="{{ child.vars.id }}">
-                    {% if child.vars.attr.icon is defined and child.vars.attr.icon is not null %}
-                        <div class="w-10 h-10 svg-full">
-                            {{ source('@SFToolbox/icons/game/'~child.vars.attr.icon) }}
+                <label for="{{ id }}">
+                    {% if choice.attr.icon is defined and choice.attr.icon is not null %}
+                        <div class="icon">
+                            {{ source(choice.attr.icon) }}
                         </div>
                     {% endif %}
 
                     <div>
-                        <span>{{ child.vars.label }}</span>
-                        {% if child.vars.attr.description is defined and child.vars.attr.description is not null %}
-                            <p>{{ child.vars.attr.description }}</p>
+                        <span>{{ choice.label }}</span>
+                        {% if choice.attr.description is defined and choice.attr.description is not null %}
+                            <p>{{ choice.attr.description }}</p>
                         {% endif %}
                     </div>
                 </label>

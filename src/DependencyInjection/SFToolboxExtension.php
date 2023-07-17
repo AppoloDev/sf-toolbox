@@ -29,7 +29,6 @@ class SFToolboxExtension extends Extension implements PrependExtensionInterface
                 'form_themes' => [
                     '@SFToolbox/form/themes/tailwind_theme.html.twig',
                     '@SFToolbox/form/widgets/card_radio.html.twig',
-                    '@SFToolbox/form/widgets/card_image_radio.html.twig',
                     '@SFToolbox/form/widgets/tom_select.html.twig',
                     '@SFToolbox/form/widgets/geo_localizable.html.twig',
                 ]
