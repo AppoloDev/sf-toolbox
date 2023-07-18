@@ -1,0 +1,16 @@
+<dismiss-toast id="dismiss-toast">
+    <div class="toast toast-{{ color }}" role="alert">
+        <div class="content">
+            {{ message }}
+            <div data-hs-remove-element="#dismiss-toast">
+                {{ component('button', {
+                    color: color,
+                    mode: 'ghost',
+                    icon: source('@SFToolbox/icons/xmark.svg'),
+                    size: 'small'
+                }) }}
+            </div>
+        </div>
+    </div>
+</dismiss-toast>
+

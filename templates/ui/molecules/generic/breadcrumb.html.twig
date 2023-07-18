@@ -1,0 +1,16 @@
+<ol class="breadcrumb" aria-label="Breadcrumb">
+    {% for item in items %}
+        {% if item is not empty %}
+            <li {% if loop.last %}aria-current="page"{% endif %}>
+                {% if loop.last %}
+                    {{ item.label|raw }}
+                {% else %}
+                    <a href="{{ item.path }}">
+                        {{ item.label|raw }}
+                        {{ source('@SFToolbox/icons/chevron-right.svg') }}
+                    </a>
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+</ol>

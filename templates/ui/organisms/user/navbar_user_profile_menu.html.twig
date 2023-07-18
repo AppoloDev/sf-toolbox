@@ -1,0 +1,32 @@
+<div class="navbar_user_profile_menu">
+    {{ component('dropdown_menu', {
+        button: component('button', {
+            label:  app.user.firstname,
+            icon: source('@SFToolbox/icons/chevron-down.svg'),
+            mode: 'solid',
+            iconPlacement: 'right',
+            color: themeColor
+        }),
+        items: [
+            component('dropdown_item_container', {
+                items: [
+                    component('button_link', {
+                        link:  path(routePrefix~'_account_edit'),
+                        label: 'Mon profil',
+                        mode: 'ghost',
+                        block: true,
+                        size: 'small',
+                    }),
+                    component('button_link', {
+                        link: path('auth_logout'),
+                        label: 'Se déconnecter',
+                        mode: 'ghost',
+                        block: true,
+                        size: 'small',
+                        color: 'red',
+                    }),
+                ]
+            }),
+        ]
+    }) }}
+</div>

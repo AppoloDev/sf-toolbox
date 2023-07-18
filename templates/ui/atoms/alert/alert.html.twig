@@ -1,0 +1,24 @@
+<div class="alert alert-{{ color }}" role="alert">
+    {% if header is not null and header is not empty %}
+        <div class="title">{{ header }}</div>
+    {% endif %}
+
+    {% if description is not null and description is not empty %}
+        <div class="description">
+            {{ description }}
+        </div>
+    {% endif %}
+
+    {% if links is not null and links is not empty %}
+        <div class="flex space-x-3 mt-4">
+            {% for link in links %}
+                    {{ component('button_link', {
+                            color: color,
+                            mode: 'outline',
+                            label: link.label,
+                            link: link.link,
+                    }) }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

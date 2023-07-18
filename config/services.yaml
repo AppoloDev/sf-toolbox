@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    AppoloDev\SFToolboxBundle\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Domain/Entity/'
+            - '../src/Domain/Repository/'
+
+    # Security
+    AppoloDev\SFToolboxBundle\Security\Http\EventListener\IsNotGrantedAttributeListener:
+        arguments:
+            - '@security.authorization_checker'
+            - '@security.is_granted_attribute_expression_language'
+        tags: ['kernel.event_subscriber']

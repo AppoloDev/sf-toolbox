@@ -12,16 +12,30 @@
     "minimum-stability": "stable",
     "require": {
         "ext-intl": "*",
+        "ext-zip": "*",
         "php": ">=8.0",
         "twig/twig": "^2.12|^3.0",
-        "doctrine/orm": "^2.9",
-        "symfony/serializer": "^5.3|^6.0",
-        "symfony/uid": "^5.3|^6.0",
-        "symfony/doctrine-bridge": "^5.3|^6.0"
+        "doctrine/orm": "^2.15",
+        "symfony/serializer": "6.3.*",
+        "symfony/uid": "6.3.*",
+        "symfony/console": "6.3.*",
+        "symfony/mailer": "6.3.*",
+        "symfony/ux-twig-component": "^2.9"
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.49"
     },
     "autoload": {
         "psr-4": {
-            "AppoloDev\\SFToolbox\\": "src/"
+            "AppoloDev\\SFToolboxBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "symfony": {
+            "endpoint": [
+                "https://api.github.com/repos/appolodev/sf-toolbox/contents/composer.json",
+                "flex://defaults"
+            ]
         }
     }
 }

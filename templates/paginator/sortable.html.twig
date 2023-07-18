@@ -1,0 +1,20 @@
+{% set options = options|merge({ class: 'group inline-flex items-center gap-x-2 ' ~ options.class }) %}
+
+<a{% for attr, value  in options %} {{ attr }}="{{ value }}"{% endfor %}>
+   <span class="text-xs font-semibold uppercase tracking-wide text-gray-800">{{ title }}</span>
+   <div class="flex justify-center items-center w-5 h-5 border border-gray-200 group-hover:bg-gray-200 text-gray-400 rounded">
+      <div class="h-2 w-2 flex place-items-center">
+          {% if sorted %}
+              {% if direction == 'desc' %}
+                  {{ source('@SFToolbox/icons/sort-down.svg') }}
+              {% else %}
+                  {{ source('@SFToolbox/icons/sort-up.svg') }}
+              {% endif %}
+          {% else %}
+              {{ source('@SFToolbox/icons/sort.svg') }}
+          {% endif %}
+      </div>
+   </div>
+</a>
+
+{# TODO: Revoir les icones #}

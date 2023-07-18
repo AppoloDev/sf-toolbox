@@ -1,0 +1,23 @@
+body.page_error {
+    @apply h-screen;
+
+    &, .container {
+        @apply flex items-center justify-center;
+    }
+
+    .container {
+        @apply flex-col space-y-16 p-4 lg:p-8;
+
+        .content {
+            @apply text-center;
+
+            p {
+                @apply text-black;
+            }
+        }
+
+        h1 {
+            @apply block font-semibold text-5xl mb-8;
+        }
+    }
+}

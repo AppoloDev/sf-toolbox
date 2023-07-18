@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %} — {{ siteTitle }}</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
+
+    {{ vite_entry_link_tags('theme') }}
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body class="bg-gray-50 {{ app.request.attributes.get('_route') }}">
+
+<div class="container mx-auto">
+    <div class="flex flex-col items-center justify-center px-4 py-8 mx-auto h-screen">
+        <div class="flex items-center mb-6">
+            {% block logo %}<img src="{{ asset('assets/images/logo.png') }}" alt="Logo" />{% endblock %}
+        </div>
+        <div class="w-full bg-white rounded-lg shadow  max-w-lg">
+            <div class="p-8 space-y-6">
+                <h1 class="text-2xl font-bold leading-tight tracking-tight text-gray-900">
+                    {{ block('title') }}
+                </h1>
+
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% for type, messages in app.flashes %}
+    {% for message in messages %}
+        {{ component('toast', {message: message,type: type}) }}
+    {% endfor %}
+{% endfor %}
+
+{{ vite_entry_script_tags('theme') }}
+{% block javascripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,5 @@
+.navbar_user_profile_menu {
+    .dropdown-menu {
+        @apply w-full [--strategy:static] sm:[--strategy:fixed] sm:w-auto;
+    }
+}

@@ -1,0 +1,25 @@
+{% block card_radio_widget %}
+    <div class="card-radio card-radio-{{ themeColor }}">
+        {%- for choice in form.vars.choices %}
+            {% set id = form.vars.id~loop.index %}
+            <div class="card-radio--item">
+                <input {% if choice.value in form.vars.value %}checked{% endif %} id={{ id }} type="{{ form.vars.multiple ? 'checkbox': 'radio' }}" name="{{ form.vars.full_name }}" value="{{ choice.value }}"/>
+
+                <label for="{{ id }}">
+                    {% if choice.attr.icon is defined and choice.attr.icon is not null %}
+                        <div class="icon">
+                            {{ source(choice.attr.icon) }}
+                        </div>
+                    {% endif %}
+
+                    <div>
+                        <span>{{ choice.label }}</span>
+                        {% if choice.attr.description is defined and choice.attr.description is not null %}
+                            <p>{{ choice.attr.description }}</p>
+                        {% endif %}
+                    </div>
+                </label>
+            </div>
+        {% endfor -%}
+    </div>
+{% endblock %}

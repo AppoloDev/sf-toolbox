@@ -1,0 +1,37 @@
+{% if form[submitField] is defined %}
+    <div class="form_submit">
+        <div class="sm:flex sm:justify-between space-y-2 sm:space-y-0">
+            <div class="flex flex-col sm:flex-row gap-y-2 sm:gap-x-2 sm:gap-y-0">
+                {{ form_widget(form[submitField]) }}
+
+                {{ component('button', {
+                    type: 'reset',
+                    label: 'Réinitialiser',
+                    color: themeColor,
+                    mode: 'ghost'
+                }) }}
+            </div>
+
+            {% if deleteButtonLink is not null %}
+                {% if deleteSwalTitle is not null %}
+                    {{ component('button_link_sweetalert', {
+                        swalTitle: deleteSwalTitle,
+                        swalText: deleteSwalText,
+                        swalColor: deleteSwalColor,
+                        link: deleteButtonLink,
+                        label: 'Supprimer ?',
+                        color: 'red'
+                    }) }}
+                {% else %}
+                    <div class="flex flex-col">
+                        {{ component('button_link', {
+                            link: deleteButtonLink,
+                            label: 'Supprimer ?',
+                            color: 'red'
+                        }) }}
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

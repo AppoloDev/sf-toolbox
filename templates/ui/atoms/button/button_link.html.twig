@@ -1,0 +1,13 @@
+{% extends '@SFToolbox/ui/atoms/button/_button.html.twig' %}
+
+{% block button_content %}
+    {% if allowDisplay is same as(true) %}
+        <a
+                href="{{ link }}"
+                target="{{ target }}"
+                class="btn btn-{{ size }} btn-{{ color }} btn-{{ mode }} {{ tooltip ? 'hs-tooltip-toggle' }} {{ block ? 'w-full' }}"
+        >
+            {{ parent() }}
+        </a>
+    {% endif %}
+{% endblock %}

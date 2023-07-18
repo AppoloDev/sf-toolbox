@@ -1,0 +1,11 @@
+.form_row {
+    @apply flex flex-col gap-2;
+    label {
+        &.required {
+            &:after {
+                content: '*';
+                @apply pl-2 text-red-500;
+            }
+        }
+    }
+}

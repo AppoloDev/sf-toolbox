@@ -1,0 +1,45 @@
+{% if pageCount > 1 %}
+    <div class="inline-flex gap-x-2 justify-end">
+        {% if previous is defined %}
+            {{ component('button_link', {
+                link: path(route, query|merge({(pageParameterName): previous})),
+                label: 'Précédent',
+                icon: source('@SFToolbox/icons/chevron-left.svg'),
+                size: 'small',
+                mode: 'white',
+                color: themeColor
+            }) }}
+        {% else %}
+            {{ component('button', {
+                disabled: true,
+                label: 'Précédent',
+                icon: source('@SFToolbox/icons/chevron-left.svg'),
+                size: 'small',
+                mode: 'white',
+                color: themeColor
+            }) }}
+        {% endif %}
+
+        {% if next is defined %}
+            {{ component('button_link', {
+                link: path(route, query|merge({(pageParameterName): next})),
+                label: 'Suivant',
+                icon: source('@SFToolbox/icons/chevron-right.svg'),
+                size: 'small',
+                mode: 'white',
+                iconPlacement: 'right',
+                color: themeColor
+            }) }}
+        {% else %}
+            {{ component('button', {
+                disabled: true,
+                label: 'Suivant',
+                icon: source('@SFToolbox/icons/chevron-right.svg'),
+                size: 'small',
+                mode: 'white',
+                iconPlacement: 'right',
+                color: themeColor
+            }) }}
+        {% endif %}
+    </div>
+{% endif %}

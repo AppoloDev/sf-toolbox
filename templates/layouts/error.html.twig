@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>{{ siteTitle }}</title>
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
+
+    {{ vite_entry_link_tags('theme') }}
+    {% block stylesheets %}{% endblock %}
+</head>
+<body class="page_error {% block bodyColor %}text-{{ themeColor }}-500{% endblock %}">
+    <div class="container">
+        {% block logo %}
+            <a href="/" rel="noopener" class="logo">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="Logo"/>
+            </a>
+        {% endblock %}
+
+        <div class="content">
+            {% block title %}
+                <h1>Oups ! Une erreur est survenue</h1>
+            {% endblock %}
+
+            {% block message %}
+                <p>
+                    Le page que vous demandez est inaccessible. Veuillez renouveler l'opération d'ici quelques instants. <br/>
+                </p>
+            {% endblock %}
+        </div>
+
+        {% block button %}
+            {{ component('button_link', {
+                link: '/',
+                label: 'Page d\'accueil',
+                color: themeColor,
+                mode: 'solid'
+            }) }}
+        {% endblock %}
+    </div>
+
+    {{ vite_entry_script_tags('theme') }}
+    {% block javascripts %}{% endblock %}
+</body>
+</html>
