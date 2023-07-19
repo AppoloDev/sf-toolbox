@@ -29,5 +29,13 @@
         "psr-4": {
             "AppoloDev\\SFToolboxBundle\\": "src/"
         }
+    },
+    "extra": {
+        "symfony": {
+            "endpoint": [
+                "https://api.github.com/repos/appolodev/sf-toolbox-recipes/contents/index.json",
+                "flex://defaults"
+            ]
+        }
     }
 }
