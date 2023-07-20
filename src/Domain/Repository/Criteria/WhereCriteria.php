@@ -49,18 +49,21 @@ trait WhereCriteria
     public function whereExpr(ExpressionInterface $selectExpression): self
     {
         $this->qb->where($selectExpression->toString($this));
+
         return $this;
     }
 
     public function orWhereExpr(ExpressionInterface $selectExpression): self
     {
         $this->qb->orWhere($selectExpression->toString($this));
+
         return $this;
     }
 
     public function andWhereExpr(ExpressionInterface $selectExpression): self
     {
         $this->qb->andWhere($selectExpression->toString($this));
+
         return $this;
     }
 }

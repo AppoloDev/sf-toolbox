@@ -13,6 +13,7 @@ class AlertComponent
     public string $color;
     public ?string $description;
     public ?array $links;
+
     #[PreMount]
     public function preMount(array $data): array
     {

@@ -4,7 +4,8 @@ namespace AppoloDev\SFToolboxBundle\UI\Atoms\Button;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-trait ButtonComponentAttribute {
+trait ButtonComponentAttribute
+{
     public ?string $color;
     public string $mode;
     public string $size;

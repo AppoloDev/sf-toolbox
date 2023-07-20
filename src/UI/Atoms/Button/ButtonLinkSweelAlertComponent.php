@@ -4,7 +4,6 @@ namespace AppoloDev\SFToolboxBundle\UI\Atoms\Button;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
-use Symfony\UX\TwigComponent\Attribute\PostMount;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 #[AsTwigComponent('button_link_sweetalert', template: '@SFToolbox/ui/atoms/button/button_link_sweetalert.html.twig')]
@@ -13,7 +12,7 @@ class ButtonLinkSweelAlertComponent
     use ButtonComponentAttribute;
 
     public string $link;
-    public string $target ;
+    public string $target;
 
     public string $swalTitle;
     public string $swalText;

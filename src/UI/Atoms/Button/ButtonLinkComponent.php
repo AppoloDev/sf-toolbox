@@ -12,7 +12,7 @@ class ButtonLinkComponent
     use ButtonComponentAttribute;
 
     public string $link;
-    public string $target ;
+    public string $target;
 
     #[PreMount]
     public function preMount(array $data): array

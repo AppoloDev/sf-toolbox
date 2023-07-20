@@ -12,13 +12,17 @@ readonly class ArrayToStringTransformer implements DataTransformerInterface
 
     public function transform(mixed $value): ?string
     {
+        if (!is_array($value)) {
+            return null;
+        }
+
         foreach ($this->defaultValues as $defaultValue) {
             if (in_array($defaultValue, $value)) {
                 return $defaultValue;
             }
         }
 
-        return is_array($value) ? end($value) : null;
+        return end($value);
     }
 
     public function reverseTransform(mixed $value): array

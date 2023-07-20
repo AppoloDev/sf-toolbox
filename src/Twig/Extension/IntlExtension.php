@@ -2,8 +2,6 @@
 
 namespace AppoloDev\SFToolboxBundle\Twig\Extension;
 
-use DateTime;
-use IntlDateFormatter;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -16,14 +14,14 @@ class IntlExtension extends AbstractExtension
         ];
     }
 
-    public function localizedDate(DateTime $date, string $format = null, string $locale = 'fr-FR'): string
+    public function localizedDate(\DateTime $date, string $format = null, string $locale = 'fr-FR'): string
     {
-        $formattedDate = IntlDateFormatter::create(
+        $formattedDate = \IntlDateFormatter::create(
             $locale,
-            IntlDateFormatter::FULL,
-            IntlDateFormatter::FULL,
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::FULL,
             'Europe/Paris',
-            IntlDateFormatter::GREGORIAN,
+            \IntlDateFormatter::GREGORIAN,
             $format
         )->format($date->getTimestamp());
 

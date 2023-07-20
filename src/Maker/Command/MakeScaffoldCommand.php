@@ -15,7 +15,8 @@ class MakeScaffoldCommand extends Command
 {
     use InteractCommand;
 
-    public function __construct(private readonly ScaffoldFileCreator $fileCreator, string $name = null) {
+    public function __construct(private readonly ScaffoldFileCreator $fileCreator, string $name = null)
+    {
         parent::__construct($name);
     }
 
@@ -53,6 +54,7 @@ class MakeScaffoldCommand extends Command
 
         if (!class_exists($entityClass)) {
             $io->error('Invalid entity class');
+
             return Command::FAILURE;
         }
 

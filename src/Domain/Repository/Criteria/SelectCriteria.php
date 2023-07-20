@@ -50,6 +50,7 @@ trait SelectCriteria
     public function selectExpr(ExpressionInterface $selectExpression): self
     {
         $this->qb->select($selectExpression->toString($this));
+
         return $this;
     }
 

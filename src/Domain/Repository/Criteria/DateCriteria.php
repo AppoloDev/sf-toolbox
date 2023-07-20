@@ -2,26 +2,24 @@
 
 namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria;
 
-use DateTimeImmutable;
-use DateTimeInterface;
-
 trait DateCriteria
 {
     public function date(
         string $field,
-        DateTimeInterface $date,
+        \DateTimeInterface $date,
         string $customAlias = null
     ): self {
-        $immutable = (DateTimeImmutable::createFromFormat('c', $date->format('c')));
-        $start = $immutable->setTime(0,0,0);
-        $end = $immutable->setTime(23,59,59);
+        $immutable = \DateTimeImmutable::createFromFormat('c', $date->format('c'));
+        $start = $immutable->setTime(0, 0, 0);
+        $end = $immutable->setTime(23, 59, 59);
+
         return $this->dateBetween($field, $start, $end, $customAlias);
     }
 
     public function dateBetween(
         string $field,
-        DateTimeInterface $from,
-        DateTimeInterface $to,
+        \DateTimeInterface $from,
+        \DateTimeInterface $to,
         string $customAlias = null
     ): self {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->between(
@@ -34,20 +32,20 @@ trait DateCriteria
 
     public function dateNotExpired(
         string $field,
-        DateTimeInterface $customDate = null,
+        \DateTimeInterface $customDate = null,
         string $customAlias = null,
     ): self {
-        $date = $customDate ?? new DateTimeImmutable();
+        $date = $customDate ?? new \DateTimeImmutable();
 
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->gte($field, $date, $customAlias));
     }
 
     public function dateExpired(
         string $field,
-        DateTimeInterface $customDate = null,
+        \DateTimeInterface $customDate = null,
         string $customAlias = null,
     ): self {
-        $date = $customDate ?? new DateTimeImmutable();
+        $date = $customDate ?? new \DateTimeImmutable();
 
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->lte($field, $date, $customAlias));
     }

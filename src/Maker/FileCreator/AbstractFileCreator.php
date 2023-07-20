@@ -43,7 +43,6 @@ class AbstractFileCreator
                 $content = $this->replaceVars($this->getTemplateContent($template));
                 $this->createFile($absoluteFilePath, $content);
             }
-
         }
     }
 
@@ -53,10 +52,8 @@ class AbstractFileCreator
         $filesystem->dumpFile($path, $content);
     }
 
-
     protected function getAbsoluteFilePath(string $filePath): string
     {
-
         return $this->rootPath.$this->replaceVars($filePath);
     }
 
@@ -67,6 +64,8 @@ class AbstractFileCreator
 
     protected function getTemplateContent(string $template): string
     {
-        return file_get_contents(__DIR__.'../../../../maker/'.$template);
+        $content = file_get_contents(__DIR__.'../../../../maker/'.$template);
+
+        return false !== $content ? $content : '';
     }
 }

@@ -12,7 +12,6 @@ class DropdownItemContainerComponent
     public array $items = [];
     public bool $allowDisplay;
 
-
     #[PreMount]
     public function preMount(array $data): array
     {

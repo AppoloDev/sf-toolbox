@@ -13,6 +13,6 @@ readonly class PartialExpr implements ExpressionInterface
 
     public function toString(BuilderCriteriaInterface $builderCriteria): string
     {
-        return 'partial ' . $builderCriteria->getAlias($this->customAlias) . '.{' . join(', ', $this->fields) . '}';
+        return 'partial '.$builderCriteria->getAlias($this->customAlias).'.{'.join(', ', $this->fields).'}';
     }
 }

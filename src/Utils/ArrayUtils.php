@@ -17,7 +17,7 @@ class ArrayUtils
         foreach ($haystack as $key => $value) {
             if ($key === $needle) {
                 return $value;
-            } else if (is_array($value)) {
+            } elseif (is_array($value)) {
                 return self::recursiveFind($value, $needle);
             }
         }

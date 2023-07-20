@@ -13,6 +13,7 @@ class TableListComponent
     public ?string $headerTitle;
     public ?array $tableColumns;
     public PaginationInterface $pagination;
+
     #[PreMount]
     public function preMount(array $data): array
     {

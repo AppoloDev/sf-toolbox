@@ -35,8 +35,7 @@ trait BuilderCriteria
 
     /**
      * @deprecated
-     * @param string $methodName
-     * @param array $params
+     *
      * @return BuilderCriteria
      */
     public function useQBMethod(string $methodName, array $params = []): self
@@ -146,6 +145,7 @@ trait BuilderCriteria
         $qb = $this->parentQb ?? $this->qb;
 
         $qb->setParameter($paramName, $value);
+
         return $this;
     }
 
@@ -154,6 +154,7 @@ trait BuilderCriteria
         if (!is_string($value) || !UuidUtils::isUuid($value)) {
             return $value;
         }
+
         return Uuid::fromString($value)->toBinary();
     }
 

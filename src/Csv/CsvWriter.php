@@ -2,15 +2,14 @@
 
 namespace AppoloDev\SFToolboxBundle\Csv;
 
-use League\Csv\AbstractCsv;
 use League\Csv\CannotInsertRecord;
 use League\Csv\Exception;
 use League\Csv\Reader;
 use League\Csv\Writer;
 
-class CsvWriter
+readonly class CsvWriter
 {
-    private AbstractCsv $csv;
+    private Writer $csv;
 
     public function __construct()
     {
@@ -31,6 +30,7 @@ class CsvWriter
     public function setHeaders(array $headers): self
     {
         $this->csv->insertOne($headers);
+
         return $this;
     }
 
@@ -41,6 +41,7 @@ class CsvWriter
     public function setRows(array $rows): self
     {
         $this->csv->insertAll($rows);
+
         return $this;
     }
 
@@ -51,6 +52,7 @@ class CsvWriter
     public function setRow(array $row): self
     {
         $this->csv->insertOne($row);
+
         return $this;
     }
 

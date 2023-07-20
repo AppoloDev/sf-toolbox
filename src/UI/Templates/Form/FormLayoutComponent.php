@@ -2,7 +2,6 @@
 
 namespace AppoloDev\SFToolboxBundle\UI\Templates\Form;
 
-use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
@@ -11,6 +10,7 @@ use Symfony\UX\TwigComponent\Attribute\PreMount;
 class FormLayoutComponent
 {
     public ?string $headerTitle;
+
     #[PreMount]
     public function preMount(array $data): array
     {

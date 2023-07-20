@@ -37,13 +37,14 @@ class MakeDomainEntityCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $domain = $input->getArgument('domain');
-        $entity = $input->getArgument('entity');
+        $domain = is_string($input->getArgument('domain')) ? $input->getArgument('domain') : null;
+        $entity = is_string($input->getArgument('entity')) ? $input->getArgument('entity') : null;
 
         $io = new SymfonyStyle($input, $output);
 
         if (is_null($domain) || is_null($entity)) {
             $io->error('Invalid domain or entity name');
+
             return Command::FAILURE;
         }
 
@@ -56,20 +57,19 @@ class MakeDomainEntityCommand extends Command
             $io->success('Entity successfully created');
         }
 
-        while ($input->getArgument('mapping') !== true) {
+        while (true !== $input->getArgument('mapping')) {
             $this->askConfirmation('mapping', $input, $output);
-            if ($input->getArgument('mapping') === false) {
+            if (false === $input->getArgument('mapping')) {
                 $this->displayMapping($io, $domain);
             }
         }
 
         $process = $this->runMake($domain, $entity);
-        if ($process === false) {
+        if (false === $process) {
             return Command::FAILURE;
         }
 
         return Command::SUCCESS;
-
     }
 
     protected function runMake(string $domain, string $entity): bool
@@ -79,6 +79,7 @@ class MakeDomainEntityCommand extends Command
         $process->setTty(true);
         $process->start();
         $process->wait();
+
         return $process->isSuccessful();
     }
 

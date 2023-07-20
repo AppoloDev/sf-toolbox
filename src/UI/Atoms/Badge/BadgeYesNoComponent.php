@@ -20,8 +20,8 @@ class BadgeYesNoComponent
     #[PostMount]
     public function postMount(array $data): array
     {
-        $this->color = $this->value === true ? 'green' : 'red';
-        $this->label = $this->value === true ? $this->labelTrue : $this->labelFalse;
+        $this->color = true === $this->value ? 'green' : 'red';
+        $this->label = true === $this->value ? $this->labelTrue : $this->labelFalse;
 
         return $data;
     }

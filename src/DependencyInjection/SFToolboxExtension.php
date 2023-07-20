@@ -12,7 +12,7 @@ class SFToolboxExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
         $loader->load('services.yaml');
     }
 
@@ -24,14 +24,14 @@ class SFToolboxExtension extends Extension implements PrependExtensionInterface
             $container->prependExtensionConfig('twig', [
                 'globals' => [
                     'siteTitle' => '%env(SITE_TITLE)%',
-                    'themeColor' => '%env(THEME_COLOR)%'
+                    'themeColor' => '%env(THEME_COLOR)%',
                 ],
                 'form_themes' => [
                     '@SFToolbox/form/themes/tailwind_theme.html.twig',
                     '@SFToolbox/form/widgets/card_radio.html.twig',
                     '@SFToolbox/form/widgets/tom_select.html.twig',
                     '@SFToolbox/form/widgets/geo_localizable.html.twig',
-                ]
+                ],
             ]);
         }
 
@@ -39,15 +39,15 @@ class SFToolboxExtension extends Extension implements PrependExtensionInterface
             $container->prependExtensionConfig('knp_paginator', [
                 'template' => [
                     'pagination' => '@SFToolbox/paginator/pagination.html.twig',
-                    'sortable' => '@SFToolbox/paginator/sortable.html.twig'
-                ]
+                    'sortable' => '@SFToolbox/paginator/sortable.html.twig',
+                ],
             ]);
         }
 
         $container->prependExtensionConfig('framework', [
             'router' => [
                 'default_uri' => '%env(DEFAULT_URI)%',
-            ]
+            ],
         ]);
     }
 }
