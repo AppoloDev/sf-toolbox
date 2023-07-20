@@ -4,9 +4,9 @@ namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\Expression;
 
 use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\BuilderCriteriaInterface;
 
-class StringExpr implements ExpressionInterface
+readonly class StringExpr implements ExpressionInterface
 {
-    public function __construct(private readonly string $str)
+    public function __construct(private string $str)
     {
     }
 

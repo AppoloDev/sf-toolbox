@@ -5,9 +5,9 @@ namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\Expression\Select
 use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\BuilderCriteriaInterface;
 use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\Expression\ExpressionInterface;
 
-class PartialExpr implements ExpressionInterface
+readonly class PartialExpr implements ExpressionInterface
 {
-    public function __construct(private readonly array $fields, private readonly ?string $customAlias = null)
+    public function __construct(private array $fields, private ?string $customAlias = null)
     {
     }
 

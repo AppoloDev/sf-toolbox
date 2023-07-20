@@ -6,16 +6,13 @@ use Doctrine\ORM\Query\Expr\Join;
 
 trait JoinCriteria
 {
-    // TODO: Add Identity
     public function with(string $field, string $joinAlias, string $customAlias = null, ?bool $addSelect = false): self
     {
-        $aliasField = $this->getAliasField($customAlias, $field);
-
         if ($addSelect) {
             $this->qb->addSelect($joinAlias);
         }
 
-        $this->qb->leftJoin($aliasField, $joinAlias);
+        $this->qb->leftJoin($this->getAliasField($customAlias, $field), $joinAlias);
 
         return $this;
     }

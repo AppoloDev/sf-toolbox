@@ -13,27 +13,21 @@ trait GroupAndOrderCriteria
 
     public function order(string $field, string $direction = 'ASC', string $customAlias = null): self
     {
-        $aliasField = $this->getAliasField($customAlias, $field);
-
-        $this->qb->addOrderBy($aliasField, $direction);
+        $this->qb->addOrderBy($this->getAliasField($customAlias, $field), $direction);
 
         return $this;
     }
 
     public function groupBy(string $field, string $customAlias = null): self
     {
-        $aliasField = $this->getAliasField($customAlias, $field);
-
-        $this->qb->addGroupBy($aliasField);
+        $this->qb->addGroupBy($this->getAliasField($customAlias, $field));
 
         return $this;
     }
 
     public function indexBy(string $field, string $customAlias = null): self
     {
-        $alias = $this->getAlias($customAlias);
-
-        $this->qb->indexBy($alias, $alias.'.'.$field);
+        $this->qb->indexBy($this->getAlias($customAlias), $this->getAliasField($customAlias, $field));
 
         return $this;
     }

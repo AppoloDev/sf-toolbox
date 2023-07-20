@@ -19,11 +19,11 @@ trait BuilderCriteria
         return $this;
     }
 
-    public function getSubQb(QueryBuilder $qb, string $alias): self
+    public function getSubQb(QueryBuilder $parentQb, string $alias): self
     {
         $this->qb = $this->createQueryBuilder($alias);
         $this::$alias = $alias;
-        $this->parentQb = $qb;
+        $this->parentQb = $parentQb;
 
         return $this;
     }
@@ -33,18 +33,29 @@ trait BuilderCriteria
         return $this->qb;
     }
 
+    /**
+     * @deprecated
+     * @param string $methodName
+     * @param array $params
+     * @return BuilderCriteria
+     */
     public function useQBMethod(string $methodName, array $params = []): self
     {
         $this->qb->$methodName(...$params);
 
-        // TODO: Bug quand il est tête
+        return $this;
+    }
+
+    public function set(string $field, null|int|bool|string $value, string $customAlias = null): self
+    {
+        $this->qb->set($this->getAliasField($customAlias, $field), $value);
 
         return $this;
     }
 
-    public function update(string $field, null|int|bool|string $value, string $customAlias = null): self
+    public function update(): self
     {
-        $this->qb->update()->set($this->getAliasField($customAlias, $field), $value);
+        $this->qb->update();
 
         return $this;
     }
@@ -108,23 +119,13 @@ trait BuilderCriteria
         return is_null($results) ? [] : $results;
     }
 
-    public function getParentQueryBuilder(): ?QueryBuilder
-    {
-        return $this->parentQb;
-    }
-
-    public function getQueryBuilder(): QueryBuilder
-    {
-        return $this->qb;
-    }
-
-    public function complexQuery(callable $cb): self
+    public function complexQuery(callable $callable): self
     {
         $complexBuilder = new ComplexBuilder($this);
-        $cmp = $cb($complexBuilder);
+        $conditions = $callable($complexBuilder);
 
-        if (!is_null($cmp)) {
-            $this->qb->andWhere($cmp);
+        if (!is_null($conditions)) {
+            $this->qb->andWhere($conditions);
         }
 
         return $this;
@@ -142,27 +143,22 @@ trait BuilderCriteria
 
     public function setParameter(string $paramName, mixed $value): self
     {
-        $this->getMainQb()->setParameter($paramName, $value);
+        $qb = $this->parentQb ?? $this->qb;
 
+        $qb->setParameter($paramName, $value);
         return $this;
     }
 
     public function getValue(mixed $value): mixed
     {
-        if (!is_string($value)) {
+        if (!is_string($value) || !UuidUtils::isUuid($value)) {
             return $value;
         }
-
-        $isUuid = UuidUtils::isUuid($value);
-        if ($isUuid) {
-            return Uuid::fromString($value)->toBinary();
-        }
-
-        return $value;
+        return Uuid::fromString($value)->toBinary();
     }
 
-    public function getMainQb(): QueryBuilder
+    public function getQueryBuilder(): QueryBuilder
     {
-        return $this->parentQb ?? $this->qb;
+        return $this->qb;
     }
 }

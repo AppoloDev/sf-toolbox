@@ -41,9 +41,21 @@ trait WhereCriteria
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->between($field, $from, $to, $customAlias));
     }
 
-    public function searchIntoFields(?string $field, array $params, string $customAlias = null): self
+    public function searchIntoFields(?string $query, array $fields, string $customAlias = null): self
     {
-        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->searchIntoFields($field, $params, $customAlias));
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->searchIntoFields($query, $fields, $customAlias));
+    }
+
+    public function whereExpr(ExpressionInterface $selectExpression): self
+    {
+        $this->qb->where($selectExpression->toString($this));
+        return $this;
+    }
+
+    public function orWhereExpr(ExpressionInterface $selectExpression): self
+    {
+        $this->qb->orWhere($selectExpression->toString($this));
+        return $this;
     }
 
     public function andWhereExpr(ExpressionInterface $selectExpression): self

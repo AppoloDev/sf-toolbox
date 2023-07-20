@@ -2,32 +2,53 @@
 
 namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria;
 
+use DateTimeImmutable;
+use DateTimeInterface;
+
 trait DateCriteria
 {
+    public function date(
+        string $field,
+        DateTimeInterface $date,
+        string $customAlias = null
+    ): self {
+        $immutable = (DateTimeImmutable::createFromFormat('c', $date->format('c')));
+        $start = $immutable->setTime(0,0,0);
+        $end = $immutable->setTime(23,59,59);
+        return $this->dateBetween($field, $start, $end, $customAlias);
+    }
+
     public function dateBetween(
         string $field,
-        \DateTimeInterface $from,
-        \DateTimeInterface $to,
+        DateTimeInterface $from,
+        DateTimeInterface $to,
         string $customAlias = null
-    ): self { // TODO => Useless :/
-        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->between($field, $from, $to, $customAlias));
+    ): self {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->between(
+            $field,
+            $from->format('Y-m-d H:i:s'),
+            $to->format('Y-m-d H:i:s'),
+            $customAlias
+        ));
     }
 
     public function dateNotExpired(
         string $field,
-        \DateTimeInterface $customDate = null,
+        DateTimeInterface $customDate = null,
         string $customAlias = null,
     ): self {
-        $date = is_null($customDate) ? new \DateTimeImmutable() : $customDate;
-        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->comparisonOperator(DoctrineOperator::GTE, $field, $date, $customAlias));
+        $date = $customDate ?? new DateTimeImmutable();
+
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->gte($field, $date, $customAlias));
     }
 
     public function dateExpired(
         string $field,
-        \DateTimeInterface $customDate = null,
+        DateTimeInterface $customDate = null,
         string $customAlias = null,
     ): self {
-        $date = is_null($customDate) ? new \DateTimeImmutable() : $customDate;
-        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->comparisonOperator(DoctrineOperator::LTE, $field, $date, $customAlias));
+        $date = $customDate ?? new DateTimeImmutable();
+
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->lte($field, $date, $customAlias));
     }
 }
