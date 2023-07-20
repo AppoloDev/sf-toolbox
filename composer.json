@@ -13,7 +13,7 @@
     "require": {
         "ext-intl": "*",
         "ext-zip": "*",
-        "php": ">=8.0",
+        "php": ">=8.2",
         "twig/twig": "^2.12|^3.0",
         "doctrine/orm": "^2.15",
         "symfony/serializer": "6.3.*",
@@ -23,7 +23,9 @@
         "symfony/ux-twig-component": "^2.9"
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.49"
+        "symfony/maker-bundle": "^1.49",
+        "friendsofphp/php-cs-fixer": "^3.22",
+        "phpstan/phpstan": "^1.10"
     },
     "autoload": {
         "psr-4": {
