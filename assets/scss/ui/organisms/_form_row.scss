@@ -8,4 +8,18 @@
             }
         }
     }
+
+    &.invalid {
+        label {
+            @apply text-red-500;
+        }
+
+        input, select {
+            @apply border border-red-500 focus:border-gray-400;
+        }
+
+        .form-errors {
+            @apply text-red-500 text-sm space-y-2;
+        }
+    }
 }
