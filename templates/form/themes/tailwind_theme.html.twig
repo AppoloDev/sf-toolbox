@@ -1,24 +1,9 @@
 {% use 'form_div_layout.html.twig' %}
 
-{# TODO: Refactor Start #}
-
-{#
-{% block input_class %} py-2 px-3 block w-full border border-gray-200 text-sm rounded-lg focus:border-{{ themeColor }}-500 focus:ring-{{ themeColor }}-500{% endblock %}
-{% block input_color_class %} py-1/2 px-1 block border border-gray-200 rounded-lg focus:border-{{ themeColor }}-500 focus:ring-{{ themeColor }}-500 w-10 h-10 cursor-pointer{% endblock %}
-{% block input_error_class %} border-red-500 focus:border-red-500 focus:ring-red-500 outline-red-500{% endblock %}
-{% block input_disable_class %} border-stone-300 text-stone-500{% endblock %}
-
-
-
-#}
-{# TODO: Refactor END #}
-
 {% block form_help -%}
-    {# TODO #}
-    {%- set help_attr = help_attr|merge({class: (help_attr.class|default('') ~ ' ')|trim ~ ' text-sm text-gray-500 mt-2'}) -%}
+    {%- set help_attr = help_attr|merge({class: (help_attr.class|default('') ~ ' ')|trim ~ ' help-text'}) -%}
     {{- parent() -}}
 {%- endblock form_help %}
-
 
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
@@ -30,6 +15,17 @@
     {%- endif -%}
 {%- endblock form_errors -%}
 
+{%- block choice_widget_expanded -%}
+    {%- set attr = attr|merge({ class: attr.class|default('') }) -%}
+    <div {{ block('widget_container_attributes') }}>
+        {%- for child in form %}
+            <div class="input-choice-container">
+                {{- form_widget(child) -}}
+                {{- form_label(child, null, { translation_domain: choice_translation_domain }) -}}
+            </div>
+        {% endfor -%}
+    </div>
+{%- endblock choice_widget_expanded -%}
 
 {%- block form_row -%}
     {%- set row_attr = row_attr|merge({ class: row_attr.class|default(row_class|default('form_row')) }) -%}
