@@ -20,7 +20,14 @@ trait Geolocalizable
     #[Groups(['localisation'])]
     private ?string $city;
 
-    // TODO: Lat, LNG ?
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    #[Groups(['localisation'])]
+    private ?float $lat;
+
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    #[Groups(['localisation'])]
+    private ?float $lng;
+
     public function getAddress(): ?string
     {
         return $this->address;
@@ -54,6 +61,28 @@ trait Geolocalizable
     {
         $this->city = $city;
 
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(?float $lng): self
+    {
+        $this->lng = $lng;
         return $this;
     }
 }
