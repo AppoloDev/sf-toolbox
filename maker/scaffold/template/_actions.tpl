@@ -14,7 +14,7 @@
                         items: [
                             component('button_link', {
                                 allowDisplay: is_granted('##AREALOWER##_##PREFIX##_edit', item),
-                                link: path('##AREALOWER##_##PREFIX##_add', {id: item.id}),
+                                link: path('##AREALOWER##_##PREFIX##_edit', {id: item.id}),
                                 label: 'Modifier',
                                 mode: 'ghost',
                                 block: true,
