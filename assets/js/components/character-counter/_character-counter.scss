@@ -1,0 +1,18 @@
+.character-counter {
+    @apply relative;
+    input {
+        @apply pr-16;
+    }
+
+    .counter {
+        @apply absolute text-xs text-appolo-500 font-semibold top-1/2 right-4 -translate-y-1/2;
+
+        .counter-current-value {
+            @apply tabular-nums;
+        }
+
+        &.over {
+            @apply text-red-500;
+        }
+    }
+}

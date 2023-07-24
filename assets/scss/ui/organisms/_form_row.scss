@@ -1,11 +1,41 @@
 .form_row {
     @apply flex flex-col gap-2;
+
     label {
+        @apply text-sm font-medium m-0;
         &.required {
             &:after {
                 content: '*';
                 @apply pl-2 text-red-500;
             }
+        }
+    }
+
+    .input-choice-container {
+        label {
+            &.required {
+                &:after {
+                    content: '';
+                }
+            }
+        }
+    }
+
+    .help-text {
+        @apply text-sm text-gray-500;
+    }
+
+    &.invalid {
+        label {
+            @apply text-red-500;
+        }
+
+        input, select, textarea {
+            @apply border border-red-500 focus:border-gray-400;
+        }
+
+        .form-errors {
+            @apply text-red-500 text-sm space-y-2;
         }
     }
 }

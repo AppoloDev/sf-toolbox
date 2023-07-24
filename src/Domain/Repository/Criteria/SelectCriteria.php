@@ -56,7 +56,6 @@ trait SelectCriteria
 
     public function selectFromSubQuery(string $entityClass, string $alias, callable $cb, string $subSelectAlias = null): self
     {
-        // TODO: documentation
         $rep = (clone $this->_em->getRepository($entityClass));
         $dql = $cb($rep->getSubQb($this->qb, $alias))->getBuilder()->getQuery()->getDQL();
         $this->qb->addSelect('('.$dql.')'.($subSelectAlias ? " as $subSelectAlias" : ''));
