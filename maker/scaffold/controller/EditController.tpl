@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route(path: '##ROUTEPATH##/modifier', name: '##PREFIX##_edit')]
+#[Route(path: '##ROUTEPATH##/{id}/modifier', name: '##PREFIX##_edit')]
 #[IsGranted(##ENTITY##Voter::EDIT, '##ENTITYCAMEL##')]
 class Edit##ENTITY##Controller extends AbstractController
 {
