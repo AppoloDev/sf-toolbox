@@ -19,7 +19,7 @@ trait GeolocalizableCriteria
 
         $sqlDistance = "(6378 * acos(cos(radians({$lat})) * cos(radians({$latField})) * cos(radians({$lngField}) - radians({$lng})) + sin(radians({$lat})) * sin(radians({$latField}))))";
 
-        return $this->andWhereExpr(new StringExpr($sqlDistance.' > :radius'))->setParameter('radius', $radius);
+        return $this->andWhereExpr(new StringExpr($sqlDistance.' <= :radius'))->setParameter('radius', $radius);
     }
 
     public function bounds(
