@@ -21,3 +21,7 @@ input[type=checkbox] {
         @apply text-appolo-500 shrink-0 border-gray-200 ring-0 focus:ring-0;
     }
 }
+
+select {
+    @apply pr-9;
+}
