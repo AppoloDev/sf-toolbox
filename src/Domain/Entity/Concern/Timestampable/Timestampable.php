@@ -8,11 +8,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 trait Timestampable
 {
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true, options: ['default' => 'CURRENT_TIMESTAMP'])]
     #[Groups(['timestamp'])]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true, options: ['default' => 'CURRENT_TIMESTAMP'])]
     #[Groups(['timestamp'])]
     private ?\DateTimeInterface $updatedAt = null;
 
