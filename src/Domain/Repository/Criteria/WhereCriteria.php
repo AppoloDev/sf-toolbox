@@ -36,6 +36,26 @@ trait WhereCriteria
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->notEq($field, $value, $customAlias));
     }
 
+    public function gt(string $field, null|int|bool|string $value, string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->gt($field, $value, $customAlias));
+    }
+
+    public function gte(string $field, null|int|bool|string $value, string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->gte($field, $value, $customAlias));
+    }
+
+    public function lt(string $field, null|int|bool|string $value, string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->lt($field, $value, $customAlias));
+    }
+
+    public function lte(string $field, null|int|bool|string $value, string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->lte($field, $value, $customAlias));
+    }
+
     public function between(string $field, ?string $from, ?string $to, string $customAlias = null): self
     {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->between($field, $from, $to, $customAlias));
