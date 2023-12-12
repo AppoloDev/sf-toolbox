@@ -17,7 +17,8 @@
 
 <div class="menu-mobile">
     <div class="flex items-center py-4">
-        <button type="button" class="text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar-brand" aria-controls="application-sidebar-brand" aria-label="Toggle navigation">
+        <button type="button" class="text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar-brand"
+                aria-controls="application-sidebar-brand" aria-label="Toggle navigation">
             <span class="sr-only">Toggle Navigation</span>
             <div class="w-5 h-5 flex items-center">
                 {{ source('@SFToolbox/icons/bars.svg') }}
@@ -27,22 +28,26 @@
 </div>
 
 {% block sidebar %}
-<div id="application-sidebar-brand" class="aside hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[60] w-64 bg-{{ themeColor }}-700 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0">
-    <div class="logo">
-        <a class="flex-none text-xl font-semibold text-white" href="{{ path(block('route_prefix') ?? 'admin'~'_dashboard') }}"
-           aria-label="{{ siteTitle }}">
-            <img src="{{ asset('assets/images/logo.png') }}" class="h-10"/>
-        </a>
+    <div id="application-sidebar-brand"
+         class="aside hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[60] w-64 bg-{{ themeColor }}-700 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0">
+        <div class="logo">
+            {% block sidebar_logo %}
+                <a class="flex-none text-xl font-semibold text-white"
+                   href="{{ path(block('route_prefix') ?? 'admin'~'_dashboard') }}"
+                   aria-label="{{ siteTitle }}">
+                    <img src="{{ asset('assets/images/logo.png') }}" class="h-10"/>
+                </a>
+            {% endblock %}
+        </div>
+
+        <nav class="navigation hs-accordion-group w-full flex flex-col flex-wrap h-full" data-hs-accordion-always-open>
+            {% block sidebar_menu %}{% endblock %}
+        </nav>
+
+        {% block sidebar_profile_menu %}
+            {{ component('sidebar_user_profile_menu', {routePrefix: block('route_prefix') ?? 'admin'}) }}
+        {% endblock %}
     </div>
-
-    <nav class="navigation hs-accordion-group w-full flex flex-col flex-wrap h-full" data-hs-accordion-always-open>
-        {% block sidebar_menu %}{% endblock %}
-    </nav>
-
-    {% block sidebar_profile_menu %}
-        {{ component('sidebar_user_profile_menu', {routePrefix: block('route_prefix') ?? 'admin'}) }}
-    {% endblock %}
-</div>
 {% endblock %}
 
 <div class="w-full py-10 px-4 sm:px-6 md:px-8 lg:pl-72">
