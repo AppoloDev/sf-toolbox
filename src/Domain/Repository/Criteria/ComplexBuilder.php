@@ -62,7 +62,7 @@ class ComplexBuilder
         return $this->comparisonOperator(DoctrineOperator::EQ, $field, $value, $customAlias);
     }
 
-    public function notEq(string $field, string $value, string $customAlias = null): Comparison|Func
+    public function notEq(string $field, null|int|bool|string $value, string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::NOT_EQ, $field, $value, $customAlias);
     }
