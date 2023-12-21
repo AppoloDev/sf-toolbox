@@ -140,11 +140,11 @@ trait BuilderCriteria
         return $this->getAlias($customAlias).'.'.$field;
     }
 
-    public function setParameter(string $paramName, mixed $value): self
+    public function setParameter(string $paramName, mixed $value, string $type = null): self
     {
         $qb = $this->parentQb ?? $this->qb;
 
-        $qb->setParameter($paramName, $value);
+        $qb->setParameter($paramName, $value, $type);
 
         return $this;
     }
