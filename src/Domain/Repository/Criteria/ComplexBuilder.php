@@ -133,7 +133,7 @@ class ComplexBuilder
         $aliasField = $this->builderCriteria->getAliasField($customAlias, $field);
         $paramName = 'value'.$field.uniqid();
 
-        $isUuid = Uuid::isValid($value);
+        $isUuid = is_string($value) && Uuid::isValid($value);
 
         $this->builderCriteria->setParameter($paramName,
             is_array($value)
