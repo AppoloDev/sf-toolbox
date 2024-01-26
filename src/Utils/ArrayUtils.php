@@ -25,7 +25,7 @@ class ArrayUtils
         return null;
     }
 
-    private static function flatten(array $array): array
+    public static function flatten(array $array): array
     {
         $result = [];
         foreach ($array as $item) {
