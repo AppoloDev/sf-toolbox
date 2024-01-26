@@ -24,4 +24,17 @@ class ArrayUtils
 
         return null;
     }
+
+    private function flatten(array $array): array
+    {
+        $result = [];
+        foreach ($array as $item) {
+            if (\is_array($item)) {
+                $result = array_merge($result, $this->flatten($item));
+            } else {
+                $result[] = $item;
+            }
+        }
+        return $result;
+    }
 }
