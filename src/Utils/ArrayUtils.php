@@ -25,12 +25,12 @@ class ArrayUtils
         return null;
     }
 
-    private function flatten(array $array): array
+    private static function flatten(array $array): array
     {
         $result = [];
         foreach ($array as $item) {
             if (\is_array($item)) {
-                $result = array_merge($result, $this->flatten($item));
+                $result = array_merge($result, self::flatten($item));
             } else {
                 $result[] = $item;
             }
