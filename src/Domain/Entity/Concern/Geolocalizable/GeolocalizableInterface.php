@@ -15,4 +15,16 @@ interface GeolocalizableInterface
     public function getCity(): ?string;
 
     public function setCity(?string $city): self;
+
+    public function getLat(): ?float;
+
+    public function setLat(?float $lat): self;
+
+    public function getLng(): ?float;
+
+    public function setLng(?float $lng): self;
+
+    public function getFormattedAddress(): ?string;
+
+    public function setFormattedAddress(?string $formattedAddress): self;
 }

@@ -25,6 +25,7 @@ class SFToolboxExtension extends Extension implements PrependExtensionInterface
                 'globals' => [
                     'siteTitle' => '%env(SITE_TITLE)%',
                     'themeColor' => '%env(THEME_COLOR)%',
+                    'googleMapApiKey' => '%env(GOOGLE_MAP_API_KEY)%',
                 ],
                 'form_themes' => [
                     '@SFToolbox/form/themes/tailwind_theme.html.twig',
