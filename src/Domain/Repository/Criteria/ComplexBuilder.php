@@ -3,6 +3,7 @@
 namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria;
 
 use AppoloDev\SFToolboxBundle\Utils\UuidUtils;
+use DateTimeInterface;
 use Doctrine\ORM\Query\Expr\Comparison;
 use Doctrine\ORM\Query\Expr\Composite;
 use Doctrine\ORM\Query\Expr\Func;
@@ -57,12 +58,12 @@ class ComplexBuilder
         return $this->builderCriteria->getQueryBuilder()->expr()->andX(...$conditions);
     }
 
-    public function eq(string $field, null|int|bool|string $value, string $customAlias = null): Comparison|Func
+    public function eq(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::EQ, $field, $value, $customAlias);
     }
 
-    public function notEq(string $field, null|int|bool|string $value, string $customAlias = null): Comparison|Func
+    public function notEq(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::NOT_EQ, $field, $value, $customAlias);
     }
@@ -77,22 +78,22 @@ class ComplexBuilder
         return $this->comparisonOperator(DoctrineOperator::NOT_IN, $field, $value, $customAlias);
     }
 
-    public function gte(string $field, string|\DateTimeInterface $value, string $customAlias = null): Comparison|Func
+    public function gte(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::GTE, $field, $value, $customAlias);
     }
 
-    public function gt(string $field, string|\DateTimeInterface $value, string $customAlias = null): Comparison|Func
+    public function gt(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::GT, $field, $value, $customAlias);
     }
 
-    public function lte(string $field, string|\DateTimeInterface $value, string $customAlias = null): Comparison|Func
+    public function lte(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::LTE, $field, $value, $customAlias);
     }
 
-    public function lt(string $field, string|\DateTimeInterface $value, string $customAlias = null): Comparison|Func
+    public function lt(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::LT, $field, $value, $customAlias);
     }
@@ -111,7 +112,7 @@ class ComplexBuilder
         return $this->builderCriteria->getQueryBuilder()->expr()->isNotNull($aliasField);
     }
 
-    public function between(string $field, string|\DateTimeInterface $from, string|\DateTimeInterface $to, string $customAlias = null): string
+    public function between(string $field, null|string|DateTimeInterface $from, null|string|DateTimeInterface $to, string $customAlias = null): string
     {
         $aliasField = $this->builderCriteria->getAliasField($customAlias, $field);
         $fromParamName = 'from'.$field.uniqid();
@@ -125,10 +126,10 @@ class ComplexBuilder
     }
 
     public function comparisonOperator(
-        DoctrineOperator $operator,
-        string $field,
-        null|array|string|bool|int|\DateTimeInterface $value,
-        string $customAlias = null
+        DoctrineOperator                             $operator,
+        string                                       $field,
+        null|array|string|bool|int|DateTimeInterface $value,
+        string                                       $customAlias = null
     ): Comparison|Func {
         $aliasField = $this->builderCriteria->getAliasField($customAlias, $field);
         $paramName = 'value'.$field.uniqid();

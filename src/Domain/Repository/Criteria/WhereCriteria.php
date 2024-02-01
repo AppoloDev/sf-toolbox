@@ -3,15 +3,16 @@
 namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria;
 
 use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\Expression\ExpressionInterface;
+use DateTimeInterface;
 
 trait WhereCriteria
 {
-    public function in(string $field, array $params, string $customAlias = null): self
+    public function in(string $field, array|string $params, string $customAlias = null): self
     {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->in($field, $params, $customAlias));
     }
 
-    public function notIn(string $field, array $params, string $customAlias = null): self
+    public function notIn(string $field, array|string $params, string $customAlias = null): self
     {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->notIn($field, $params, $customAlias));
     }
@@ -26,37 +27,37 @@ trait WhereCriteria
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->isNotNull($field, $customAlias));
     }
 
-    public function eq(string $field, null|int|bool|string $value, string $customAlias = null): self
+    public function eq(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): self
     {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->eq($field, $value, $customAlias));
     }
 
-    public function notEq(string $field, null|int|bool|string $value, string $customAlias = null): self
+    public function notEq(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): self
     {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->notEq($field, $value, $customAlias));
     }
 
-    public function gt(string $field, null|int|bool|string $value, string $customAlias = null): self
+    public function gt(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): self
     {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->gt($field, $value, $customAlias));
     }
 
-    public function gte(string $field, null|int|bool|string $value, string $customAlias = null): self
+    public function gte(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): self
     {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->gte($field, $value, $customAlias));
     }
 
-    public function lt(string $field, null|int|bool|string $value, string $customAlias = null): self
+    public function lt(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): self
     {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->lt($field, $value, $customAlias));
     }
 
-    public function lte(string $field, null|int|bool|string $value, string $customAlias = null): self
+    public function lte(string $field, null|int|bool|string|DateTimeInterface $value, string $customAlias = null): self
     {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->lte($field, $value, $customAlias));
     }
 
-    public function between(string $field, ?string $from, ?string $to, string $customAlias = null): self
+    public function between(string $field, null|string|DateTimeInterface $from, null|string|DateTimeInterface $to, string $customAlias = null): self
     {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->between($field, $from, $to, $customAlias));
     }
