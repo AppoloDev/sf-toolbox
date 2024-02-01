@@ -1,6 +1,6 @@
 <div class="flex flex-col">
     <div class="min-w-full inline-block align-middle">
-        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <div class="bg-white border border-gray-200 rounded-lg">
             {% block header %}
                 <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
                     <div>
@@ -24,25 +24,27 @@
             {% block search %}
                 <form>
                     <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center">
-                        <div class="grid gap-3 md:flex">
-                            {% block search_input %}
-                                <div class="relative">
-                                    <input type="text"
-                                           value="{{ app.request.query.get('q') }}"
-                                           name="q"
-                                           class="py-2 px-3 !pl-11 border border-gray-200 rounded-md text-sm focus:outline-none w-full md:w-auto"
-                                           placeholder="Votre recherche…"/>
+                        {% block search_bar %}
+                            <div class="grid gap-3 md:flex">
+                                {% block search_input %}
+                                    <div class="relative">
+                                        <input type="text"
+                                               value="{{ app.request.query.get('q') }}"
+                                               name="q"
+                                               class="py-2 px-3 !pl-11 border border-gray-200 rounded-md text-sm focus:outline-none w-full md:w-auto"
+                                               placeholder="Votre recherche…"/>
 
-                                    <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none pl-4">
-                                        <div class="h-4 w-4 text-gray-400">
-                                            {{ source('@SFToolbox/icons/magnifying-glass.svg') }}
+                                        <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none pl-4">
+                                            <div class="h-4 w-4 text-gray-400">
+                                                {{ source('@SFToolbox/icons/magnifying-glass.svg') }}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            {% endblock %}
+                                {% endblock %}
 
-                            {% block search_extraFields %}{% endblock %}
-                        </div>
+                                {% block search_extraFields %}{% endblock %}
+                            </div>
+                        {% endblock %}
 
                         {% block search_actions %}
                             <div class="flex justify-between sm:justify-end items-center gap-x-2">
