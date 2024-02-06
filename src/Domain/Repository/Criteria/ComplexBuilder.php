@@ -28,7 +28,7 @@ class ComplexBuilder
     public function searchIntoFields(?string $query, array $fields, string $customAlias = null): ?Composite
     {
         $orX = $this->builderCriteria->getQueryBuilder()->expr()->orX();
-        if (count($fields) > 0 && !is_null($query) && '' !== $fields) {
+        if (count($fields) > 0 && !is_null($query) && '' !== $query && '' !== $fields) {
             foreach (explode(' ', $query) as $term) {
                 $isUuid = UuidUtils::isUuid($term);
 
