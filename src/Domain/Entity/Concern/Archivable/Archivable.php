@@ -8,7 +8,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 trait Archivable
 {
-    #[ORM\Column(type: Types::BOOLEAN)]
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     #[Groups(['archive'])]
     private bool $archived = false;
 
