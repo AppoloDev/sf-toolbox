@@ -28,6 +28,10 @@ trait Geolocalizable
     #[Groups(['localisation'])]
     private ?float $lng;
 
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Groups(['localisation'])]
+    private ?string $formattedAddress;
+
     public function getAddress(): ?string
     {
         return $this->address;
@@ -83,6 +87,18 @@ trait Geolocalizable
     public function setLng(?float $lng): self
     {
         $this->lng = $lng;
+        return $this;
+    }
+
+    public function getFormattedAddress(): ?string
+    {
+        return $this->formattedAddress;
+    }
+
+    public function setFormattedAddress(?string $formattedAddress): self
+    {
+        $this->formattedAddress = $formattedAddress;
+
         return $this;
     }
 }

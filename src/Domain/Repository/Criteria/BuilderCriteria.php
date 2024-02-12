@@ -99,7 +99,11 @@ trait BuilderCriteria
     public function getResultsIndexedBy(string $field): array
     {
         $results = array_reduce($this->getQB()->getResults(), function (?array $acc, mixed $item) use ($field) {
-            $acc[$item->{'get'.ucfirst($field)}()] = $item;
+            $id = $item->{'get'.ucfirst($field)}();
+            if ($id instanceof Uuid) {
+                $id = (string) $id;
+            }
+            $acc[$id] = $item;
 
             return $acc;
         });

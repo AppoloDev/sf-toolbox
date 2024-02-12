@@ -9,7 +9,12 @@ trait DateCriteria
         \DateTimeInterface $date,
         string $customAlias = null
     ): self {
-        $immutable = \DateTimeImmutable::createFromFormat('c', $date->format('c'));
+        if ($date instanceof \DateTime) {
+            $immutable = \DateTimeImmutable::createFromMutable($date);
+        } else {
+            $immutable = $date;
+        }
+
         $start = $immutable->setTime(0, 0, 0);
         $end = $immutable->setTime(23, 59, 59);
 

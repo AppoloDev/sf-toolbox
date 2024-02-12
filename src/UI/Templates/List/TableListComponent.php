@@ -12,7 +12,7 @@ class TableListComponent
 {
     public ?string $headerTitle;
     public ?array $tableColumns;
-    public PaginationInterface $pagination;
+    public ?PaginationInterface $pagination;
 
     #[PreMount]
     public function preMount(array $data): array
@@ -22,8 +22,8 @@ class TableListComponent
         $resolver->setAllowedTypes('headerTitle', ['string', 'null']);
         $resolver->setDefaults(['tableColumns' => null]);
         $resolver->setAllowedTypes('tableColumns', ['array', 'null']);
-        $resolver->setRequired('pagination');
-        $resolver->setAllowedTypes('pagination', [PaginationInterface::class]);
+        $resolver->setDefaults(['pagination' => null]);
+        $resolver->setAllowedTypes('pagination', [PaginationInterface::class, 'null']);
 
         return $resolver->resolve($data);
     }

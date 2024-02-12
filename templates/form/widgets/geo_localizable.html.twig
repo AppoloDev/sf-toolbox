@@ -1,6 +1,11 @@
-{# TODO: A implémenter le component js #}
 {% block geo_localizable_widget %}
-   <geo-complete remote="">
-       {{ form_widget(form) }}
+   <geo-complete api-key="{{ googleMapApiKey }}" source=".sourceInput" target="#{{ id }}">
+      <div class="form_row">
+         <label for="geocomplete_{{ id }}" {% if required %}class="required"{% endif %}>{{ label }}</label>
+         <input id="geocomplete_{{ id }}" class="sourceInput" type="text" value="{{ data }}" {% if required %}required{% endif %}/>
+      </div>
+
+      {{ form_widget(form) }}
+      {{ form_errors(form) }}
    </geo-complete>
 {% endblock %}
