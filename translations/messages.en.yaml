@@ -1,0 +1,5 @@
+button.delete.label: 'Delete ?'
+button.reset.label: 'Reset'
+user_profil_my_profile: 'My profile'
+auth_logout: 'Log Out'
+search.input.placeholder: 'Your search'
