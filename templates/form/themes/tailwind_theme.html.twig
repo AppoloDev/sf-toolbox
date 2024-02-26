@@ -48,7 +48,7 @@
 {% block submit_widget -%}
     {{ component('button', {
         type: 'submit',
-        label: label,
+        label: label|trans,
         color: themeColor
     }) }}
 {%- endblock submit_widget %}
