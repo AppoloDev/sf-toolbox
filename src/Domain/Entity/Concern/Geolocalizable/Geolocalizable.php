@@ -10,27 +10,27 @@ trait Geolocalizable
 {
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Groups(['localisation'])]
-    private ?string $address;
+    private ?string $address = null;
 
     #[ORM\Column(type: Types::STRING, length: 5, nullable: true)]
     #[Groups(['localisation'])]
-    private ?string $zipCode;
+    private ?string $zipCode = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     #[Groups(['localisation'])]
-    private ?string $city;
+    private ?string $city = null;
 
     #[ORM\Column(type: Types::FLOAT, nullable: true)]
     #[Groups(['localisation'])]
-    private ?float $lat;
+    private ?float $lat = null;
 
     #[ORM\Column(type: Types::FLOAT, nullable: true)]
     #[Groups(['localisation'])]
-    private ?float $lng;
+    private ?float $lng = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     #[Groups(['localisation'])]
-    private ?string $formattedAddress;
+    private ?string $formattedAddress = null;
 
     public function getAddress(): ?string
     {
