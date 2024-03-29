@@ -6,7 +6,7 @@
 
                 {{ component('button', {
                     type: 'reset',
-                    label: 'Réinitialiser',
+                    label: 'button.reset.label'|trans,
                     color: themeColor,
                     mode: 'ghost'
                 }) }}
@@ -19,14 +19,14 @@
                         swalText: deleteSwalText,
                         swalColor: deleteSwalColor,
                         link: deleteButtonLink,
-                        label: 'Supprimer ?',
+                        label: 'button.delete.label'|trans,
                         color: 'red'
                     }) }}
                 {% else %}
                     <div class="flex flex-col">
                         {{ component('button_link', {
                             link: deleteButtonLink,
-                            label: 'Supprimer ?',
+                            label: 'button.delete.label'|trans,
                             color: 'red'
                         }) }}
                     </div>

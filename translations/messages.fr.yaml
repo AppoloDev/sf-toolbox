@@ -1,0 +1,5 @@
+button.delete.label: 'Supprimer ?'
+button.reset.label: 'Réinitialiser'
+user_profil_my_profile: 'Mon profil'
+auth_logout: 'Se déconnecter'
+search.input.placeholder: 'Votre recherche'

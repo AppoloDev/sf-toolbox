@@ -8,7 +8,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 trait Deletable
 {
-    #[ORM\Column(type: Types::BOOLEAN)]
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     #[Groups(['delete'])]
     private bool $deleted = false;
 
