@@ -30,7 +30,7 @@ class FormSubmitComponent
         $resolver->setDefault('deleteButtonLink', null);
         $resolver->setAllowedTypes('deleteButtonLink', ['string', 'null']);
 
-        $resolver->setDefaults(['deleteSwalTitle' => 'Êtes-vous sure ?']);
+        $resolver->setDefaults(['deleteSwalTitle' => 'Êtes-vous sûr ?']);
         $resolver->setAllowedTypes('deleteSwalTitle', ['string', 'null']);
 
         $resolver->setDefaults(['deleteSwalText' => 'Vous êtes sur le point d’effectuer une action totalement irréversible …']);

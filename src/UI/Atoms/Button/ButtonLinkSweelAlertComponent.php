@@ -31,7 +31,7 @@ class ButtonLinkSweelAlertComponent
         $resolver->setAllowedTypes('target', ['string', 'null']);
         $resolver->setAllowedValues('target', ['_self', '_blank']);
 
-        $resolver->setDefaults(['swalTitle' => 'Êtes-vous sure ?']);
+        $resolver->setDefaults(['swalTitle' => 'Êtes-vous sûr ?']);
         $resolver->setAllowedTypes('swalTitle', ['string', 'null']);
 
         $resolver->setDefaults(['swalText' => 'Vous êtes sur le point d’effectuer une action totalement irréversible …']);
