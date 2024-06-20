@@ -11,6 +11,7 @@ class ListEmptyComponent
 {
     public ?string $title = '';
     public ?string $description = '';
+    public ?string $illustration = null;
     public ?string $button = null;
 
     #[PreMount]
@@ -25,6 +26,9 @@ class ListEmptyComponent
 
         $resolver->setDefault('button', null);
         $resolver->setAllowedTypes('button', ['string', 'null']);
+
+        $resolver->setDefault('illustration', null);
+        $resolver->setAllowedTypes('illustration', ['string', 'null']);
 
         return $resolver->resolve($data);
     }
