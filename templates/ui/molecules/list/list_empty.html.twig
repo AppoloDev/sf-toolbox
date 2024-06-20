@@ -1,13 +1,14 @@
 <div class="max-w-sm w-full flex flex-col justify-center mx-auto space-y-5 p-8">
-    <div class="space-y-2 text-center">
+    <div class="flex flex-col items-center gap-2">
+        <div class="mb-4">
+            {{ illustration is null ? source('@SFToolbox/illustrations/list_empty.svg') : illustration|raw }}
+        </div>
+
         {% if title is not null %}
             <div class="font-semibold text-gray-800">
                 {{ title }}
             </div>
         {% endif %}
-
-
-        {{ illustration is null ? source('@SFToolbox/illustrations/list_empty.svg') : illustration|raw }}
 
         {% if description is not null %}
             <p class="text-sm text-gray-600">
