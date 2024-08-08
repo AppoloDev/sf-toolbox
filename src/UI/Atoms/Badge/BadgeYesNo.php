@@ -7,8 +7,8 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('badge_yesno', template: '@SFToolbox/ui/atoms/badge/badge_yesno.html.twig')]
-class BadgeYesNoComponent
+#[AsTwigComponent(template: '@SFToolbox/ui/atoms/badge/badge_yesno.html.twig')]
+class BadgeYesNo
 {
     public string $color;
     public string $rounded;

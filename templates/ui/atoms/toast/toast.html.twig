@@ -3,12 +3,12 @@
         <div class="content">
             {{ message }}
             <div data-hs-remove-element="#dismiss-toast">
-                {{ component('button', {
-                    color: color,
-                    mode: 'ghost',
-                    icon: source('@SFToolbox/icons/xmark.svg'),
-                    size: 'small'
-                }) }}
+                <twig:Button
+                        color="{{ color }}"
+                        mode="ghost"
+                        icon="{{ source('@SFToolbox/icons/xmark.svg') }}"
+                        size="small"
+                    />
             </div>
         </div>
     </div>

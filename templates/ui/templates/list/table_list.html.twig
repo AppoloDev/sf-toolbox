@@ -53,21 +53,20 @@
                                     {% set routeParams = routeParams|merge(app.request.attributes.get('_route_params')) %}
                                 {% endif %}
 
-                                {{ component('button_link', {
-                                    link: path(app.request.attributes.get('_route'), routeParams),
-                                    label: 'Réinitialiser',
-                                    mode: 'ghost',
-                                    color: themeColor,
-                                    size: 'small'
-                                }) }}
+                                <twig:ButtonLink
+                                        color="{{ themeColor }}"
+                                        label="Réinitialiser"
+                                        link="{{ path(app.request.attributes.get('_route'), routeParams) }}"
+                                        size="small"
+                                        mode="ghost"
+                                />
 
-                                {{ component('button', {
-                                    type: 'submit',
-                                    label: 'Rechercher',
-                                    color: themeColor,
-                                    size: 'small'
-                                }) }}
-
+                                <twig:Button
+                                        type="submit"
+                                        color="{{ themeColor }}"
+                                        label="Rechercher"
+                                        size="small"
+                                />
                             </div>
                         {% endblock %}
                     </div>
@@ -116,9 +115,9 @@
                 {% else %}
                     {% if app.request.query.has('q') %}
                         {% block emptyListOnSearch %}
-                            {{ component('list_empty', {
-                                description: 'Nous n\'avons rien trouvé pour votre recherche: "'~app.request.query.get('q')~'"'
-                            }) }}
+                            <twig:ListEmpty
+                                    description="Nous n'avons rien trouvé pour votre recherche: {{ app.request.query.get('q') }}"
+                            />
                         {% endblock %}
                     {% else %}
                         {% block emptyList %}{% endblock %}

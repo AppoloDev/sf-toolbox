@@ -33,7 +33,7 @@
 
 {% for type, messages in app.flashes %}
     {% for message in messages %}
-        {{ component('toast', {message: message,type: type}) }}
+        <twig:Toast message="{{ message }}" type="{{ type }}" />
     {% endfor %}
 {% endfor %}
 

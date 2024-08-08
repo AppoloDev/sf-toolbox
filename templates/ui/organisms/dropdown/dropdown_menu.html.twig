@@ -1,24 +1,18 @@
 <div class="hs-dropdown dropdownmenu">
-    {% if button is not null %}
-        {{ button|raw }}
-    {% else %}
-        {{ component('button', {
-            icon: source('@SFToolbox/icons/ellipsis.svg'),
-            mode: 'white',
-            color: themeColor
-        }) }}
-    {% endif %}
+    {% block dropdownButton %}
+        <twig:Button icon="{{ source('@SFToolbox/icons/ellipsis.svg') }}" mode="white" color="{{ themeColor }}" />
+    {% endblock %}
+
+
     <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 opacity-0 duration hidden dropdownmenu-container">
-        {% if headerLabel is not null %}
+        {% if dropdownHeaderLabel is defined %}
             <div class="py-2 first:pt-0 last:pb-0">
                 <span class="block py-2 px-3 text-xs font-medium uppercase text-gray-400">
-                    {{ headerLabel }}
+                    {% block dropdownHeaderLabel %}{% endblock %}
                   </span>
             </div>
         {% endif %}
 
-        {% for item in items %}
-            {{ item|raw }}
-        {% endfor %}
+        {% block dropdownItems %}{% endblock %}
     </div>
 </div>

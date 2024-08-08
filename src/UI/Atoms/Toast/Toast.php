@@ -6,8 +6,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('toast', template: '@SFToolbox/ui/atoms/toast/toast.html.twig')]
-class ToastComponent
+#[AsTwigComponent(template: '@SFToolbox/ui/atoms/toast/toast.html.twig')]
+class Toast
 {
     public string $message;
     public string $type = 'success';

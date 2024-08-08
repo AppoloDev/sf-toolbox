@@ -1,13 +1,13 @@
 <?php
 
-namespace AppoloDev\SFToolboxBundle\UI\Templates\Card;
+namespace AppoloDev\SFToolboxBundle\UI\Templates\Form;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('card_layout', template: '@SFToolbox/ui/templates/card/card_layout.html.twig')]
-class CardLayoutComponent
+#[AsTwigComponent(template: '@SFToolbox/ui/templates/form/form_layout.html.twig')]
+class FormLayout
 {
     public ?string $headerTitle;
 

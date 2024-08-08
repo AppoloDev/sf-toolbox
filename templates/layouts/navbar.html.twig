@@ -50,7 +50,7 @@
                     {% block navbar_menu %}{% endblock %}
 
                     {% block navbar_profile_menu %}
-                        {{ component('navbar_user_profile_menu', {routePrefix: block('route_prefix') ?? 'admin' }) }}
+                        <twig:NavbarUserProfileMenu routePrefix="{{ block('route_prefix') ?? 'admin' }}" />
                     {% endblock %}
                 </div>
             </div>
@@ -65,7 +65,7 @@
 
 {% for type, messages in app.flashes %}
     {% for message in messages %}
-        {{ component('toast', {message: message,type: type}) }}
+        <twig:Toast message="{{ message }}" type="{{ type }}" />
     {% endfor %}
 {% endfor %}
 

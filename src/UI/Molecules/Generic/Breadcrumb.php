@@ -6,8 +6,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('breadcrumb', template: '@SFToolbox/ui/molecules/generic/breadcrumb.html.twig')]
-class BreadcrumbComponent
+#[AsTwigComponent(template: '@SFToolbox/ui/molecules/generic/breadcrumb.html.twig')]
+class Breadcrumb
 {
     public array $items = [];
 

@@ -6,7 +6,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('navbar_user_profile_menu', template: '@SFToolbox/ui/organisms/user/navbar_user_profile_menu.html.twig')]
+#[AsTwigComponent(template: '@SFToolbox/ui/organisms/user/navbar_user_profile_menu.html.twig')]
 class NavbarUserProfileMenu
 {
     public string $routePrefix = '';

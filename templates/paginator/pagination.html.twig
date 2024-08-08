@@ -1,45 +1,45 @@
 {% if pageCount > 1 %}
     <div class="inline-flex gap-x-2 justify-end">
         {% if previous is defined %}
-            {{ component('button_link', {
-                link: path(route, query|merge({(pageParameterName): previous})),
-                label: 'Précédent',
-                icon: source('@SFToolbox/icons/chevron-left.svg'),
-                size: 'small',
-                mode: 'white',
-                color: themeColor
-            }) }}
+            <twig:ButtonLink
+                    color="{{ themeColor }}"
+                    mode="white"
+                    label="Précédent"
+                    link="{{ path(route, query|merge({(pageParameterName): previous})) }}"
+                    icon="{{ source('@SFToolbox/icons/chevron-left.svg') }}"
+                    size="small"
+            />
         {% else %}
-            {{ component('button', {
-                disabled: true,
-                label: 'Précédent',
-                icon: source('@SFToolbox/icons/chevron-left.svg'),
-                size: 'small',
-                mode: 'white',
-                color: themeColor
-            }) }}
+            <twig:Button
+                    color="{{ themeColor }}"
+                    mode="white"
+                    label="Précédent"
+                    disable="true"
+                    icon="{{ source('@SFToolbox/icons/chevron-left.svg') }}"
+                    size="small"
+            />
         {% endif %}
 
         {% if next is defined %}
-            {{ component('button_link', {
-                link: path(route, query|merge({(pageParameterName): next})),
-                label: 'Suivant',
-                icon: source('@SFToolbox/icons/chevron-right.svg'),
-                size: 'small',
-                mode: 'white',
-                iconPlacement: 'right',
-                color: themeColor
-            }) }}
+            <twig:ButtonLink
+                    color="{{ themeColor }}"
+                    mode="white"
+                    label="Suivant"
+                    link="{{ path(route, query|merge({(pageParameterName): next})) }}"
+                    icon="{{ source('@SFToolbox/icons/chevron-right.svg') }}"
+                    iconPlacement="right"
+                    size="small"
+            />
         {% else %}
-            {{ component('button', {
-                disabled: true,
-                label: 'Suivant',
-                icon: source('@SFToolbox/icons/chevron-right.svg'),
-                size: 'small',
-                mode: 'white',
-                iconPlacement: 'right',
-                color: themeColor
-            }) }}
+            <twig:Button
+                    color="{{ themeColor }}"
+                    mode="white"
+                    label="Suivant"
+                    disabled="true"
+                    icon="{{ source('@SFToolbox/icons/chevron-right.svg') }}"
+                    iconPlacement="right"
+                    size="small"
+            />
         {% endif %}
     </div>
 {% endif %}

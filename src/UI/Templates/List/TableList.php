@@ -7,8 +7,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('table_list', template: '@SFToolbox/ui/templates/list/table_list.html.twig')]
-class TableListComponent
+#[AsTwigComponent(template: '@SFToolbox/ui/templates/list/table_list.html.twig')]
+class TableList
 {
     public ?string $headerTitle;
     public ?array $tableColumns;

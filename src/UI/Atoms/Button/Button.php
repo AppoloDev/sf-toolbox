@@ -6,8 +6,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('button', template: '@SFToolbox/ui/atoms/button/button.html.twig')]
-class ButtonComponent
+#[AsTwigComponent(template: '@SFToolbox/ui/atoms/button/button.html.twig')]
+class Button
 {
     use ButtonComponentAttribute;
 

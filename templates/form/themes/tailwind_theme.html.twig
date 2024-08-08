@@ -46,9 +46,5 @@
 {%- endblock form_row -%}
 
 {% block submit_widget -%}
-    {{ component('button', {
-        type: 'submit',
-        label: label|trans,
-        color: themeColor
-    }) }}
+    <twig:Button type="submit" label="{{ label|trans }}" color="{{ themeColor }}" />
 {%- endblock submit_widget %}

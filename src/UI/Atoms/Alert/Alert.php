@@ -6,8 +6,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('alert', template: '@SFToolbox/ui/atoms/alert/alert.html.twig')]
-class AlertComponent
+#[AsTwigComponent(template: '@SFToolbox/ui/atoms/alert/alert.html.twig')]
+class Alert
 {
     public ?string $header;
     public string $color;

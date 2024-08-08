@@ -6,8 +6,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('badge', template: '@SFToolbox/ui/atoms/badge/badge.html.twig')]
-class BadgeComponent
+#[AsTwigComponent(template: '@SFToolbox/ui/atoms/badge/badge.html.twig')]
+class Badge
 {
     public string|int $label;
     public string $color;

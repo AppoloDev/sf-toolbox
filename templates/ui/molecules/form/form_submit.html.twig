@@ -4,31 +4,31 @@
             <div class="flex flex-col sm:flex-row gap-y-2 sm:gap-x-2 sm:gap-y-0">
                 {{ form_widget(form[submitField]) }}
 
-                {{ component('button', {
-                    type: 'reset',
-                    label: 'button.reset.label'|trans,
-                    color: themeColor,
-                    mode: 'ghost'
-                }) }}
+                <twig:Button
+                        type="reset"
+                        label="{{ 'button.reset.label'|trans }}"
+                        color="{{ themeColor }}"
+                        mode="ghost"
+                />
             </div>
 
             {% if deleteButtonLink is not null %}
                 {% if deleteSwalTitle is not null %}
-                    {{ component('button_link_sweetalert', {
-                        swalTitle: deleteSwalTitle,
-                        swalText: deleteSwalText,
-                        swalColor: deleteSwalColor,
-                        link: deleteButtonLink,
-                        label: 'button.delete.label'|trans,
-                        color: 'red'
-                    }) }}
+                    <twig:ButtonLinkSweetAlert
+                            swalTitle="{{ deleteSwalTitle }}"
+                            swalText="{{ swalText }}"
+                            swalColor="{{ deleteSwalColor }}"
+                            link="{{ deleteButtonLink }}"
+                            label="{{ 'button.delete.label'|trans }}"
+                            color="red"
+                    />
                 {% else %}
                     <div class="flex flex-col">
-                        {{ component('button_link', {
-                            link: deleteButtonLink,
-                            label: 'button.delete.label'|trans,
-                            color: 'red'
-                        }) }}
+                        <twig:ButtonLink
+                                color="red"
+                                label="{{ 'button.delete.label'|trans }}"
+                                link="{{ deleteButtonLink }}"
+                        />
                     </div>
                 {% endif %}
             {% endif %}

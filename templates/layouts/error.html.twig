@@ -31,12 +31,7 @@
         </div>
 
         {% block button %}
-            {{ component('button_link', {
-                link: '/',
-                label: 'Page d\'accueil',
-                color: themeColor,
-                mode: 'solid'
-            }) }}
+            <twig:ButtonLink color="{{ themeColor }}" mode="solid" label="Page d'accueil" link="/" />
         {% endblock %}
     </div>
 
