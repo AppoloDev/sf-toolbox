@@ -39,7 +39,7 @@ class ButtonLinkSweetAlert
 
         $resolver->setDefaults(['swalColor' => 'red']);
         $resolver->setAllowedTypes('swalColor', ['string', 'null']);
-        $resolver->setAllowedValues('swalColor', ['orange', 'red', 'green', 'blue']);
+        $resolver->setAllowedValues('swalColor', ['orange', 'red', 'green', 'blue', 'appolo']);
 
         $this->updateResolver($resolver);
 
