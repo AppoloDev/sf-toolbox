@@ -1,6 +1,6 @@
 <div class="navbar_user_profile_menu">
     <twig:DropdownMenu>
-        {% block dropdownButton %}
+        <twig:block name="dropdownButton">
             <twig:Button
                     label="{{ app.user.firstname }}"
                     icon="{{ source('@SFToolbox/icons/chevron-down.svg') }}"
@@ -8,28 +8,28 @@
                     iconPlacement="right"
                     color="{{ themeColor }}"
             />
-        {% endblock %}
+        </twig:block>
 
-        {% block dropdownItems %}
+        <twig:block name="dropdownItems">
             <twig:DropdownItemContainer>
-                {% block dropdownItemContainerItems %}
+                <twig:block name="dropdownItemContainerItems">
                     <twig:ButtonLink
-                        link="{{ path(routePrefix~'_account_edit') }}"
-                        label="{{ 'user_profil_my_profile'|trans }}"
-                        mode="ghost"
-                        block="true"
-                        size="small"
-                        />
+                            link="{{ path(routePrefix~'_account_edit') }}"
+                            label="{{ 'user_profil_my_profile'|trans }}"
+                            mode="ghost"
+                            block="{{ true }}"
+                            size="small"
+                    />
                     <twig:ButtonLink
                             link="{{ path('auth_logout') }}"
                             label="{{ 'auth_logout'|trans }}"
                             mode="ghost"
-                            block="true"
+                            block="{{ true }}"
                             size="small"
                             color="red"
                     />
-                {% endblock %}
+                </twig:block>
             </twig:DropdownItemContainer>
-        {% endblock %}
+        </twig:block>
     </twig:DropdownMenu>
 </div>
