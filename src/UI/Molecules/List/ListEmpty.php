@@ -11,8 +11,6 @@ class ListEmpty
 {
     public ?string $title = '';
     public ?string $description = '';
-    public ?string $illustration = null;
-    public ?string $button = null;
 
     #[PreMount]
     public function preMount(array $data): array
@@ -23,12 +21,6 @@ class ListEmpty
 
         $resolver->setDefault('description', 'Essayez d\'ajouter un nouvel élément.');
         $resolver->setAllowedTypes('description', ['string', 'null']);
-
-        $resolver->setDefault('button', null);
-        $resolver->setAllowedTypes('button', ['string', 'null']);
-
-        $resolver->setDefault('illustration', null);
-        $resolver->setAllowedTypes('illustration', ['string', 'null']);
 
         return $resolver->resolve($data);
     }
