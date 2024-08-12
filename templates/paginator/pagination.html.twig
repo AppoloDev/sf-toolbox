@@ -6,7 +6,7 @@
                     mode="white"
                     label="Précédent"
                     link="{{ path(route, query|merge({(pageParameterName): previous})) }}"
-                    icon="{{ source('@SFToolbox/icons/chevron-left.svg') }}"
+                    icon="{{ ux_icon('fa6-solid:chevron-left') }}"
                     size="small"
             />
         {% else %}
@@ -15,7 +15,7 @@
                     mode="white"
                     label="Précédent"
                     :disabled="true"
-                    icon="{{ source('@SFToolbox/icons/chevron-left.svg') }}"
+                    icon="{{ ux_icon('fa6-solid:chevron-left') }}"
                     size="small"
             />
         {% endif %}
@@ -26,7 +26,7 @@
                     mode="white"
                     label="Suivant"
                     link="{{ path(route, query|merge({(pageParameterName): next})) }}"
-                    icon="{{ source('@SFToolbox/icons/chevron-right.svg') }}"
+                    icon="{{ ux_icon('fa6-solid:chevron-right') }}"
                     iconPlacement="right"
                     size="small"
             />
@@ -36,7 +36,7 @@
                     mode="white"
                     label="Suivant"
                     :disabled="true"
-                    icon="{{ source('@SFToolbox/icons/chevron-right.svg') }}"
+                    icon="{{ ux_icon('fa6-solid:chevron-right') }}"
                     iconPlacement="right"
                     size="small"
             />

@@ -1,8 +1,7 @@
 <div class="hs-dropdown dropdownmenu">
     {% block dropdownButton %}
-        <twig:Button icon="{{ source('@SFToolbox/icons/ellipsis.svg') }}" mode="white" color="{{ themeColor }}" />
+        <twig:Button icon="{{ ux_icon('fa6-solid:ellipsis') }}" mode="white" color="{{ themeColor }}" />
     {% endblock %}
-
 
     <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 opacity-0 duration hidden dropdownmenu-container">
         {% if dropdownHeaderLabel is defined %}

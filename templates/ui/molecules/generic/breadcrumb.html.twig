@@ -8,7 +8,7 @@
                     {% else %}
                         <a href="{{ item.path }}">
                             {{ item.label|raw }}
-                            {{ source('@SFToolbox/icons/chevron-right.svg') }}
+                            <twig:ux:icon name="fa6-solid:chevron-right" />
                         </a>
                     {% endif %}
                 </li>

@@ -6,12 +6,12 @@
       <div class="h-2 w-2 flex place-items-center">
           {% if sorted %}
               {% if direction == 'desc' %}
-                  {{ source('@SFToolbox/icons/sort-down.svg') }}
+                 <twig:ux:icon name="fa6-solid:sort-down" />
               {% else %}
-                  {{ source('@SFToolbox/icons/sort-up.svg') }}
+                 <twig:ux:icon name="fa6-solid:sort-up" />
               {% endif %}
           {% else %}
-              {{ source('@SFToolbox/icons/sort.svg') }}
+             <twig:ux:icon name="fa6-solid:sort" />
           {% endif %}
       </div>
    </div>

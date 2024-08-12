@@ -13,12 +13,12 @@
         </fieldset>
 
         <div class="pt-6 sm:pt-12">
-            {{ component('form_submit', {
-                form: form,
-                deleteButtonLink: ##ENTITYCAMEL## is defined and is_granted('##AREALOWER##_##PREFIX##_delete', ##ENTITYCAMEL##) ? path('##AREALOWER##_##PREFIX##_delete', {id: ##ENTITYCAMEL##.id}) :null,
-                deleteSwalTitle: 'Supprimer cet élément',
-                deleteSwalColor: 'red'
-            }) }}
+            <twig:FormSubmit
+                form="{{ form }}"
+                deleteButtonLink="{{ ##ENTITYCAMEL## is defined and is_granted('##AREALOWER##_##PREFIX##_delete', ##ENTITYCAMEL##) ? path('##AREALOWER##_##PREFIX##_delete', {id: ##ENTITYCAMEL##.id}) :null }}"
+                deleteSwalTitle="Supprimer cet élément"
+                deleteSwalColor="red"
+            />
         </div>
     </div>
 </div>

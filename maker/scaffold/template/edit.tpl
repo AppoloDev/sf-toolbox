@@ -4,11 +4,11 @@
 
 {% block breadcrumb %}
     {# TODO: Wording #}
-    {{ component('breadcrumb', {items: [
+    <twig:Breadcrumb items="{{[
         {path: path('##AREALOWER##_dashboard'), label: 'Accueil'},
         {path: path('##AREALOWER##_##PREFIX##_list'), label: '##ROUTEPATH##s'},
         {path: null, label: block('title')},
-    ]}) }}
+    ] }}"/>
 {% endblock %}
 
 {% block body %}
