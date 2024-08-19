@@ -42,27 +42,22 @@
         }
     },
     "scripts": {
-        "post-package-install": [
-            "symfony console ux:icon:import fa6-solid:bars",
-            "symfony console ux:icon:import ph:x",
-            "symfony console ux:icon:import fa6-solid:chevron-left",
-            "symfony console ux:icon:import fa6-solid:chevron-right",
-            "symfony console ux:icon:import fa6-solid:sort",
-            "symfony console ux:icon:import fa6-solid:sort-up",
-            "symfony console ux:icon:import fa6-solid:sort-down",
-            "symfony console ux:icon:import iconoir:search",
-            "symfony console ux:icon:import fa6-solid:download"
+        "auto-scripts": {
+            "ux:icon:import fa6-solid:bars": "symfony-cmd",
+            "ph:x": "symfony-cmd",
+            "fa6-solid:chevron-left": "symfony-cmd",
+            "fa6-solid:chevron-right": "symfony-cmd",
+            "fa6-solid:sort": "symfony-cmd",
+            "fa6-solid:sort-up": "symfony-cmd",
+            "fa6-solid:sort-down": "symfony-cmd",
+            "iconoir:search": "symfony-cmd",
+            "fa6-solid:download": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
         ],
-        "post-package-update": [
-            "symfony console ux:icon:import fa6-solid:bars",
-            "symfony console ux:icon:import ph:x",
-            "symfony console ux:icon:import fa6-solid:chevron-left",
-            "symfony console ux:icon:import fa6-solid:chevron-right",
-            "symfony console ux:icon:import fa6-solid:sort",
-            "symfony console ux:icon:import fa6-solid:sort-up",
-            "symfony console ux:icon:import fa6-solid:sort-down",
-            "symfony console ux:icon:import iconoir:search",
-            "symfony console ux:icon:import fa6-solid:download"
+        "post-update-cmd": [
+            "@auto-scripts"
         ]
     }
 }
