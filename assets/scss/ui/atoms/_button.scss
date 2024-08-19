@@ -17,7 +17,7 @@ $buttonColors: 'green', 'red', 'blue', 'orange', 'indigo', 'appolo';
 
     .icon-full {
         svg {
-            @apply max-h-[24px] max-w-[24px];
+            @apply h-[20px] w-[20px];
         }
     }
 
@@ -35,7 +35,7 @@ $buttonColors: 'green', 'red', 'blue', 'orange', 'indigo', 'appolo';
 
     .icon-full {
         svg {
-            @apply max-h-[18px] max-w-[18px];
+            @apply h-[18px] w-[18px];
         }
     }
 }
