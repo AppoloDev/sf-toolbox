@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block body %}
-    {% component form_layout with {
+    {% component FormLayout with {
         headerTitle: block('title'),
     } %}
         {% block form_render %}

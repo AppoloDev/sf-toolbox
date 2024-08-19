@@ -11,7 +11,7 @@
 
 {% block body %}
     {# TODO: Implements & wording #}
-    {% component table_list with {
+    {% component TableList with {
         headerTitle: block('title'),
         tableColumns: [
             knp_pagination_sortable(pagination, 'ID', '##ENTITYLOWER##.id'),
