@@ -21,7 +21,7 @@ trait ButtonComponentAttribute
     {
         $resolver->setDefaults(['color' => null]);
         $resolver->setAllowedTypes('color', ['string', 'null']);
-        $resolver->setAllowedValues('color', ['green', 'red', 'orange', 'blue', 'indigo', 'appolo', null]);
+        $resolver->setAllowedValues('color', ['green', 'red', 'orange', 'blue', 'indigo', 'appolo', 'default', null]);
 
         $resolver->setDefaults(['type' => 'button']);
         $resolver->setAllowedTypes('type', 'string');
