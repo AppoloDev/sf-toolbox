@@ -12,7 +12,7 @@ trait BuilderCriteria
     protected QueryBuilder $qb;
     protected ?QueryBuilder $parentQb = null;
 
-    public function getQB(string $customAlias = null): self
+    public function getQB(?string $customAlias = null): self
     {
         $this->qb = $this->createQueryBuilder($this->getAlias($customAlias));
 
@@ -45,7 +45,7 @@ trait BuilderCriteria
         return $this;
     }
 
-    public function set(string $field, null|int|bool|string $value, string $customAlias = null): self
+    public function set(string $field, int|bool|string|null $value, ?string $customAlias = null): self
     {
         $this->qb->set($this->getAliasField($customAlias, $field), $value);
 
@@ -144,7 +144,7 @@ trait BuilderCriteria
         return $this->getAlias($customAlias).'.'.$field;
     }
 
-    public function setParameter(string $paramName, mixed $value, string $type = null): self
+    public function setParameter(string $paramName, mixed $value, ?string $type = null): self
     {
         $qb = $this->parentQb ?? $this->qb;
 

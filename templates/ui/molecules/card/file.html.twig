@@ -1,0 +1,19 @@
+{% set element = 'span' %}
+{% if route is not null %}
+    {% set element = 'a' %}
+{% endif %}
+
+<{{ element}}{% if element is same as ('a') %} href="{{ route }}" target="_blank"{% endif %} class="file-item">
+    <span class="icon">
+        <twig:ux:icon name="fa6-regular:{{ icon }}"/>
+    </span>
+    <div>
+        <span class="filename">
+            {{ file.filename }}
+        </span>
+
+        <p class="extension">
+            Type de fichier: {{ extension is not null ? extension|upper : 'Inconnu' }}
+        </p>
+    </div>
+</{{ element }}>

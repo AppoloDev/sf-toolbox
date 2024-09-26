@@ -14,5 +14,5 @@ interface BuilderCriteriaInterface
 
     public function getQueryBuilder(): QueryBuilder;
 
-    public function setParameter(string $paramName, mixed $value, string $type = null): self;
+    public function setParameter(string $paramName, mixed $value, ?string $type = null): self;
 }

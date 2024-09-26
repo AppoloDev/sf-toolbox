@@ -65,7 +65,7 @@ class GeolocalizableSubscriber implements EventSubscriberInterface
         /** @var \stdClass $data */
         $data = json_decode($geocompleteJson);
 
-        if(is_null($data)) {
+        if (is_null($data)) {
             return [];
         }
 

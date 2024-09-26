@@ -7,8 +7,8 @@ trait PublishableCriteria
     public function published(
         string $fieldFrom = 'publicationStartDate',
         string $fieldTo = 'publicationEndDate',
-        string $customAlias = null,
-        \DateTime $currentDate = null,
+        ?string $customAlias = null,
+        ?\DateTime $currentDate = null,
     ): self {
         if (is_null($currentDate)) {
             $startDate = (new \DateTimeImmutable())->setTime(0, 0, 0, 0);

@@ -10,7 +10,7 @@ trait GeolocalizableCriteria
         float $lat,
         float $lng,
         int $radius = 10,
-        string $customAlias = null,
+        ?string $customAlias = null,
         ?string $latField = 'lat',
         ?string $lngField = 'lng'
     ): self {
@@ -24,7 +24,7 @@ trait GeolocalizableCriteria
 
     public function bounds(
         array $bounds,
-        string $customAlias = null,
+        ?string $customAlias = null,
         ?string $latField = 'lat',
         ?string $lngField = 'lng'
     ): self {

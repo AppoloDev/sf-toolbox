@@ -6,41 +6,41 @@ use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\Expression\ExpressionIn
 
 trait SelectCriteria
 {
-    public function max(string $field, string $customAlias = null, bool $addSelect = false): self
+    public function max(string $field, ?string $customAlias = null, bool $addSelect = false): self
     {
         return $this->selectFromFunction('MAX', $field, $customAlias, $addSelect);
     }
 
-    public function min(string $field, string $customAlias = null, bool $addSelect = false): self
+    public function min(string $field, ?string $customAlias = null, bool $addSelect = false): self
     {
         return $this->selectFromFunction('MIN', $field, $customAlias, $addSelect);
     }
 
-    public function countItem(string $field, string $customAlias = null, bool $addSelect = false): self
+    public function countItem(string $field, ?string $customAlias = null, bool $addSelect = false): self
     {
         return $this->selectFromFunction('COUNT', $field, $customAlias, $addSelect);
     }
 
-    public function sum(string $field, string $customAlias = null, bool $addSelect = false): self
+    public function sum(string $field, ?string $customAlias = null, bool $addSelect = false): self
     {
         return $this->selectFromFunction('SUM', $field, $customAlias, $addSelect);
     }
 
-    public function select(string $field, string $customAlias = null): self
+    public function select(string $field, ?string $customAlias = null): self
     {
         $this->qb->select($this->getAliasField($customAlias, $field));
 
         return $this;
     }
 
-    public function addSelect(string $field, string $customAlias = null): self
+    public function addSelect(string $field, ?string $customAlias = null): self
     {
         $this->qb->addSelect($this->getAliasField($customAlias, $field));
 
         return $this;
     }
 
-    public function selectDistinct(string $field, string $customAlias = null): self
+    public function selectDistinct(string $field, ?string $customAlias = null): self
     {
         $this->qb->select($this->getAliasField($customAlias, $field))->distinct();
 
@@ -54,7 +54,7 @@ trait SelectCriteria
         return $this;
     }
 
-    public function selectFromSubQuery(string $entityClass, string $alias, callable $cb, string $subSelectAlias = null): self
+    public function selectFromSubQuery(string $entityClass, string $alias, callable $cb, ?string $subSelectAlias = null): self
     {
         $rep = (clone $this->_em->getRepository($entityClass));
         $dql = $cb($rep->getSubQb($this->qb, $alias))->getBuilder()->getQuery()->getDQL();
@@ -63,7 +63,7 @@ trait SelectCriteria
         return $this;
     }
 
-    public function selectFromFunction(string $function, string $field, string $customAlias = null, bool $addSelect = false): self
+    public function selectFromFunction(string $function, string $field, ?string $customAlias = null, bool $addSelect = false): self
     {
         $aliasField = $this->getAliasField($customAlias, $field);
 

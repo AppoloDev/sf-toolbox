@@ -35,6 +35,7 @@ class ArrayUtils
                 $result[] = $item;
             }
         }
+
         return $result;
     }
 }

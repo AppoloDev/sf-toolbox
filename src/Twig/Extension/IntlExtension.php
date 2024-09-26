@@ -14,7 +14,7 @@ class IntlExtension extends AbstractExtension
         ];
     }
 
-    public function localizedDate(\DateTime $date, string $format = null, string $locale = 'fr-FR'): string
+    public function localizedDate(\DateTime $date, ?string $format = null, string $locale = 'fr-FR'): string
     {
         $formattedDate = \IntlDateFormatter::create(
             $locale,

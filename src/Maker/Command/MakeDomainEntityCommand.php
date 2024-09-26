@@ -16,7 +16,7 @@ class MakeDomainEntityCommand extends Command
 {
     use InteractCommand;
 
-    public function __construct(private readonly EntityFileCreator $fileCreator, string $name = null)
+    public function __construct(private readonly EntityFileCreator $fileCreator, ?string $name = null)
     {
         parent::__construct($name);
     }

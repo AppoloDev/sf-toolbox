@@ -7,7 +7,7 @@ trait DateCriteria
     public function date(
         string $field,
         \DateTimeInterface $date,
-        string $customAlias = null
+        ?string $customAlias = null
     ): self {
         if ($date instanceof \DateTime) {
             $immutable = \DateTimeImmutable::createFromMutable($date);
@@ -25,7 +25,7 @@ trait DateCriteria
         string $field,
         \DateTimeInterface $from,
         \DateTimeInterface $to,
-        string $customAlias = null
+        ?string $customAlias = null
     ): self {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->between(
             $field,
@@ -37,8 +37,8 @@ trait DateCriteria
 
     public function dateNotExpired(
         string $field,
-        \DateTimeInterface $customDate = null,
-        string $customAlias = null,
+        ?\DateTimeInterface $customDate = null,
+        ?string $customAlias = null,
     ): self {
         $date = $customDate ?? new \DateTimeImmutable();
 
@@ -47,8 +47,8 @@ trait DateCriteria
 
     public function dateExpired(
         string $field,
-        \DateTimeInterface $customDate = null,
-        string $customAlias = null,
+        ?\DateTimeInterface $customDate = null,
+        ?string $customAlias = null,
     ): self {
         $date = $customDate ?? new \DateTimeImmutable();
 

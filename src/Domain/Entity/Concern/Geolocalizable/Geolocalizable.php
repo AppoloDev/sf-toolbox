@@ -76,6 +76,7 @@ trait Geolocalizable
     public function setLat(?float $lat): self
     {
         $this->lat = $lat;
+
         return $this;
     }
 
@@ -87,6 +88,7 @@ trait Geolocalizable
     public function setLng(?float $lng): self
     {
         $this->lng = $lng;
+
         return $this;
     }
 
