@@ -6,7 +6,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 readonly class ArrayToStringTransformer implements DataTransformerInterface
 {
-    public function __construct(private array $defaultValues)
+    public function __construct(private array $defaultValues, private bool $multiple = false)
     {
     }
 
@@ -22,13 +22,21 @@ readonly class ArrayToStringTransformer implements DataTransformerInterface
             }
         }
 
-        return end($value);
+        if (!$this->multiple) {
+            return end($value);
+        }
+
+        return implode(',', $value);
     }
 
     public function reverseTransform(mixed $value): array
     {
         if (is_string($value)) {
-            return [$value];
+            if (!$this->multiple) {
+                return [$value];
+            }
+
+            return explode(',', $value);
         }
 
         return [];
