@@ -23,8 +23,8 @@ class SweetAlert extends HTMLElement {
 				htmlContainer: `sweetalert__content`,
 				actions: `sweetalert__actions`,
 				loader: 'hidden',
-				confirmButton: `btn btn-solid btn-${this.getAttribute('color')}`,
-				cancelButton: 'btn btn-solid btn-white',
+				confirmButton: `btn btn-mode-solid btn-color-${this.getAttribute('color')}`,
+				cancelButton: 'btn btn-mode-solid btn-mode-white',
 			},
 		}).then((result) => {
 			if (result.isConfirmed) {
