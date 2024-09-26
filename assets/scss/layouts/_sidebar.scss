@@ -1,6 +1,13 @@
 body.sidebar {
     .menu-mobile {
         @apply sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden;
+
+        button {
+            svg {
+                height: inherit;
+                width: inherit;
+            }
+        }
     }
 
     .aside {
