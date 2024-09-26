@@ -4,7 +4,7 @@
     {% if allowDisplay is same as(true) %}
         <button
                 type="{{ type }}"
-                class="btn btn-{{ size }} btn-{{ color }} btn-{{ mode }} {{ tooltip ? 'hs-tooltip-toggle' }} {{ block ? 'w-full' }}"
+                class="btn btn-size-{{ size }} btn-color-{{ color }} btn-mode-{{ mode }} {{ tooltip ? 'hs-tooltip-toggle' }} {{ block ? 'w-full' }}"
                 {% if disabled %}disabled{% endif %}
         >
             {{ parent() }}
