@@ -1,7 +1,7 @@
 {% block geo_localizable_widget %}
    <geo-complete api-key="{{ googleMapApiKey }}" source=".sourceInput" target="#{{ id }}">
       <div class="form_row">
-         <label for="geocomplete_{{ id }}" {% if required %}class="required"{% endif %}>{{ label }}</label>
+         <label for="geocomplete_{{ id }}" {% if required %}class="required"{% endif %}>{{ label|trans }}</label>
          <input id="geocomplete_{{ id }}" class="sourceInput" type="text" value="{{ data }}" {% if required %}required{% endif %}/>
       </div>
 
