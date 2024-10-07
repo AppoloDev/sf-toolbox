@@ -13,7 +13,7 @@
                     {% endif %}
 
                     <div>
-                        <span>{{ choice.label }}</span>
+                        <span>{{ choice.label|trans }}</span>
                         {% if choice.attr.description is defined and choice.attr.description is not null %}
                             <p>{{ choice.attr.description }}</p>
                         {% endif %}
