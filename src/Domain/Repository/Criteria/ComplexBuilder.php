@@ -47,7 +47,7 @@ class ComplexBuilder
         return null;
     }
 
-    public function andX(Composite|Comparison|string ...$conditions): ?Composite
+    public function andX(Composite|Comparison|string|null ...$conditions): ?Composite
     {
         $conditions = array_filter($conditions, fn (mixed $condition) => null !== $condition);
         if (0 === count($conditions)) {

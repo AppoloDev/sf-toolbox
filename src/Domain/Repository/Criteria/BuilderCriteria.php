@@ -45,7 +45,7 @@ trait BuilderCriteria
         return $this;
     }
 
-    public function set(string $field, int|bool|string|null $value, ?string $customAlias = null): self
+    public function set(string $field, int|float|bool|string|null $value, ?string $customAlias = null): self
     {
         $this->qb->set($this->getAliasField($customAlias, $field), $value);
 
