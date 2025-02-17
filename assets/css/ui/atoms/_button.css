@@ -1,0 +1,184 @@
+.btn {
+    @apply text-neutral-500 hover:bg-neutral-100 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold text-sm transition-all duration-300 cursor-pointer ring-0;
+}
+
+.btn .icon-full svg {
+    @apply h-[20px] w-[20px];
+}
+
+.btn:disabled {
+    @apply cursor-not-allowed opacity-40;
+}
+
+.btn.hs-tooltip-toggle .tooltip {
+    @apply opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-white rounded;
+}
+
+/** Mode **/
+.btn-mode-solid {
+    @apply text-white;
+}
+
+.btn-mode-outline {
+    @apply py-[.688rem] border-2;
+}
+
+.btn-mode-white {
+    @apply border-gray-200 font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50;
+}
+
+/** Small **/
+.btn-size-small {
+    @apply py-2 px-3;
+}
+
+.btn-size-small.btn-outline {
+    @apply sm:py-[.438rem];
+}
+
+.btn-size-small .icon-full svg {
+    @apply h-[18px] w-[18px];
+}
+
+/** Large **/
+.btn-size-large {
+    @apply sm:p-5;
+}
+
+.btn-size-large.btn-outline {
+    @apply sm:py-[1.188rem];
+}
+
+/** Default **/
+.btn-color-default.btn-outline {
+    @apply border-gray-200 text-black hover:bg-gray-50 border;
+}
+
+/** Green **/
+.btn-color-green.btn-mode-solid {
+    @apply bg-green-500 hover:bg-green-600;
+}
+
+.btn-color-green.btn-mode-outline {
+    @apply border-green-200 text-green-500 hover:bg-green-500 hover:border-green-500 hover:text-white;
+}
+
+.btn-color-green.btn-mode-ghost {
+    @apply text-green-500 hover:bg-green-100;
+}
+
+.btn-color-green.btn-mode-soft {
+    @apply bg-green-100 text-green-500 hover:bg-green-500 hover:text-white;
+}
+
+.btn-color-green.btn-mode-link {
+    @apply text-green-500 hover:text-green-700;
+}
+
+/** Red **/
+.btn-color-red.btn-mode-solid {
+    @apply bg-red-500 hover:bg-red-600;
+}
+
+.btn-color-red.btn-mode-outline {
+    @apply border-red-200 text-red-500 hover:bg-red-500 hover:border-red-500 hover:text-white;
+}
+
+.btn-color-red.btn-mode-ghost {
+    @apply text-red-500 hover:bg-red-100;
+}
+
+.btn-color-red.btn-mode-soft {
+    @apply bg-red-100 text-red-500 hover:bg-red-500 hover:text-white;
+}
+
+.btn-color-red.btn-mode-link {
+    @apply text-red-500 hover:text-red-700;
+}
+
+/** Blue **/
+.btn-color-blue.btn-mode-solid {
+    @apply bg-blue-500 hover:bg-blue-600;
+}
+
+.btn-color-blue.btn-mode-outline {
+    @apply border-blue-200 text-blue-500 hover:bg-blue-500 hover:border-blue-500 hover:text-white;
+}
+
+.btn-color-blue.btn-mode-ghost {
+    @apply text-blue-500 hover:bg-blue-100;
+}
+
+.btn-color-blue.btn-mode-soft {
+    @apply bg-blue-100 text-blue-500 hover:bg-blue-500 hover:text-white;
+}
+
+.btn-color-blue.btn-mode-link {
+    @apply text-blue-500 hover:text-blue-700;
+}
+
+/** Orange **/
+.btn-color-orange.btn-mode-solid {
+    @apply bg-orange-500 hover:bg-orange-600;
+}
+
+.btn-color-orange.btn-mode-outline {
+    @apply border-orange-200 text-orange-500 hover:bg-orange-500 hover:border-orange-500 hover:text-white;
+}
+
+.btn-color-orange.btn-mode-ghost {
+    @apply text-orange-500 hover:bg-orange-100;
+}
+
+.btn-color-orange.btn-mode-soft {
+    @apply bg-orange-100 text-orange-500 hover:bg-orange-500 hover:text-white;
+}
+
+.btn-color-orange.btn-mode-link {
+    @apply text-orange-500 hover:text-orange-700;
+}
+
+/** Indigo **/
+.btn-color-indigo.btn-mode-solid {
+    @apply bg-indigo-500 hover:bg-indigo-600;
+}
+
+.btn-color-indigo.btn-mode-outline {
+    @apply border-indigo-200 text-indigo-500 hover:bg-indigo-500 hover:border-indigo-500 hover:text-white;
+}
+
+.btn-color-indigo.btn-mode-ghost {
+    @apply text-indigo-500 hover:bg-indigo-100;
+}
+
+.btn-color-indigo.btn-mode-soft {
+    @apply bg-indigo-100 text-indigo-500 hover:bg-indigo-500 hover:text-white;
+}
+
+.btn-color-indigo.btn-mode-link {
+    @apply text-indigo-500 hover:text-indigo-700;
+}
+
+/** Appolo **/
+.btn-color-appolo.btn-mode-solid {
+    @apply bg-appolo-500 hover:bg-appolo-600;
+}
+
+.btn-color-appolo.btn-mode-outline {
+    @apply border-appolo-200 text-appolo-500 hover:bg-appolo-500 hover:border-appolo-500 hover:text-white;
+}
+
+.btn-color-appolo.btn-mode-ghost {
+    @apply text-appolo-500 hover:bg-appolo-100;
+}
+
+.btn-color-appolo.btn-mode-soft {
+    @apply bg-appolo-100 text-appolo-500 hover:bg-appolo-500 hover:text-white;
+}
+
+.btn-color-appolo.btn-mode-link {
+    @apply text-appolo-500 hover:text-appolo-700;
+}
+
+
+

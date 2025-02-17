@@ -1,0 +1,69 @@
+.sweetalert__container {
+    @apply fixed w-screen h-screen top-0 left-0 flex items-center justify-center z-50 bg-opacity-90 bg-stone-500;
+}
+
+.sweetalert__popup {
+    @apply bg-white border shadow-sm rounded-xl p-8;
+}
+
+.sweetalert__title {
+    @apply m-0 font-bold text-gray-800 text-xl;
+}
+
+.sweetalert__content {
+    @apply my-4 text-gray-800;
+}
+
+.sweetalert__actions {
+    @apply flex justify-end items-center gap-x-4 pt-6 border-t;
+}
+
+.swal2-timer-progress-bar-container {
+    @apply hidden;
+}
+
+
+/** Green **/
+.sweetalert__container__green {
+    @apply bg-opacity-50 bg-green-500;
+}
+
+.sweetalert__title.text__green {
+    @apply text-green-800;
+}
+
+/** Red **/
+.sweetalert__container__red {
+    @apply bg-opacity-50 bg-red-500;
+}
+
+.sweetalert__title.text__red {
+    @apply text-red-800;
+}
+
+/** Blue **/
+.sweetalert__container__blue {
+    @apply bg-opacity-50 bg-blue-500;
+}
+
+.sweetalert__title.text__blue {
+    @apply text-blue-800;
+}
+
+/** Orange **/
+.sweetalert__container__orange {
+    @apply bg-opacity-50 bg-orange-500;
+}
+
+.sweetalert__title.text__orange {
+    @apply text-orange-800;
+}
+
+/** Appolo **/
+.sweetalert__container__appolo {
+    @apply bg-opacity-50 bg-appolo-500;
+}
+
+.sweetalert__title.text__appolo {
+    @apply text-appolo-800;
+}

@@ -1,0 +1,33 @@
+body.sidebar .menu-mobile {
+    @apply sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden;
+}
+
+body.sidebar .menu-mobile button svg {
+    height: inherit;
+    width: inherit;
+}
+
+body.sidebar .aside {
+    @apply px-6 py-10 space-y-6;
+}
+
+body.sidebar .aside .logo {
+    @apply h-10;
+}
+
+body.sidebar .aside .navigation {
+    @apply h-full;
+    height: calc(100vh - theme('height.10') - theme('height.12') - theme('padding.10') * 2 - theme('padding.6') * 2);
+}
+
+body.sidebar .aside .sidebar_user_profile_menu {
+    @apply h-12;
+}
+
+body.sidebar .aside .sidebar_user_profile_menu .dropdownmenu {
+    @apply w-full;
+}
+
+body.sidebar .aside .sidebar_user_profile_menu .dropdownmenu button {
+    @apply justify-between;
+}

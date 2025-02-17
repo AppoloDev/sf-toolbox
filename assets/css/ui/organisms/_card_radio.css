@@ -1,0 +1,36 @@
+.card-radio {
+    @apply w-full space-y-6;
+}
+
+.card-radio--item {
+    @apply w-full relative;
+}
+
+.card-radio--item input {
+    @apply absolute top-0 left-0 -z-10;
+}
+
+.card-radio--item label {
+    @apply flex gap-8 items-center w-full h-full bg-white border border-dashed border-gray-200 transition-all cursor-pointer m-0 p-8 rounded-lg;
+}
+
+.card-radio--item label span {
+    @apply block font-bold text-base;
+}
+
+.card-radio--item label p {
+    @apply text-gray-500 text-sm;
+}
+
+.card-radio--item label svg {
+    @apply max-h-[24px] max-w-[24px];
+}
+
+/** Appolo **/
+.card-radio-appolo .card-radio--item:hover label {
+    @apply border-appolo-500 bg-appolo-50 text-appolo-500;
+}
+
+.card-radio-appolo .card-radio--item input:checked + label {
+    @apply border-appolo-500 bg-appolo-50 text-appolo-500;
+}
