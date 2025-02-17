@@ -10,7 +10,7 @@ tom-select {
             @apply flex items-center py-2 px-3 w-full border border-gray-200 text-sm rounded-lg ring-0 outline-0 focus:border-gray-400 focus:ring-0 min-h-[38px] h-full;
 
             .items-count {
-                @apply px-[6px] py-[2px] text-gray-800 bg-gray-200 rounded;
+                @apply px-[6px] py-[2px] text-gray-800 bg-gray-200 rounded-sm;
             }
         }
 
@@ -27,7 +27,7 @@ tom-select {
                 @apply flex gap-[3px];
 
                 > div {
-                    @apply text-appolo-700 bg-appolo-50 rounded m-0;
+                    @apply text-appolo-700 bg-appolo-50 rounded-sm m-0;
                 }
             }
         }

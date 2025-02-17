@@ -11,7 +11,7 @@ ol.breadcrumb li a {
 }
 
 ol.breadcrumb li a svg {
-    @apply flex-shrink-0 mx-3 overflow-visible h-2.5 w-2.5 text-gray-400;
+    @apply shrink-0 mx-3 overflow-visible h-2.5 w-2.5 text-gray-400;
 }
 
 ol.breadcrumb li:last-child {

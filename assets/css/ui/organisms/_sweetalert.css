@@ -1,5 +1,5 @@
 .sweetalert__container {
-    @apply fixed w-screen h-screen top-0 left-0 flex items-center justify-center z-50 bg-opacity-90 bg-stone-500;
+    @apply fixed w-screen h-screen top-0 left-0 flex items-center justify-center z-50 bg-stone-500/90;
 }
 
 .sweetalert__popup {
@@ -25,7 +25,7 @@
 
 /** Green **/
 .sweetalert__container__green {
-    @apply bg-opacity-50 bg-green-500;
+    @apply bg-green-500/50;
 }
 
 .sweetalert__title.text__green {
@@ -34,7 +34,7 @@
 
 /** Red **/
 .sweetalert__container__red {
-    @apply bg-opacity-50 bg-red-500;
+    @apply bg-red-500/50;
 }
 
 .sweetalert__title.text__red {
@@ -43,7 +43,7 @@
 
 /** Blue **/
 .sweetalert__container__blue {
-    @apply bg-opacity-50 bg-blue-500;
+    @apply bg-blue-500/50;
 }
 
 .sweetalert__title.text__blue {
@@ -52,7 +52,7 @@
 
 /** Orange **/
 .sweetalert__container__orange {
-    @apply bg-opacity-50 bg-orange-500;
+    @apply bg-orange-500/50;
 }
 
 .sweetalert__title.text__orange {
@@ -61,7 +61,7 @@
 
 /** Appolo **/
 .sweetalert__container__appolo {
-    @apply bg-opacity-50 bg-appolo-500;
+    @apply bg-appolo-500/50;
 }
 
 .sweetalert__title.text__appolo {

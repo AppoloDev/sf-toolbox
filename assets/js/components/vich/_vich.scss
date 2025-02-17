@@ -38,7 +38,7 @@ vich-file {
         @apply relative flex items-center gap-3;
 
         > div {
-            @apply overflow-hidden overflow-ellipsis;
+            @apply overflow-hidden text-ellipsis;
         }
 
         .icon {

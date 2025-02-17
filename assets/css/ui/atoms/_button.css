@@ -11,7 +11,7 @@
 }
 
 .btn.hs-tooltip-toggle .tooltip {
-    @apply opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-white rounded;
+    @apply opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-white rounded-sm;
 }
 
 /** Mode **/
