@@ -18,7 +18,7 @@ class GeoComplete extends HTMLElement {
 
                 const options = {
                     fields: ["address_components", "formatted_address", "geometry", "name"],
-                    componentRestrictions: {country: 'fr'},
+                  //  componentRestrictions: {country: 'fr'}, TODO: voir options
                     strictBounds: false,
                 };
                 const autocomplete = new google.maps.places.Autocomplete(source, options);
