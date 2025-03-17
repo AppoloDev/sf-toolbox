@@ -14,8 +14,8 @@ class SweetAlert extends HTMLElement {
 			title: this.getAttribute('title'),
 			text: this.getAttribute('text'),
 			showCancelButton: true,
-			cancelButtonText: 'Annuler',
-			confirmButtonText: 'Je confirme',
+			cancelButtonText: this.getAttribute('cancelButtonText') ?? 'Cancel',
+			confirmButtonText: this.getAttribute('confirmButtonText') ?? 'I Confirm',
 			customClass: {
 				container: `sweetalert sweetalert__container sweetalert__container__${this.getAttribute('color')}`,
 				popup: 'sweetalert__popup',

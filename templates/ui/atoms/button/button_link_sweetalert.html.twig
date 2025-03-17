@@ -1,5 +1,5 @@
 {% if allowDisplay is same as (true) %}
-    <sweet-alert title="{{ swalTitle }}" text="{{ swalText }}" color="{{ swalColor }}">
+    <sweet-alert title="{{ swalTitle }}" text="{{ swalText }}" color="{{ swalColor }}" cancelButtonText="{{ 'cancel'|trans }}" confirmButtonText="{{ 'i_confirm'|trans }}">
         <twig:ButtonLink
                 color="{{ color }}"
                 mode="{{ mode }}"
