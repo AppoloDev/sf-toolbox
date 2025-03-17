@@ -13,7 +13,7 @@ tom-select .ts-wrapper .ts-control .items-count {
     @apply px-[6px] py-[2px] text-gray-800 bg-gray-200 rounded-sm;
 }
 tom-select .ts-wrapper.multi.has-items .ts-control {
-    @apply pr-2 !important;
+    @apply !pr-2;
 }
 tom-select .ts-wrapper.multi .ts-control {
     @apply flex gap-[3px];
@@ -45,5 +45,5 @@ tom-select .ts-wrapper.single.input-active .ts-control, tom-select .ts-wrapper.s
     @apply text-appolo-500;
 }
 .ts-dropdown .dropdown-input-wrap input {
-    @apply rounded-none border-0 border-b !important;
+    @apply !rounded-none !border-0 !border-b;
 }
