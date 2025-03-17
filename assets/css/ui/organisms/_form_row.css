@@ -23,7 +23,7 @@
     @apply text-red-500;
 }
 
-.form_row.invalid input, select, textarea {
+.form_row.invalid input, .form_row.invalid select, .form_row.invalid textarea {
     @apply border border-red-500 focus:border-gray-400;
 }
 
