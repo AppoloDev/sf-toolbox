@@ -1,33 +1,25 @@
 .form_row {
     @apply flex flex-col gap-2;
 }
-
 .form_row label {
     @apply text-sm font-medium m-0;
 }
-
 .form_row label.required:after {
-    content: '*';
+    content: "*";
     @apply pl-2 text-red-500;
 }
-
-.form_row .input-choice-container label .required :after {
-    content: '';
+.form_row .input-choice-container label.required:after {
+    content: "";
 }
-
 .form_row .help-text {
     @apply text-sm text-gray-500;
 }
-
 .form_row.invalid label {
     @apply text-red-500;
 }
-
 .form_row.invalid input, .form_row.invalid select, .form_row.invalid textarea {
     @apply border border-red-500 focus:border-gray-400;
 }
-
 .form_row.invalid .form-errors {
     @apply text-red-500 text-sm space-y-2;
 }
-

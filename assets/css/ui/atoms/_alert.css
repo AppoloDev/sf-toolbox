@@ -1,89 +1,69 @@
 .alert {
     @apply rounded-md p-4 space-y-4 border;
 }
-
 .alert .title {
     @apply font-semibold;
 }
-
 .alert .description {
     @apply text-sm;
 }
 
-/** Green **/
 .alert-green {
     @apply bg-green-50 border-green-200;
 }
-
 .alert-green h3 {
     @apply text-green-500;
 }
-
 .alert-green .description {
     @apply text-green-500;
 }
 
-/** Red **/
 .alert-red {
     @apply bg-red-50 border-red-200;
 }
-
 .alert-red h3 {
     @apply text-red-500;
 }
-
 .alert-red .description {
     @apply text-red-500;
 }
 
-/** Blue **/
 .alert-blue {
     @apply bg-blue-50 border-blue-200;
 }
-
 .alert-blue h3 {
     @apply text-blue-500;
 }
-
 .alert-blue .description {
     @apply text-blue-500;
 }
 
-/** Orange **/
 .alert-orange {
     @apply bg-orange-50 border-orange-200;
 }
-
 .alert-orange h3 {
     @apply text-orange-500;
 }
-
 .alert-orange .description {
     @apply text-orange-500;
 }
 
-/** Indigo **/
 .alert-indigo {
     @apply bg-indigo-50 border-indigo-200;
 }
-
 .alert-indigo h3 {
     @apply text-indigo-500;
 }
-
 .alert-indigo .description {
     @apply text-indigo-500;
 }
 
-/** Appolo **/
 .alert-appolo {
     @apply bg-appolo-50 border-appolo-200;
 }
-
 .alert-appolo h3 {
     @apply text-appolo-500;
 }
-
 .alert-appolo .description {
     @apply text-appolo-500;
 }
