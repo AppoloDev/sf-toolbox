@@ -1,4 +1,4 @@
-import './_character-counter.scss';
+import './_character-counter.css';
 
 class CharacterCounter extends HTMLElement {
     connectedCallback() {
