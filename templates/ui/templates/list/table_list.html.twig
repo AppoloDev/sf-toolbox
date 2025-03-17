@@ -32,7 +32,7 @@
                                                value="{{ app.request.query.get('q') }}"
                                                name="q"
                                                class="h-full py-2 px-3 !pl-11 border border-gray-200 rounded-md text-sm focus:outline-hidden w-full md:w-auto"
-                                               placeholder="{{ 'search.input.placeholder'|trans }}…"/>
+                                               placeholder="{{ 'your_search'|trans }}"/>
 
                                         <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none pl-4">
                                             <div class="h-4 w-4 text-gray-400">
@@ -55,7 +55,7 @@
 
                                 <twig:ButtonLink
                                         color="{{ themeColor }}"
-                                        label="Réinitialiser"
+                                        label="{{ 'reset'|trans }}"
                                         link="{{ path(app.request.attributes.get('_route'), routeParams) }}"
                                         size="small"
                                         mode="ghost"
@@ -64,7 +64,7 @@
                                 <twig:Button
                                         type="submit"
                                         color="{{ themeColor }}"
-                                        label="Rechercher"
+                                        label="{{ 'search'|trans }}"
                                         size="small"
                                 />
                             </div>

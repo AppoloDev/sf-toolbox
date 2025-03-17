@@ -6,7 +6,7 @@
 
                 <twig:Button
                         type="reset"
-                        label="{{ 'button.reset.label'|trans }}"
+                        label="{{ 'reset'|trans }}"
                         color="{{ themeColor }}"
                         mode="ghost"
                 />
@@ -19,14 +19,14 @@
                             swalText="{{ deleteSwalText }}"
                             swalColor="{{ deleteSwalColor }}"
                             link="{{ deleteButtonLink }}"
-                            label="{{ 'button.delete.label'|trans }}"
+                            label="{{ 'ask_delete'|trans }}"
                             color="red"
                     />
                 {% else %}
                     <div class="flex flex-col">
                         <twig:ButtonLink
                                 color="red"
-                                label="{{ 'button.delete.label'|trans }}"
+                                label="{{ 'ask_delete'|trans }}"
                                 link="{{ deleteButtonLink }}"
                         />
                     </div>

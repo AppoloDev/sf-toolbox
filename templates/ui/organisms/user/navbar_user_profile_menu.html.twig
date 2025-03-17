@@ -15,14 +15,14 @@
                 <twig:block name="dropdownItemContainerItems">
                     <twig:ButtonLink
                             link="{{ path(routePrefix~'_account_edit') }}"
-                            label="{{ 'user_profil_my_profile'|trans }}"
+                            label="{{ 'my_profile'|trans }}"
                             mode="ghost"
                             :block="true"
                             size="small"
                     />
                     <twig:ButtonLink
                             link="{{ path('auth_logout') }}"
-                            label="{{ 'auth_logout'|trans }}"
+                            label="{{ 'logout'|trans }}"
                             mode="ghost"
                             :block="true"
                             size="small"
