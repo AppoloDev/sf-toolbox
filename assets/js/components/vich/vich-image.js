@@ -1,4 +1,3 @@
-import "./_vich.css"
 class VichImage extends HTMLElement {
     connectedCallback() {
         const previewImage = this.querySelector('.image-preview') || undefined;

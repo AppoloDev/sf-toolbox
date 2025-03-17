@@ -1,5 +1,3 @@
-import './_character-counter.css';
-
 class CharacterCounter extends HTMLElement {
     connectedCallback() {
         this.inputElement = this.querySelector('input') || null;

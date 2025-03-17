@@ -1,6 +1,4 @@
 import TomSelect from "tom-select";
-import "tom-select/dist/css/tom-select.css";
-import "./_tomselect.css"
 import maxItemPlugin from "./plugins/max-items";
 
 class Autocomplete extends HTMLElement {
