@@ -1,8 +1,8 @@
 .sweetalert__container {
-    @apply fixed w-screen h-screen top-0 left-0 flex items-center justify-center z-50 bg-opacity-90 bg-stone-500;
+    @apply fixed w-screen h-screen top-0 left-0 flex items-center justify-center z-50 bg-stone-500/90;
 }
 .sweetalert__popup {
-    @apply bg-white border shadow-sm rounded-xl p-8;
+    @apply bg-white border shadow-xs rounded-xl p-8;
 }
 .sweetalert__title {
     @apply m-0 font-bold text-gray-800 text-xl;
@@ -19,35 +19,35 @@
 }
 
 .sweetalert__container__green {
-    @apply bg-opacity-50 bg-green-500;
+    @apply bg-green-500/50;
 }
 .sweetalert__title.text__green {
     @apply text-green-800;
 }
 
 .sweetalert__container__red {
-    @apply bg-opacity-50 bg-red-500;
+    @apply bg-red-500/50;
 }
 .sweetalert__title.text__red {
     @apply text-red-800;
 }
 
 .sweetalert__container__orange {
-    @apply bg-opacity-50 bg-orange-500;
+    @apply bg-orange-500/50;
 }
 .sweetalert__title.text__orange {
     @apply text-orange-800;
 }
 
 .sweetalert__container__appolo {
-    @apply bg-opacity-50 bg-appolo-500;
+    @apply bg-appolo-500/50;
 }
 .sweetalert__title.text__appolo {
     @apply text-appolo-800;
 }
 
 .sweetalert__container__blue {
-    @apply bg-opacity-50 bg-blue-500;
+    @apply bg-blue-500/50;
 }
 .sweetalert__title.text__blue {
     @apply text-blue-800;

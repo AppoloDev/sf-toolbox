@@ -10,7 +10,7 @@ tom-select .ts-wrapper .ts-control {
     @apply flex items-center py-2 px-3 w-full border border-gray-200 text-sm rounded-lg ring-0 outline-0 focus:border-gray-400 focus:ring-0 min-h-[38px] h-full;
 }
 tom-select .ts-wrapper .ts-control .items-count {
-    @apply px-[6px] py-[2px] text-gray-800 bg-gray-200 rounded-sm;
+    @apply px-[6px] py-[2px] text-gray-800 bg-gray-200 rounded-xs;
 }
 tom-select .ts-wrapper.multi.has-items .ts-control {
     @apply !pr-2;
@@ -19,7 +19,7 @@ tom-select .ts-wrapper.multi .ts-control {
     @apply flex gap-[3px];
 }
 tom-select .ts-wrapper.multi .ts-control > div {
-    @apply text-appolo-700 bg-appolo-50 rounded-sm m-0;
+    @apply text-appolo-700 bg-appolo-50 rounded-xs m-0;
 }
 tom-select .ts-wrapper.single.input-active .ts-control, tom-select .ts-wrapper.single .ts-control {
     background-image: url("data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20fill='none'%20viewBox='0%200%2020%2020'%3e%3cpath%20stroke='%236b7280'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke-width='1.5'%20d='M6%208l4%204%204-4'/%3e%3c/svg%3e");
