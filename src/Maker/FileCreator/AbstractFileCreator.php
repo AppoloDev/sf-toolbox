@@ -14,7 +14,7 @@ class AbstractFileCreator
 
     public function __construct(
         #[Autowire('%kernel.project_dir%')]
-        protected readonly string $rootPath
+        protected readonly string $rootPath,
     ) {
     }
 

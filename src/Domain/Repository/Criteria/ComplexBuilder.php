@@ -128,7 +128,7 @@ class ComplexBuilder
         DoctrineOperator $operator,
         string $field,
         array|string|bool|int|\DateTimeInterface|null $value,
-        ?string $customAlias = null
+        ?string $customAlias = null,
     ): Comparison|Func {
         $aliasField = $this->builderCriteria->getAliasField($customAlias, $field);
         $paramName = 'value'.$field.uniqid();

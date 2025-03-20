@@ -10,7 +10,7 @@ readonly class PartialDtoExpr implements ExpressionInterface
     public function __construct(
         private array $fields,
         private string $objectClass,
-        private ?string $customAlias = null
+        private ?string $customAlias = null,
     ) {
     }
 

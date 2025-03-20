@@ -11,7 +11,7 @@ class CsvFileResponse extends Response
         ?string $csvContent = '',
         string $fileName = 'export.csv',
         int $status = 200,
-        array $headers = []
+        array $headers = [],
     ) {
         parent::__construct($csvContent, $status, $headers);
 

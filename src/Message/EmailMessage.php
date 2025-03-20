@@ -13,7 +13,7 @@ class EmailMessage
         array $recipients,
         private readonly string $object,
         private readonly string $template,
-        private readonly array $parameters = []
+        private readonly array $parameters = [],
     ) {
         $this->recipients = array_map(fn ($recipient): Address => new Address($recipient), $recipients);
     }

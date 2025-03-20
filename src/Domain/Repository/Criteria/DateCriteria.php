@@ -7,7 +7,7 @@ trait DateCriteria
     public function date(
         string $field,
         \DateTimeInterface $date,
-        ?string $customAlias = null
+        ?string $customAlias = null,
     ): self {
         if ($date instanceof \DateTime) {
             $immutable = \DateTimeImmutable::createFromMutable($date);
@@ -25,7 +25,7 @@ trait DateCriteria
         string $field,
         \DateTimeInterface $from,
         \DateTimeInterface $to,
-        ?string $customAlias = null
+        ?string $customAlias = null,
     ): self {
         return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->between(
             $field,

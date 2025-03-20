@@ -18,7 +18,7 @@ class Toast
         $this->color = match ($type) {
             'danger', 'error' => 'red',
             'warning' => 'orange',
-            default => 'green'
+            default => 'green',
         };
     }
 

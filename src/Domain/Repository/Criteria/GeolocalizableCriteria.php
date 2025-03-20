@@ -12,7 +12,7 @@ trait GeolocalizableCriteria
         int $radius = 10,
         ?string $customAlias = null,
         ?string $latField = 'lat',
-        ?string $lngField = 'lng'
+        ?string $lngField = 'lng',
     ): self {
         $latField = $this->getAliasField($customAlias, $latField);
         $lngField = $this->getAliasField($customAlias, $lngField);
@@ -26,7 +26,7 @@ trait GeolocalizableCriteria
         array $bounds,
         ?string $customAlias = null,
         ?string $latField = 'lat',
-        ?string $lngField = 'lng'
+        ?string $lngField = 'lng',
     ): self {
         if (isset($bounds['slat']) && isset($bounds['nlat'])) {
             $this->between($latField, $bounds['slat'], $bounds['nlat'], $customAlias);

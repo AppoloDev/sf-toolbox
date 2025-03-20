@@ -20,7 +20,7 @@ class ZipResponse extends BinaryFileResponse
         bool $public = true,
         string $contentDisposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT,
         bool $autoEtag = false,
-        bool $autoLastModified = true
+        bool $autoLastModified = true,
     ) {
         $zipPath = sys_get_temp_dir().DIRECTORY_SEPARATOR.uniqid();
 
