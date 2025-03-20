@@ -10,6 +10,7 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Mime\Address;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsMessageHandler]
 class EmailSenderHandler extends AbstractController
@@ -22,6 +23,7 @@ class EmailSenderHandler extends AbstractController
         private readonly MailerInterface $mailer,
         #[Autowire('%kernel.project_dir%')]
         private readonly string $projectDir,
+        private readonly TranslatorInterface $translator
     ) {
     }
 
@@ -35,11 +37,15 @@ class EmailSenderHandler extends AbstractController
         $email = (new TemplatedEmail())
             ->from(new Address($this->senderEmail, $this->senderName))
             ->to(...$emailMessage->getRecipients())
-            ->subject($emailMessage->getObject())
+            ->subject($this->translator->trans($emailMessage->getObject()))
             ->embedFromPath($logoPath, 'logo')
             ->htmlTemplate($emailMessage->getTemplate())
-            ->context($emailMessage->getParameters())
+            ->context(array_merge($emailMessage->getParameters(), ['locale' => $emailMessage->getLocale()]))
         ;
+
+        if (!is_null($emailMessage->getFile())) {
+            $email->attach($emailMessage->getFile()->getContent(), $emailMessage->getFilename() ?? 'attachment');
+        }
 
         $this->mailer->send($email);
     }
