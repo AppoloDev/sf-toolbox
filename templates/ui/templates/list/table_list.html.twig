@@ -115,6 +115,7 @@
                 {% else %}
                     {% if app.request.query.has('q') %}
                         {% block emptyListOnSearch %}
+                            {# TODO: Translation #}
                             <twig:ListEmpty
                                     description="Nous n'avons rien trouvé pour votre recherche: {{ app.request.query.get('q') }}"
                             />
