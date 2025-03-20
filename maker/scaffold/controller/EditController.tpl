@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route(path: '##ROUTEPATH##/{id}/modifier', name: '##PREFIX##_edit')]
 #[IsGranted(##ENTITY##Voter::EDIT, '##ENTITYCAMEL##')]
@@ -19,7 +20,8 @@ class Edit##ENTITY##Controller extends AbstractController
     public function __invoke(
         ##ENTITY## $##ENTITYCAMEL##,
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        TranslatorInterface $translator
     ): Response
     {
         $form = $this->createForm(##ENTITY##FormType::class, $##ENTITYCAMEL##);
@@ -27,7 +29,7 @@ class Edit##ENTITY##Controller extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'Modifié.');
+            $this->addFlash('success', $translator->trans('the_item_has_been_updated'));
 
             return $this->redirectToRoute('##AREALOWER##_##PREFIX##_list');
         }

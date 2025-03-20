@@ -14,6 +14,7 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route(path: '##ROUTEPATH##s/exporter', name: '##PREFIX##_export')]
 #[IsGranted(##ENTITY##Voter::EXPORT)]
@@ -22,23 +23,25 @@ class Export##ENTITY##Controller extends AbstractController
     public function __invoke(
         Request $request,
         ##ENTITY##Repository $repository,
+        TranslatorInterface $translator,
         #[MapQueryParameter] ?string $q,
     ): Response {
-     $##ENTITYCAMEL##s = $repository
-        ->getQB()
-        ->querySearch($q)
-        ->order('updatedAt', 'DESC')
-        ->getResults()
-    ;
+         $##ENTITYCAMEL##s = $repository
+            ->getQB()
+            ->querySearch($q)
+            ->order('updatedAt', 'DESC')
+            ->getResults()
+        ;
 
-    $csv = new CsvWriter();
-    $csv->setHeaders(['Id']); // TODO: Implements
-    $csv->setRows(array_map(function (##ENTITY## $##ENTITYCAMEL##) {
-        return [
-            $##ENTITYCAMEL##->getId(), // TODO: Implements
-        ];
-    }, $##ENTITYCAMEL##s));
+        $csv = new CsvWriter();
+        $csv->setHeaders([$translator->trans('Id')]); // TODO: Implements
+        $csv->setRows(array_map(function (##ENTITY## $##ENTITYCAMEL##) {
+            return [
+                $##ENTITYCAMEL##->getId(), // TODO: Implements
+            ];
+        }, $##ENTITYCAMEL##s));
 
-    return new CsvFileResponse($csv->getContent(), (new AsciiSlugger())->slug('Liste des ##ROUTEPATH##s').'.csv');
+        // TODO: Translation
+        return new CsvFileResponse($csv->getContent(), (new AsciiSlugger())->slug($translator->trans('list_of_##ROUTEPATH##s').'.csv');
     }
 }

@@ -1,6 +1,6 @@
 import TomSelect from "tom-select";
 import maxItemPlugin from "./plugins/max-items";
-
+// TODO: I18n
 class Autocomplete extends HTMLElement {
     connectedCallback() {
         const select = this.querySelector('select') || this.querySelector('input');

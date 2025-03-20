@@ -17,5 +17,5 @@ class TomSelectType extends AbstractType
         return 'tom_select';
     }
 
-    // TODO: Option resolver pour l'attribut . Nom à définir (Options ?)
+    // TODO: Option resolver pour l'attribut . Nom à définir (Options ?) + Passer la local pour i18n
 }

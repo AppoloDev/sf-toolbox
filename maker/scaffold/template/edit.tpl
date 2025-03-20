@@ -3,10 +3,10 @@
 {% block title %}{{ ##ENTITYCAMEL##.id}}{% endblock %}{# TODO: Implements #}
 
 {% block breadcrumb %}
-    {# TODO: Wording #}
+    {# TODO: Translation #}
     <twig:Breadcrumb items="{{[
-        {path: path('##AREALOWER##_dashboard'), label: 'Accueil'},
-        {path: path('##AREALOWER##_##PREFIX##_list'), label: '##ROUTEPATH##s'},
+        {path: path('##AREALOWER##_dashboard'), label: 'home'|trans},
+        {path: path('##AREALOWER##_##PREFIX##_list'), label: 'list_of_##ROUTEPATH##s'|trans},
         {path: null, label: block('title')},
     ] }}"/>
 {% endblock %}

@@ -2,7 +2,7 @@
     {% if is_granted('##AREALOWER##_##PREFIX##_edit', item) or is_granted('##AREALOWER##_##PREFIX##_delete', item) %}
         <div class="px-6 py-2">
             <twig:DropdownMenu>
-                <twig:block name="dropdownHeaderLabel">Actions</twig:block>
+                <twig:block name="dropdownHeaderLabel">{{ 'actions'|trans }}</twig:block>
                 <twig:block name="dropdownButton">
                     <twig:Button
                             icon="{{ ux_icon('fa6-solid:ellipsis') }}"
@@ -17,7 +17,7 @@
                             <twig:ButtonLink
                                     allowDisplay="{{ is_granted('##AREALOWER##_##PREFIX##_edit', item) }}"
                                     link="{{ path('##AREALOWER##_##PREFIX##_edit', {id: item.id}) }}"
-                                    label="Modifier"
+                                    label="{{ 'edit'|trans }}"
                                     mode="ghost"
                                     :block="true"
                                     size="small"
@@ -29,13 +29,13 @@
                             <twig:ButtonLinkSweetAlert
                                     allowDisplay="{{ is_granted('##AREALOWER##_##PREFIX##_delete', item) }}"
                                     link="{{ path('##AREALOWER##_##PREFIX##_delete', {id: item.id}) }}"
-                                    label="Supprimer"
+                                    label="{{ 'delete'|trans }}"
                                     mode="ghost"
                                     :block="true"
                                     size="small"
                                     color="red"
-                                    swalTitle="Supprimer cet élément"
-                                    swalText="Vous êtes sur le point d’effectuer une action totalement irréversible …"
+                                    swalTitle="{{ 'delete_this_item'|trans }}"
+                                    swalText="{{ 'this_action_is_final_are_you_sure'|trans }}"
                                     swalColor="red"
                             />
                         </twig:block>

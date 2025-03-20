@@ -6,7 +6,7 @@
                     {{ item.id }}
                 </span>
                 <span class="block text-sm text-gray-500">
-                    Modifié le {{ item.updatedAt | date('d/m/Y') }}
+                   {{ 'updated_on'|trans }} {{ item.updatedAt | date('d/m/Y') }}
                 </span>
             </div>
         </td>
