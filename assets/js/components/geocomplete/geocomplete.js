@@ -4,6 +4,7 @@ class GeoComplete extends HTMLElement {
     connectedCallback() {
         const source = this.querySelector(this.getAttribute('source'));
         const target = this.querySelector(this.getAttribute('target'));
+        const autocompleteOptions = JSON.parse(this.getAttribute('autocompleteOptions')) ?? {};
 
         if (source && target) {
 
@@ -12,15 +13,18 @@ class GeoComplete extends HTMLElement {
                 version: "weekly",
             });
 
-
             (async () => {
                 await loader.importLibrary("places");
 
+                if (autocompleteOptions.fields === undefined) {
+                    autocompleteOptions.fields = ["address_components", "formatted_address", "geometry", "name"];
+                }
+
                 const options = {
-                    fields: ["address_components", "formatted_address", "geometry", "name"],
-                  //  componentRestrictions: {country: 'fr'}, TODO: voir options
+                    ...autocompleteOptions,
                     strictBounds: false,
                 };
+
                 const autocomplete = new google.maps.places.Autocomplete(source, options);
                 autocomplete.addListener("place_changed", () => {
                     target.value = JSON.stringify(autocomplete.getPlace());
