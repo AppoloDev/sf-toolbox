@@ -29,6 +29,7 @@ class TomSelectType extends AbstractType
     {
         parent::buildView($view, $form, $options);
         $options['configuration']['maxItems'] = $options['configuration']['maxItems'] ?? ($options['multiple'] ? null : 1);
+        $options['configuration']['options'] = $options['choices'];
         $view->vars['configuration'] = $options['configuration'];
     }
 
@@ -43,9 +44,11 @@ class TomSelectType extends AbstractType
         $resolver->setDefaults([
             'configuration' => [],
             'multiple' => false,
+            'choices' => [],
         ]);
 
         $resolver->setAllowedTypes('configuration', ['array']);
+        $resolver->setAllowedTypes('choices', ['array']);
         $resolver->setAllowedTypes('multiple', ['bool']);
     }
 }
