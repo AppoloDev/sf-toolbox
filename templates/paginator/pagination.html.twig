@@ -1,11 +1,10 @@
-{# TODO: Translation #}
 {% if pageCount > 1 %}
     <div class="inline-flex gap-x-2 justify-end">
         {% if previous is defined %}
             <twig:ButtonLink
                     color="{{ themeColor }}"
                     mode="white"
-                    label="Précédent"
+                    label="{{ 'previous'|trans }}"
                     link="{{ path(route, query|merge({(pageParameterName): previous})) }}"
                     icon="{{ ux_icon('fa6-solid:chevron-left') }}"
                     size="small"
@@ -14,7 +13,7 @@
             <twig:Button
                     color="{{ themeColor }}"
                     mode="white"
-                    label="Précédent"
+                    label="{{ 'previous'|trans }}"
                     :disabled="true"
                     icon="{{ ux_icon('fa6-solid:chevron-left') }}"
                     size="small"
@@ -25,7 +24,7 @@
             <twig:ButtonLink
                     color="{{ themeColor }}"
                     mode="white"
-                    label="Suivant"
+                    label="{{ 'next'|trans }}"
                     link="{{ path(route, query|merge({(pageParameterName): next})) }}"
                     icon="{{ ux_icon('fa6-solid:chevron-right') }}"
                     iconPlacement="right"
@@ -35,7 +34,7 @@
             <twig:Button
                     color="{{ themeColor }}"
                     mode="white"
-                    label="Suivant"
+                    label="{{ 'next'|trans }}"
                     :disabled="true"
                     icon="{{ ux_icon('fa6-solid:chevron-right') }}"
                     iconPlacement="right"

@@ -18,21 +18,20 @@
             </a>
         {% endblock %}
 
-        {# TODO: Translation #}
         <div class="content">
             {% block title %}
-                <h1>Oups ! Une erreur est survenue</h1>
+                <h1>{{ 'an_error_has_occurred'|trans }}</h1>
             {% endblock %}
 
             {% block message %}
                 <p>
-                    Le page que vous demandez est inaccessible. Veuillez renouveler l'opération d'ici quelques instants. <br/>
+                    {{ 'the_page_you_requested_is_inaccessible'|trans }} <br/>
                 </p>
             {% endblock %}
         </div>
 
         {% block button %}
-            <twig:ButtonLink color="{{ themeColor }}" mode="solid" label="Page d'accueil" link="/" />
+            <twig:ButtonLink color="{{ themeColor }}" mode="solid" label="{{ 'back_to_home'|trans }}" link="/" />
         {% endblock %}
     </div>
 

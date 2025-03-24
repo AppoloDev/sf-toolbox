@@ -1,5 +1,3 @@
-{# TODO: Translation #}
-
 {% set element = 'span' %}
 {% if route is not null %}
     {% set element = 'a' %}
@@ -15,7 +13,7 @@
         </span>
 
         <p class="extension">
-            Type de fichier: {{ extension is not null ? extension|upper : 'Inconnu' }}
+            {{ 'file_type'|trans }}: {{ extension is not null ? extension|upper : 'unknown'|trans }}
         </p>
     </div>
 </{{ element }}>
