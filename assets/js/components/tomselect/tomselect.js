@@ -28,10 +28,20 @@ class Autocomplete extends HTMLElement {
                 }, ...conf};
 
             if (conf.options) {
-                options.options = options.options.map(e => ({
-                    text: e,
-                    value: e
-                }));
+                if (Array.isArray(conf.options)) {
+                    options.options = options.options.map(e => ({
+                        text: e,
+                        value: e
+                    }));
+                } else if (typeof conf.options === 'object') {
+                    options.options = Object.entries(options.options).map(([label, value]) => ({
+                        text: label,
+                        value: value
+                    }));
+                } else {
+                    console.error('Can\'t handle options', conf.options);
+                    return;
+                }
             }
 
             if (conf.maxItems === null || conf.maxItems > 1) {
