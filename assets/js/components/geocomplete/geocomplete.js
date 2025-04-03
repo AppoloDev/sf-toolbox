@@ -1,33 +1,32 @@
 import { Loader } from "@googlemaps/js-api-loader"
 
 class GeoComplete extends HTMLElement {
-    connectedCallback() {
-        const source = this.querySelector(this.getAttribute('source'));
-        const target = this.querySelector(this.getAttribute('target'));
-        const autocompleteOptions = JSON.parse(this.getAttribute('autocompleteOptions')) ?? {};
 
-        if (source && target) {
+    connectedCallback() {
+        const target = this.querySelector(this.getAttribute('target'));
+
+        if (target) {
 
             const loader = new Loader({
                 apiKey: this.getAttribute('api-key'),
                 version: "weekly",
             });
 
+
             (async () => {
                 await loader.importLibrary("places");
 
-                if (autocompleteOptions.fields === undefined) {
-                    autocompleteOptions.fields = ["address_components", "formatted_address", "geometry", "name"];
-                }
+                const autocomplete = new google.maps.places.PlaceAutocompleteElement();
 
-                const options = {
-                    ...autocompleteOptions,
-                    strictBounds: false,
-                };
+                this.appendChild(autocomplete);
 
-                const autocomplete = new google.maps.places.Autocomplete(source, options);
-                autocomplete.addListener("place_changed", () => {
-                    target.value = JSON.stringify(autocomplete.getPlace());
+
+                autocomplete.addEventListener('gmp-select', async ({ placePrediction }) => {
+                    const place = placePrediction.toPlace();
+                    await place.fetchFields({ fields: ['displayName', 'formattedAddress', 'location', 'addressComponents'] });
+                    const json = place.toJSON();
+
+                    target.value = json;
                 });
             })();
         }
