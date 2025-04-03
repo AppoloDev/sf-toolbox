@@ -12,7 +12,9 @@ class VichImage extends HTMLElement {
                 previewImage.classList.add('no-image');
                 form.classList.remove('hidden');
                 fileInput.value = null;
-                removeCheckbox.setAttribute('checked', true);
+                if (removeCheckbox.checked === false) {
+                    removeCheckbox.click();
+                }
             });
         }
 
