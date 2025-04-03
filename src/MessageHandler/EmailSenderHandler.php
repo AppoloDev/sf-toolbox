@@ -37,7 +37,7 @@ class EmailSenderHandler extends AbstractController
         $email = (new TemplatedEmail())
             ->from(new Address($this->senderEmail, $this->senderName))
             ->to(...$emailMessage->getRecipients())
-            ->subject($this->translator->trans($emailMessage->getObject()))
+            ->subject($this->translator->trans($emailMessage->getObject(),[], 'emails'))
             ->embedFromPath($logoPath, 'logo')
             ->htmlTemplate($emailMessage->getTemplate())
             ->context(array_merge($emailMessage->getParameters(), ['locale' => $emailMessage->getLocale()]))
