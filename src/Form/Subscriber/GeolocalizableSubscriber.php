@@ -70,31 +70,31 @@ class GeolocalizableSubscriber implements EventSubscriberInterface
         }
 
         $locationData = [
-            'formattedAddress' => $data->formatted_address ?? '',
+            'formattedAddress' => $data->formattedAddress ?? '',
             'address' => '',
-            'lat' => $data->geometry->location->lat ?? 0,
-            'lng' => $data->geometry->location->lng ?? 0,
+            'lat' => $data->location->lat ?? 0,
+            'lng' => $data->location->lng ?? 0,
         ];
 
-        foreach ($data->address_components as $component) {
+        foreach ($data->addressComponents as $component) {
             if (in_array('locality', $component->types)) {
-                $locationData['city'] = $component->long_name;
+                $locationData['city'] = $component->longText;
             }
 
             if (in_array('postal_code', $component->types)) {
-                $locationData['zipCode'] = $component->long_name;
+                $locationData['zipCode'] = $component->longText;
             }
 
             if (in_array('country', $component->types)) {
-                $locationData['country'] = $component->long_name;
+                $locationData['country'] = $component->longText;
             }
 
             if (in_array('street_number', $component->types)) {
-                $locationData['address'] .= $component->long_name;
+                $locationData['address'] .= $component->longText;
             }
 
             if (in_array('route', $component->types)) {
-                $locationData['address'] .= ' '.$component->long_name;
+                $locationData['address'] .= ' '.$component->longText;
             }
         }
 
