@@ -46,6 +46,14 @@ class SFToolboxExtension extends Extension implements PrependExtensionInterface
             ]);
         }
 
+        if (isset($bundles['TwigComponentBundle'])) {
+            $container->prependExtensionConfig('twig_component', [
+                'defaults' => [
+                    'AppoloDev\SFToolboxBundle\UI\\' => '@SFToolboxBundle/ui'
+                ],
+            ]);
+        }
+
         $container->prependExtensionConfig('framework', [
             'router' => [
                 'default_uri' => '%env(DEFAULT_URI)%',

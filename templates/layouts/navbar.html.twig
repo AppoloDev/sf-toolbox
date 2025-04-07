@@ -20,7 +20,7 @@
         <nav class="container mx-auto sm:flex px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between">
                 {% block navbar_logo %}
-                    <a class="flex-none text-xl font-semibold text-white" href="{{ path(block('route_prefix') ?? 'admin'~'_dashboard') }}"
+                    <a class="flex-none text-xl font-semibold text-white" href="{{ path((block('route_prefix') ?? 'admin') ~'_dashboard') }}"
                        aria-label="{{ siteTitle }}">
                         <img src="{{ asset('assets/images/logo.png') }}" class="h-10"/>
                     </a>
