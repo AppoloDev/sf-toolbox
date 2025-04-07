@@ -4,8 +4,10 @@ class GeoComplete extends HTMLElement {
 
     connectedCallback() {
         const target = this.querySelector(this.getAttribute('target'));
+        const source = this.querySelector(this.getAttribute('source'));
+        const dropdown = this.querySelector('ul');
 
-        if (target) {
+        if (source && target && dropdown) {
 
             const loader = new Loader({
                 apiKey: this.getAttribute('api-key'),
@@ -14,19 +16,38 @@ class GeoComplete extends HTMLElement {
 
 
             (async () => {
-                await loader.importLibrary("places");
+                const { AutocompleteSessionToken, AutocompleteSuggestion } = await loader.importLibrary("places");
 
-                const autocomplete = new google.maps.places.PlaceAutocompleteElement();
+                source.addEventListener('keydown', async () => {
+                    let request = {
+                        input: source.value,
+                    };
 
-                this.appendChild(autocomplete);
+                    const token = new AutocompleteSessionToken();
 
+                    request.sessionToken = token;
 
-                autocomplete.addEventListener('gmp-select', async ({ placePrediction }) => {
-                    const place = placePrediction.toPlace();
-                    await place.fetchFields({ fields: ['displayName', 'formattedAddress', 'location', 'addressComponents'] });
-                    const json = place.toJSON();
+                    const { suggestions } = await AutocompleteSuggestion.fetchAutocompleteSuggestions(request);
 
-                    target.value = json;
+                    dropdown.innerHTML = '';
+
+                    for (let suggestion of suggestions) {
+                        const placePrediction = suggestion.placePrediction;
+
+                        const listItem = document.createElement('li');
+                        listItem.appendChild(document.createTextNode(placePrediction.text.toString()));
+                        listItem.addEventListener('click', async () => {
+                            const place = placePrediction.toPlace();
+                            await place.fetchFields({ fields: ['displayName', 'formattedAddress', 'location', 'addressComponents'] });
+                            const json = place.toJSON();
+
+                            target.value = JSON.stringify(json);
+                            source.value = json.formattedAddress;
+                            dropdown.innerHTML = '';
+                        })
+
+                        dropdown.appendChild(listItem);
+                    }
                 });
             })();
         }

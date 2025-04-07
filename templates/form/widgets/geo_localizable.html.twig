@@ -1,11 +1,8 @@
 {% block geo_localizable_widget %}
-   <geo-complete api-key="{{ googleMapApiKey }}" source=".sourceInput" target="#{{ id }}" autocompleteOptions="{{ autocompleteOptions|json_encode }}">
-      <div class="form_row">
-         <label for="geocomplete_{{ id }}" {% if required %}class="required"{% endif %}>{{ label|trans }}</label>
-         <input id="geocomplete_{{ id }}" class="sourceInput" type="text" value="{{ data }}" {% if required %}required{% endif %}/>
-      </div>
-
-      {{ form_widget(form) }}
-      {{ form_errors(form) }}
+   <geo-complete api-key="{{ googleMapApiKey }}" source=".source" target="#{{ id }}" autocompleteOptions="{{ autocompleteOptions|json_encode }}">
+      {{ form_row(form) }}
+      <input type="text" placeholder="{{ placeholder|trans }}" class="source">
+      <ul>
+      </ul>
    </geo-complete>
 {% endblock %}
