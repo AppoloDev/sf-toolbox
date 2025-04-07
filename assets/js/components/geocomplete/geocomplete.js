@@ -8,7 +8,11 @@ class GeoComplete extends HTMLElement {
         const dropdown = this.querySelector('ul');
 
         if(target.value) {
-            source.value = JSON.parse(target.value).formattedAddress ?? '';
+            try {
+                source.value = JSON.parse(target.value).formattedAddress ?? '';
+            } catch (e) {
+                source.value = target.value;
+            }
         }
 
         const options = JSON.parse(this.getAttribute('request-options') ?? '{}');
