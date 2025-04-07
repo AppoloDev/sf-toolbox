@@ -8,6 +8,7 @@ use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormConfigInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvents;
 
 class GeolocalizableSubscriber implements EventSubscriberInterface
@@ -35,6 +36,7 @@ class GeolocalizableSubscriber implements EventSubscriberInterface
             if (GeolocalizableType::class === $fieldType && isset($formData[$fieldName])) {
                 $this->geolocalizableFields[$fieldName] = [
                     'mappedFields' => $this->extractMappedFields($field->getConfig()),
+                    'requiredFields' => $this->extractRequiredFields($field->getConfig()),
                     'geocompleteData' => $this->transformGeocompleteData($formData[$fieldName]),
                 ];
             }
@@ -46,13 +48,22 @@ class GeolocalizableSubscriber implements EventSubscriberInterface
         /** @var object $formData */
         $formData = $event->getData();
 
-        foreach ($this->geolocalizableFields as $field) {
+        foreach ($this->geolocalizableFields as $fieldName => $field) {
             if (isset($field['mappedFields'], $field['geocompleteData'])) {
                 foreach ($field['mappedFields'] as $mappedField) {
+                    if(in_array($mappedField, $field['requiredFields']) && is_null($field['geocompleteData'][$mappedField] ?? null)) {
+                        $event->getForm()->get($fieldName)->addError(new FormError($mappedField . ' is required'));
+                    }
+
                     $this->setFieldData($formData, $mappedField, $field['geocompleteData']);
                 }
             }
         }
+    }
+
+    private function extractRequiredFields(FormConfigInterface $config): array
+    {
+        return is_array($config->getOptions()['requiredFields']) ? $config->getOptions()['requiredFields'] : [];
     }
 
     private function extractMappedFields(FormConfigInterface $config): array
@@ -70,7 +81,7 @@ class GeolocalizableSubscriber implements EventSubscriberInterface
         }
 
         $locationData = [
-            'formattedAddress' => $data->formattedAddress ?? '',
+            'formattedAddress' => $data->formatted_address ?? '',
             'address' => '',
             'lat' => $data->location->lat ?? 0,
             'lng' => $data->location->lng ?? 0,

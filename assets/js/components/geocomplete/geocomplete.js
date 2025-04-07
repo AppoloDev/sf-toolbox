@@ -7,6 +7,12 @@ class GeoComplete extends HTMLElement {
         const source = this.querySelector(this.getAttribute('source'));
         const dropdown = this.querySelector('ul');
 
+        if(target.value) {
+            source.value = JSON.parse(target.value).formattedAddress ?? '';
+        }
+
+        const options = JSON.parse(this.getAttribute('request-options') ?? '{}');
+
         if (source && target && dropdown) {
 
             const loader = new Loader({
@@ -20,6 +26,7 @@ class GeoComplete extends HTMLElement {
 
                 source.addEventListener('keydown', async () => {
                     let request = {
+                        ...options,
                         input: source.value,
                     };
 

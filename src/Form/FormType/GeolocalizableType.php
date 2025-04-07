@@ -24,8 +24,8 @@ class GeolocalizableType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         parent::buildView($view, $form, $options);
-        $view->vars['autocompleteOptions'] = $options['autocompleteOptions'];
         $view->vars['placeholder'] = $options['placeholder'];
+        $view->vars['requestOptions'] = $options['requestOptions'];
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -33,12 +33,16 @@ class GeolocalizableType extends AbstractType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'autocompleteOptions' => [],
             'placeholder' => '',
-            'mappedFields' => []
+            'mappedFields' => [],
+            'requiredFields' => [],
+            'requestOptions' => [],
+            'error_bubbling' => false,
         ]);
 
         $resolver->setAllowedTypes('mappedFields', ['array']);
+        $resolver->setAllowedTypes('requiredFields', ['array']);
+        $resolver->setAllowedTypes('requestOptions', ['array']);
         $resolver->setAllowedTypes('placeholder', ['string']);
     }
 }
