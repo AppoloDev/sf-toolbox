@@ -28,19 +28,48 @@ class Autocomplete extends HTMLElement {
                 }, ...conf};
 
             if (conf.options) {
-                if (Array.isArray(conf.options)) {
-                    options.options = options.options.map(e => ({
+                const hasOptgroups = typeof conf.options === 'object' &&
+                    !Array.isArray(conf.options) &&
+                    Object.values(conf.options).some(v => typeof v === 'object');
+
+                if (hasOptgroups) {
+                    options.optgroupField = 'group';
+                    options.optgroupLabelField = 'label';
+                    options.optgroupValueField = 'value';
+                    options.lockOptgroupOrder = true;
+
+                    const optgroups = [];
+                    const optionsFormatted = [];
+
+                    Object.entries(conf.options).forEach(([group, items]) => {
+                        optgroups.push({
+                            value: group,
+                            label: group
+                        });
+
+                        if (typeof items === 'object') {
+                            Object.entries(items).forEach(([label, value]) => {
+                                optionsFormatted.push({
+                                    text: label,
+                                    value: value,
+                                    group: group
+                                });
+                            });
+                        }
+                    });
+
+                    options.optgroups = optgroups;
+                    options.options = optionsFormatted;
+                } else if (Array.isArray(conf.options)) {
+                    options.options = conf.options.map(e => ({
                         text: e,
                         value: e
                     }));
-                } else if (typeof conf.options === 'object') {
-                    options.options = Object.entries(options.options).map(([label, value]) => ({
+                } else {
+                    options.options = Object.entries(conf.options).map(([label, value]) => ({
                         text: label,
                         value: value
                     }));
-                } else {
-                    console.error('Can\'t handle options', conf.options);
-                    return;
                 }
             }
 
@@ -62,6 +91,9 @@ class Autocomplete extends HTMLElement {
     }
 
     disconnectedCallback() {
+        if (this.instance) {
+            this.instance.destroy();
+        }
     }
 }
 
