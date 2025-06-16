@@ -43,8 +43,12 @@ class EmailSenderHandler extends AbstractController
             ->context(array_merge($emailMessage->getParameters(), ['locale' => $emailMessage->getLocale()]))
         ;
 
-        if (!is_null($emailMessage->getFile())) {
-            $email->attach($emailMessage->getFile()->getContent(), $emailMessage->getFilename() ?? 'attachment');
+        if (count($emailMessage->getFiles()) > 0) {
+            foreach ($emailMessage->getFiles() as $file) {
+                if (isset($file['file'])) {
+                    $email->attach($file['file']->getContent(), $file['filename'] ?? 'attachment');
+                }
+            }
         }
 
         $this->mailer->send($email);
