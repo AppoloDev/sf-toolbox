@@ -9,10 +9,7 @@ use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormConfigInterface;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Translation\TranslatableMessage;
-use Symfony\Contracts\Translation\TranslatableInterface;
 
 class GeolocalizableSubscriber implements EventSubscriberInterface
 {
@@ -32,7 +29,6 @@ class GeolocalizableSubscriber implements EventSubscriberInterface
         $formData = $event->getData();
         /** @var Form $form */
         $form = $event->getForm();
-
 
         foreach ($form->getIterator() as $fieldName => $field) {
             $fieldType = get_class($field->getConfig()->getType()->getInnerType());

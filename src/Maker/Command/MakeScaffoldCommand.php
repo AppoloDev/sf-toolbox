@@ -42,7 +42,9 @@ class MakeScaffoldCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        /** @var string $domain */
         $domain = $input->getArgument('domain');
+        /** @var string $entity */
         $entity = $input->getArgument('entity');
         $area = $input->getArgument('area');
         $prefix = $input->getArgument('prefix');

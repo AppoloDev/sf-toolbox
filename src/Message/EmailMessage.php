@@ -15,7 +15,7 @@ class EmailMessage
         private readonly string $template,
         private readonly array $parameters = [],
         private readonly string $locale = 'en',
-        private readonly array $files = []
+        private readonly array $files = [],
     ) {
         $this->recipients = array_map(fn ($recipient): Address => new Address($recipient), $recipients);
     }

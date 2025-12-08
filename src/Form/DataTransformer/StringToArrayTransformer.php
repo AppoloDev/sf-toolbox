@@ -11,9 +11,9 @@ readonly class StringToArrayTransformer implements DataTransformerInterface
         return is_array($value) ? join(',', $value) : $value;
     }
 
-    public function reverseTransform(mixed $value): mixed
+    public function reverseTransform(mixed $value): ?array
     {
-        if (!$value) {
+        if (!is_string($value)) {
             return null;
         }
 
