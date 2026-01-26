@@ -23,7 +23,9 @@ readonly class ArrayToStringTransformer implements DataTransformerInterface
         }
 
         if (!$this->multiple) {
-            return end($value);
+            $v = end($value);
+
+            return is_string($v) ? $v : '';
         }
 
         return implode(',', $value);

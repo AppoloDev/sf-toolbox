@@ -13,7 +13,7 @@ class GeolocalizableConstraint extends Constraint
     {
         parent::__construct($options);
 
-        if(isset($options['requiredFields'])) {
+        if (isset($options['requiredFields'])) {
             $this->requiredFields = $options['requiredFields'];
         }
     }

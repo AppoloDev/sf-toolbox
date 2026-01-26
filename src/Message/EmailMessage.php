@@ -2,7 +2,6 @@
 
 namespace AppoloDev\SFToolboxBundle\Message;
 
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Mime\Address;
 
 class EmailMessage
@@ -16,8 +15,7 @@ class EmailMessage
         private readonly string $template,
         private readonly array $parameters = [],
         private readonly string $locale = 'en',
-        private readonly ?File $file = null,
-        private readonly string $filename = 'attachment',
+        private readonly array $files = [],
         private readonly ?string $logoPath = null,
     ) {
         $this->recipients = array_map(fn ($recipient): Address => new Address($recipient), $recipients);
@@ -48,14 +46,9 @@ class EmailMessage
         return $this->locale;
     }
 
-    public function getFile(): ?File
+    public function getFiles(): array
     {
-        return $this->file;
-    }
-
-    public function getFilename(): string
-    {
-        return $this->filename;
+        return $this->files;
     }
 
     public function getLogoPath(): ?string
