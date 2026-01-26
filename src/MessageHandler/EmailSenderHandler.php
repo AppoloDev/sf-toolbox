@@ -32,7 +32,9 @@ class EmailSenderHandler extends AbstractController
      */
     public function __invoke(EmailMessage $emailMessage): void
     {
-        $logoPath = $this->projectDir.'/public/assets/images/logo.png';
+        $logoPath = !is_null($emailMessage->getLogoPath()) && is_file($emailMessage->getLogoPath())
+            ? $emailMessage->getLogoPath()
+            : $this->projectDir.'/public/assets/images/logo.png';
 
         $email = (new TemplatedEmail())
             ->from(new Address($this->senderEmail, $this->senderName))

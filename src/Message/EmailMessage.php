@@ -18,6 +18,7 @@ class EmailMessage
         private readonly string $locale = 'en',
         private readonly ?File $file = null,
         private readonly string $filename = 'attachment',
+        private readonly ?string $logoPath = null,
     ) {
         $this->recipients = array_map(fn ($recipient): Address => new Address($recipient), $recipients);
     }
@@ -55,5 +56,10 @@ class EmailMessage
     public function getFilename(): string
     {
         return $this->filename;
+    }
+
+    public function getLogoPath(): ?string
+    {
+        return $this->logoPath;
     }
 }
