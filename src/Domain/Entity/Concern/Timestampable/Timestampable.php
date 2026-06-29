@@ -2,17 +2,18 @@
 
 namespace AppoloDev\SFToolboxBundle\Domain\Entity\Concern\Timestampable;
 
+use Doctrine\DBAL\Schema\DefaultExpression\CurrentTimestamp;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
 
 trait Timestampable
 {
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true, options: ['default' => new CurrentTimestamp()])]
     #[Groups(['timestamp'])]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true, options: ['default' => new CurrentTimestamp()])]
     #[Groups(['timestamp'])]
     private ?\DateTimeInterface $updatedAt = null;
 
