@@ -10,3 +10,8 @@ parameters:
     - identifier: missingType.iterableValue
     - identifier: missingType.generics
     - identifier: trait.unused
+    -
+      # Composer\Script\Event is provided by the Composer runtime executing this script,
+      # not by a declared dependency (composer/composer is not required, only used at dev-time).
+      identifier: class.notFound
+      path: src/Composer/ScriptHandler.php
