@@ -58,12 +58,12 @@ class ComplexBuilder
         return $this->builderCriteria->getQueryBuilder()->expr()->andX(...$conditions);
     }
 
-    public function eq(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
+    public function eq(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison
     {
         return $this->comparisonOperator(DoctrineOperator::EQ, $field, $value, $customAlias);
     }
 
-    public function notEq(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
+    public function notEq(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison
     {
         return $this->comparisonOperator(DoctrineOperator::NOT_EQ, $field, $value, $customAlias);
     }
@@ -71,7 +71,7 @@ class ComplexBuilder
     /**
      * @param array<int, AbstractUid|int|bool|string|\DateTimeInterface>|string $value
      */
-    public function in(string $field, array|string $value, ?string $customAlias = null): Comparison|Func
+    public function in(string $field, array|string $value, ?string $customAlias = null): Func
     {
         return $this->comparisonOperator(DoctrineOperator::IN, $field, $value, $customAlias);
     }
@@ -79,27 +79,27 @@ class ComplexBuilder
     /**
      * @param array<int, AbstractUid|int|bool|string|\DateTimeInterface>|string $value
      */
-    public function notIn(string $field, string|array $value, ?string $customAlias = null): Comparison|Func
+    public function notIn(string $field, string|array $value, ?string $customAlias = null): Func
     {
         return $this->comparisonOperator(DoctrineOperator::NOT_IN, $field, $value, $customAlias);
     }
 
-    public function gte(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
+    public function gte(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison
     {
         return $this->comparisonOperator(DoctrineOperator::GTE, $field, $value, $customAlias);
     }
 
-    public function gt(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
+    public function gt(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison
     {
         return $this->comparisonOperator(DoctrineOperator::GT, $field, $value, $customAlias);
     }
 
-    public function lte(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
+    public function lte(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison
     {
         return $this->comparisonOperator(DoctrineOperator::LTE, $field, $value, $customAlias);
     }
 
-    public function lt(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
+    public function lt(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison
     {
         return $this->comparisonOperator(DoctrineOperator::LT, $field, $value, $customAlias);
     }
@@ -133,6 +133,8 @@ class ComplexBuilder
 
     /**
      * @param array<int, AbstractUid|int|bool|string|\DateTimeInterface>|string|bool|int|\DateTimeInterface|AbstractUid|null $value
+     *
+     * @phpstan-return ($operator is DoctrineOperator::IN|DoctrineOperator::NOT_IN ? Func : Comparison)
      */
     public function comparisonOperator(
         DoctrineOperator $operator,
