@@ -44,24 +44,5 @@
         "psr-4": {
             "AppoloDev\\SFToolboxBundle\\": "src/"
         }
-    },
-    "scripts": {
-        "auto-scripts": {
-            "ux:icon:import fa6-solid:bars": "symfony-cmd",
-            "ph:x": "symfony-cmd",
-            "fa6-solid:chevron-left": "symfony-cmd",
-            "fa6-solid:chevron-right": "symfony-cmd",
-            "fa6-solid:sort": "symfony-cmd",
-            "fa6-solid:sort-up": "symfony-cmd",
-            "fa6-solid:sort-down": "symfony-cmd",
-            "iconoir:search": "symfony-cmd",
-            "fa6-solid:download": "symfony-cmd"
-        },
-        "post-install-cmd": [
-            "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ]
     }
 }
