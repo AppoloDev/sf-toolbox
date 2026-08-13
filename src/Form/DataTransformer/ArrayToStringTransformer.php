@@ -28,7 +28,7 @@ readonly class ArrayToStringTransformer implements DataTransformerInterface
             return is_string($v) ? $v : '';
         }
 
-        return implode(',', $value);
+        return implode(',', array_map(self::stringifyArrayValue(...), $value));
     }
 
     public function reverseTransform(mixed $value): array
@@ -42,5 +42,18 @@ readonly class ArrayToStringTransformer implements DataTransformerInterface
         }
 
         return [];
+    }
+
+    private static function stringifyArrayValue(mixed $value): string
+    {
+        if (is_scalar($value)) {
+            return (string) $value;
+        }
+
+        if ($value instanceof \Stringable) {
+            return (string) $value;
+        }
+
+        return '';
     }
 }

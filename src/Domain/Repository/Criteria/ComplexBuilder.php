@@ -6,6 +6,7 @@ use AppoloDev\SFToolboxBundle\Utils\UuidUtils;
 use Doctrine\ORM\Query\Expr\Comparison;
 use Doctrine\ORM\Query\Expr\Composite;
 use Doctrine\ORM\Query\Expr\Func;
+use Symfony\Component\Uid\AbstractUid;
 use Symfony\Component\Uid\Uuid;
 
 class ComplexBuilder
@@ -57,42 +58,48 @@ class ComplexBuilder
         return $this->builderCriteria->getQueryBuilder()->expr()->andX(...$conditions);
     }
 
-    public function eq(string $field, int|bool|string|\DateTimeInterface|null $value, ?string $customAlias = null): Comparison|Func
+    public function eq(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::EQ, $field, $value, $customAlias);
     }
 
-    public function notEq(string $field, int|bool|string|\DateTimeInterface|null $value, ?string $customAlias = null): Comparison|Func
+    public function notEq(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::NOT_EQ, $field, $value, $customAlias);
     }
 
+    /**
+     * @param array<int, AbstractUid|int|bool|string|\DateTimeInterface>|string $value
+     */
     public function in(string $field, array|string $value, ?string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::IN, $field, $value, $customAlias);
     }
 
+    /**
+     * @param array<int, AbstractUid|int|bool|string|\DateTimeInterface>|string $value
+     */
     public function notIn(string $field, string|array $value, ?string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::NOT_IN, $field, $value, $customAlias);
     }
 
-    public function gte(string $field, int|bool|string|\DateTimeInterface|null $value, ?string $customAlias = null): Comparison|Func
+    public function gte(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::GTE, $field, $value, $customAlias);
     }
 
-    public function gt(string $field, int|bool|string|\DateTimeInterface|null $value, ?string $customAlias = null): Comparison|Func
+    public function gt(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::GT, $field, $value, $customAlias);
     }
 
-    public function lte(string $field, int|bool|string|\DateTimeInterface|null $value, ?string $customAlias = null): Comparison|Func
+    public function lte(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::LTE, $field, $value, $customAlias);
     }
 
-    public function lt(string $field, int|bool|string|\DateTimeInterface|null $value, ?string $customAlias = null): Comparison|Func
+    public function lt(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func
     {
         return $this->comparisonOperator(DoctrineOperator::LT, $field, $value, $customAlias);
     }
@@ -124,16 +131,19 @@ class ComplexBuilder
             ->expr()->between($aliasField, ':'.$fromParamName, ':'.$toParamName);
     }
 
+    /**
+     * @param array<int, AbstractUid|int|bool|string|\DateTimeInterface>|string|bool|int|\DateTimeInterface|AbstractUid|null $value
+     */
     public function comparisonOperator(
         DoctrineOperator $operator,
         string $field,
-        array|string|bool|int|\DateTimeInterface|null $value,
+        array|string|bool|int|\DateTimeInterface|AbstractUid|null $value,
         ?string $customAlias = null,
     ): Comparison|Func {
         $aliasField = $this->builderCriteria->getAliasField($customAlias, $field);
         $paramName = 'value'.$field.uniqid();
 
-        $isUuid = is_string($value) && Uuid::isValid($value);
+        $isUuid = $value instanceof AbstractUid || (is_string($value) && Uuid::isValid($value));
 
         $this->builderCriteria->setParameter($paramName,
             is_array($value)

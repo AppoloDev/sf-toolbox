@@ -5,6 +5,7 @@ namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria;
 use AppoloDev\SFToolboxBundle\Domain\Entity\Concern\Identifiable\IdentifiableInterface;
 use AppoloDev\SFToolboxBundle\Utils\UuidUtils;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Uid\AbstractUid;
 use Symfony\Component\Uid\Uuid;
 
 trait BuilderCriteria
@@ -155,6 +156,10 @@ trait BuilderCriteria
 
     public function getValue(mixed $value): mixed
     {
+        if ($value instanceof AbstractUid) {
+            return $value->toBinary();
+        }
+
         if (!is_string($value) || !UuidUtils::isUuid($value)) {
             return $value;
         }

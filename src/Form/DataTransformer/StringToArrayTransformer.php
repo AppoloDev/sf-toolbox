@@ -8,7 +8,7 @@ readonly class StringToArrayTransformer implements DataTransformerInterface
 {
     public function transform(mixed $value): mixed
     {
-        return is_array($value) ? join(',', $value) : $value;
+        return is_array($value) ? implode(',', array_map(self::stringifyArrayValue(...), $value)) : $value;
     }
 
     public function reverseTransform(mixed $value): ?array
@@ -18,5 +18,18 @@ readonly class StringToArrayTransformer implements DataTransformerInterface
         }
 
         return explode(',', $value);
+    }
+
+    private static function stringifyArrayValue(mixed $value): string
+    {
+        if (is_scalar($value)) {
+            return (string) $value;
+        }
+
+        if ($value instanceof \Stringable) {
+            return (string) $value;
+        }
+
+        return '';
     }
 }
