@@ -19,14 +19,14 @@ trait JoinCriteria
 
     public function join(string $className, string $joinAlias, string $conditions): self
     {
-        $this->qb->join($className, $joinAlias, Join::WITH, $conditions);
+        $this->qb->join($className, $joinAlias, Join::ON, $conditions);
 
         return $this;
     }
 
     public function leftJoin(string $className, string $joinAlias, string $conditions): self
     {
-        $this->qb->leftJoin($className, $joinAlias, Join::WITH, $conditions);
+        $this->qb->leftJoin($className, $joinAlias, Join::ON, $conditions);
 
         return $this;
     }
