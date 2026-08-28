@@ -21,7 +21,7 @@ $repository->getQB()
 
 ### `join(string $className, string $joinAlias, string $conditions): self`
 
-`JOIN` sur une classe arbitraire (pas nécessairement une association mappée sur l'entité courante), avec une condition `WITH` explicite.
+`JOIN` sur une classe arbitraire (pas nécessairement une association mappée sur l'entité courante), avec une condition `ON` explicite.
 
 ```php
 $repository->getQB()->join(Order::class, 'o', 'o.book = book.id')->getResults();
