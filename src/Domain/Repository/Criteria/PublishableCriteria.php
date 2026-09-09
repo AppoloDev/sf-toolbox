@@ -11,8 +11,8 @@ trait PublishableCriteria
         ?\DateTime $currentDate = null,
     ): self {
         if (is_null($currentDate)) {
-            $startDate = (new \DateTimeImmutable())->setTime(0, 0, 0, 0);
-            $endDate = (new \DateTimeImmutable())->setTime(23, 59, 59, 59);
+            $startDate = new \DateTimeImmutable();
+            $endDate = new \DateTimeImmutable();
         } else {
             $startDate = $currentDate;
             $endDate = $currentDate;
