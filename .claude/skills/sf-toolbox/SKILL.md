@@ -32,6 +32,6 @@ For an exhaustive, per-method, French-language reference with usage examples (on
 ## Non-obvious gotchas
 
 - `Sluggable::updateSlug()` only does something if the entity also defines a `getTitle()` method (checked via `method_exists`) — silently does nothing otherwise.
-- `Identifiable` primary keys are `Symfony\Component\Uid\Uuid`, generated via `UuidGenerator` — not auto-increment integers. Criteria helpers (`ComplexBuilder::comparisonOperator`, `getValue()`) automatically detect UUID strings and convert them to binary/`uuid` param type, so passing a UUID string to `eq()`/`in()` etc. just works.
+- `Identifiable` primary keys are `Symfony\Component\Uid\Uuid`, generated via `UuidGenerator` — not auto-increment integers. Criteria helpers (`ComplexBuilder::comparisonOperator`, `getValue()`) automatically detect UUID strings *and* `Symfony\Component\Uid\AbstractUid` objects and convert them to binary/`uuid` param type, so passing either a UUID string or the `Uuid` object itself (e.g. `$entity->getId()`) to `eq()`/`in()` etc. just works — no manual `->toString()` needed under `strict_types=1`.
 - `AuthenticableInterface`/`Authenticable` implement Symfony's `UserInterface` shape (`getUserIdentifier`, `getRoles`, `eraseCredentials`, etc.) but don't declare `implements UserInterface` themselves — the consuming entity must add that.
 - `#[IsNotGranted]` (in `Security\Http\Attribute`) is the inverse of core Symfony's `#[IsGranted]`: it denies access when the voter/expression **is** granted. Don't confuse the two.

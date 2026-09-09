@@ -46,7 +46,7 @@ class BookRepository extends ServiceEntityRepository implements BuilderCriteriaI
       $cb->gte('createdAt', $someDate),
   ));
   ```
-- `getValue(mixed $value): mixed` — auto-converts UUID strings to binary for Doctrine parameters; used internally, rarely called directly.
+- `getValue(mixed $value): mixed` — auto-converts UUID strings and `Symfony\Component\Uid\AbstractUid` objects to binary for Doctrine parameters; used internally, rarely called directly.
 - `setParameter(string $name, $value, ?string $type = null): self` — sets on the *parent* QB when inside a sub-query, otherwise on the current one.
 
 ## `WhereCriteria` — simple filters (all delegate to `complexQuery`+`ComplexBuilder`)
@@ -57,10 +57,10 @@ Also: `whereExpr`/`orWhereExpr`/`andWhereExpr(ExpressionInterface $expr)` for ra
 
 ## `ComplexBuilder` — low-level expression builder
 
-Passed into `complexQuery()` callbacks. Same comparison methods as `WhereCriteria` (`eq`, `notEq`, `in`, `notIn`, `gte`, `gt`, `lte`, `lt`, `isNull`, `isNotNull`, `between`) but each **returns a `Doctrine\ORM\Query\Expr\Comparison|Func` expression** instead of `self`, plus:
+Passed into `complexQuery()` callbacks. Same comparison methods as `WhereCriteria` (`eq`, `notEq`, `in`, `notIn`, `gte`, `gt`, `lte`, `lt`, `isNull`, `isNotNull`, `between`) but each **returns a Doctrine expression** instead of `self` — `eq`/`notEq`/`gte`/`gt`/`lte`/`lt` return `Comparison`, `in`/`notIn` return `Func` (narrowed per-operator return types, not a `Comparison|Func` union), plus:
 - `andX(...$conditions)`, `orX(...$conditions)` — composite expressions; `null` entries are filtered out, and an all-null/empty set returns `null` (so you can conditionally build a WHERE without `if` branches).
 - `searchIntoFields(...)` — same as `WhereCriteria` but returns the raw `orX` expression.
-- Automatically parameter-binds values it's given (unique generated names via `uniqid()`), and detects UUID strings to bind them with Doctrine type `uuid`.
+- Automatically parameter-binds values it's given (unique generated names via `uniqid()`), and detects UUID strings *or* `Symfony\Component\Uid\AbstractUid` objects (e.g. `Uuid`) to bind them with Doctrine type `uuid`.
 
 Use `ComplexBuilder` directly (not `WhereCriteria`) when you need to combine several conditions with `andX`/`orX` inside one `complexQuery()` call, e.g. optional/conditional filters:
 ```php

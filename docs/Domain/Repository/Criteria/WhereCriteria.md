@@ -13,7 +13,7 @@ Toutes les méthodes retournent `self` et sont chainables.
 
 ### `in(string $field, array|string $params, ?string $customAlias = null): self`
 
-`WHERE champ IN (...)`.
+`WHERE champ IN (...)`. Chaque élément du tableau accepte un `int|bool|string|\DateTimeInterface|AbstractUid`.
 
 ```php
 $repository->getQB()->in('status', ['draft', 'pending'])->getResults();
@@ -31,13 +31,14 @@ $repository->getQB()->in('status', ['draft', 'pending'])->getResults();
 
 `WHERE champ IS NOT NULL`.
 
-### `eq(string $field, int|bool|string|\DateTimeInterface|null $value, ?string $customAlias = null): self`
+### `eq(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): self`
 
-`WHERE champ = valeur`. Détecte automatiquement les chaînes UUID et les convertit au format binaire attendu par Doctrine.
+`WHERE champ = valeur`. Détecte automatiquement les chaînes UUID et les objets `Symfony\Component\Uid\AbstractUid` (ex: `Uuid`), et les convertit au format binaire attendu par Doctrine.
 
 ```php
 $repository->getQB()->eq('enabled', true)->getResults();
-$repository->getQB()->eq('author', $authorUuidString)->getResults(); // UUID géré automatiquement
+$repository->getQB()->eq('author', $authorUuidString)->getResults(); // chaîne UUID gérée automatiquement
+$repository->getQB()->eq('author', $author->getId())->getResults(); // objet Uuid accepté directement
 ```
 
 ### `notEq(string $field, ..., ?string $customAlias = null): self`

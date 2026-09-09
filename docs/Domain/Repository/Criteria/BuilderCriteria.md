@@ -134,7 +134,7 @@ Pose un paramètre lié sur le `QueryBuilder` — sur le `QueryBuilder` **parent
 
 ### `getValue(mixed $value): mixed`
 
-Convertit automatiquement une chaîne UUID valide en sa forme binaire (`Uuid::fromString($value)->toBinary()`), sinon retourne la valeur telle quelle. Utilisé en interne par [`ComplexBuilder`](ComplexBuilder.md) pour que vous puissiez passer une chaîne UUID brute à `eq()`/`in()`/etc. sans conversion manuelle.
+Convertit automatiquement une chaîne UUID valide, ou un objet `Symfony\Component\Uid\AbstractUid` (ex: `Uuid`), en sa forme binaire (`->toBinary()`), sinon retourne la valeur telle quelle. Utilisé en interne par [`ComplexBuilder`](ComplexBuilder.md) pour que vous puissiez passer une chaîne UUID brute ou un objet Uid à `eq()`/`in()`/etc. sans conversion manuelle.
 
 ## Exemple d'usage complet
 

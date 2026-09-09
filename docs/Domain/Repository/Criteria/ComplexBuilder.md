@@ -46,35 +46,35 @@ $cb->searchIntoFields('jean dupont', ['firstname', 'lastname', 'email']);
 // OR (firstname LIKE '%dupont%' OR lastname LIKE '%dupont%' OR email LIKE '%dupont%')
 ```
 
-### `eq(string $field, int|bool|string|\DateTimeInterface|null $value, ?string $customAlias = null): Comparison|Func`
+### `eq(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison`
 
-Égalité stricte `champ = valeur`.
+Égalité stricte `champ = valeur`. `$value` accepte directement un objet `Symfony\Component\Uid\AbstractUid` (ex: `Uuid`), en plus de sa forme chaîne.
 
-### `notEq(string $field, ..., ?string $customAlias = null): Comparison|Func`
+### `notEq(string $field, ..., ?string $customAlias = null): Comparison`
 
 Inégalité `champ != valeur`.
 
-### `in(string $field, array|string $value, ?string $customAlias = null): Comparison|Func`
+### `in(string $field, array|string $value, ?string $customAlias = null): Func`
 
-`champ IN (...)`.
+`champ IN (...)`. `$value` (ou chaque élément du tableau) accepte un `AbstractUid` directement.
 
-### `notIn(string $field, string|array $value, ?string $customAlias = null): Comparison|Func`
+### `notIn(string $field, string|array $value, ?string $customAlias = null): Func`
 
 `champ NOT IN (...)`.
 
-### `gte(string $field, ..., ?string $customAlias = null): Comparison|Func`
+### `gte(string $field, ..., ?string $customAlias = null): Comparison`
 
 `champ >= valeur`.
 
-### `gt(string $field, ..., ?string $customAlias = null): Comparison|Func`
+### `gt(string $field, ..., ?string $customAlias = null): Comparison`
 
 `champ > valeur`.
 
-### `lte(string $field, ..., ?string $customAlias = null): Comparison|Func`
+### `lte(string $field, ..., ?string $customAlias = null): Comparison`
 
 `champ <= valeur`.
 
-### `lt(string $field, ..., ?string $customAlias = null): Comparison|Func`
+### `lt(string $field, ..., ?string $customAlias = null): Comparison`
 
 `champ < valeur`.
 
@@ -90,9 +90,9 @@ Inégalité `champ != valeur`.
 
 `champ BETWEEN :from AND :to` — pose lui-même les deux paramètres liés (noms générés dynamiquement via `uniqid()`, donc pas de risque de collision si utilisé plusieurs fois dans la même requête).
 
-### `comparisonOperator(DoctrineOperator $operator, string $field, array|string|bool|int|\DateTimeInterface|null $value, ?string $customAlias = null): Comparison|Func`
+### `comparisonOperator(DoctrineOperator $operator, string $field, array|string|bool|int|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): Comparison|Func`
 
-Méthode générique sur laquelle `eq`/`notEq`/`in`/`notIn`/`gte`/`gt`/`lte`/`lt` sont toutes construites (voir [DoctrineOperator](DoctrineOperator.md) pour la liste des opérateurs). Pose automatiquement le paramètre lié, avec détection d'UUID (bind avec le type Doctrine `uuid` le cas échéant) et conversion de tableau (`array_map` sur chaque valeur via `getValue()`).
+Méthode générique sur laquelle `eq`/`notEq`/`in`/`notIn`/`gte`/`gt`/`lte`/`lt` sont toutes construites (voir [DoctrineOperator](DoctrineOperator.md) pour la liste des opérateurs). Pose automatiquement le paramètre lié, avec détection d'UUID — chaîne UUID valide ou objet `AbstractUid` — (bind avec le type Doctrine `uuid` le cas échéant) et conversion de tableau (`array_map` sur chaque valeur via `getValue()`). Le type de retour réel est affiné par opérateur via une annotation PHPStan conditionnelle (`Func` pour `IN`/`NOT IN`, `Comparison` sinon) ; les méthodes `eq`/`in`/etc. ci-dessus exposent déjà ce type précis, cette signature générique reste `Comparison|Func`.
 
 Vous n'avez normalement pas besoin d'appeler cette méthode directement — utilisez plutôt `eq`/`in`/etc.
 
