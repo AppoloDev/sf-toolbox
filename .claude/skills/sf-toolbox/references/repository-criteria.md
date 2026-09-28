@@ -73,7 +73,7 @@ $repo->getQB()->complexQuery(fn (ComplexBuilder $cb) => $cb->andX(
 ## `JoinCriteria`
 
 - `with(string $field, string $joinAlias, ?string $customAlias = null, ?bool $addSelect = false): self` — `leftJoin` on an association field (e.g. `'book.author'`), optionally `addSelect`s the joined alias to avoid N+1.
-- `join`/`leftJoin(string $className, string $joinAlias, string $conditions): self` — join an arbitrary class with an explicit `WITH` condition string.
+- `join`/`leftJoin(string $className, string $joinAlias, string $conditions, string $conditionType = Join::ON): self` — join an arbitrary class with an explicit condition string. `$conditionType` defaults to `Join::ON` (use `Join::WITH` if needed).
 
 ## `SelectCriteria`
 

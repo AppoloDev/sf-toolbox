@@ -17,16 +17,16 @@ trait JoinCriteria
         return $this;
     }
 
-    public function join(string $className, string $joinAlias, string $conditions): self
+    public function join(string $className, string $joinAlias, string $conditions, string $conditionType = Join::ON): self
     {
-        $this->qb->join($className, $joinAlias, Join::ON, $conditions);
+        $this->qb->join($className, $joinAlias, $conditionType, $conditions);
 
         return $this;
     }
 
-    public function leftJoin(string $className, string $joinAlias, string $conditions): self
+    public function leftJoin(string $className, string $joinAlias, string $conditions, string $conditionType = Join::ON): self
     {
-        $this->qb->leftJoin($className, $joinAlias, Join::ON, $conditions);
+        $this->qb->leftJoin($className, $joinAlias, $conditionType, $conditions);
 
         return $this;
     }

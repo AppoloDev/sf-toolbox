@@ -19,15 +19,15 @@ $repository->getQB()
     ->getResults();
 ```
 
-### `join(string $className, string $joinAlias, string $conditions): self`
+### `join(string $className, string $joinAlias, string $conditions, string $conditionType = Join::ON): self`
 
-`JOIN` sur une classe arbitraire (pas nécessairement une association mappée sur l'entité courante), avec une condition `ON` explicite.
+`JOIN` sur une classe arbitraire (pas nécessairement une association mappée sur l'entité courante), avec une condition explicite. `$conditionType` vaut `Join::ON` par défaut (utiliser `Join::WITH` si besoin).
 
 ```php
 $repository->getQB()->join(Order::class, 'o', 'o.book = book.id')->getResults();
 ```
 
-### `leftJoin(string $className, string $joinAlias, string $conditions): self`
+### `leftJoin(string $className, string $joinAlias, string $conditions, string $conditionType = Join::ON): self`
 
 Identique à `join()` mais en `LEFT JOIN` (les entités sans correspondance sont quand même incluses, avec des valeurs `null` pour l'alias joint).
 

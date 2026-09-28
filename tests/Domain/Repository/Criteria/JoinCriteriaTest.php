@@ -37,6 +37,32 @@ class JoinCriteriaTest extends TestCase
         self::assertSame($subject, $subject->leftJoin('App\Entity\Order', 'o', 'o.book = book.id'));
     }
 
+    public function testJoinUsesGivenConditionType(): void
+    {
+        $queryBuilder = $this->createMock(QueryBuilder::class);
+        $queryBuilder->expects(self::once())
+            ->method('join')
+            ->with('App\Entity\Order', 'o', Join::WITH, 'o.book = book.id')
+            ->willReturnSelf();
+
+        $subject = $this->createJoinCriteria($queryBuilder);
+
+        self::assertSame($subject, $subject->join('App\Entity\Order', 'o', 'o.book = book.id', Join::WITH));
+    }
+
+    public function testLeftJoinUsesGivenConditionType(): void
+    {
+        $queryBuilder = $this->createMock(QueryBuilder::class);
+        $queryBuilder->expects(self::once())
+            ->method('leftJoin')
+            ->with('App\Entity\Order', 'o', Join::WITH, 'o.book = book.id')
+            ->willReturnSelf();
+
+        $subject = $this->createJoinCriteria($queryBuilder);
+
+        self::assertSame($subject, $subject->leftJoin('App\Entity\Order', 'o', 'o.book = book.id', Join::WITH));
+    }
+
     private function createJoinCriteria(QueryBuilder $queryBuilder): object
     {
         return new class($queryBuilder) {
