@@ -2,66 +2,56 @@
 
 namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria;
 
-// TODO : Refactor
 trait DateCriteria
 {
-    public function date(string $field, \DateTimeInterface $date, string $customAlias = null): self
-    {
-        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $paramName = 'date'.$alias.$field.uniqid();
+    public function date(
+        string $field,
+        \DateTimeInterface $date,
+        ?string $customAlias = null,
+    ): self {
+        if ($date instanceof \DateTime) {
+            $immutable = \DateTimeImmutable::createFromMutable($date);
+        } else {
+            $immutable = $date;
+        }
 
-        $this->qb
-            ->andWhere($this->qb->expr()->eq($alias.'.'.$field, ':'.$paramName))
-            ->setParameter($paramName, $date);
+        $start = $immutable->setTime(0, 0, 0);
+        $end = $immutable->setTime(23, 59, 59);
 
-        return $this;
+        return $this->dateBetween($field, $start, $end, $customAlias);
     }
 
     public function dateBetween(
         string $field,
         \DateTimeInterface $from,
         \DateTimeInterface $to,
-        string $customAlias = null
+        ?string $customAlias = null,
     ): self {
-        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-
-        $this->qb
-            ->andWhere($this->qb->expr()->between($alias.'.'.$field, ':from'.$field, ':to'.$field))
-            ->setParameter('from'.$field, $from)
-            ->setParameter('to'.$field, $to);
-
-        return $this;
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->between(
+            $field,
+            $from->format('Y-m-d H:i:s'),
+            $to->format('Y-m-d H:i:s'),
+            $customAlias
+        ));
     }
 
     public function dateNotExpired(
         string $field,
-        string $customAlias = null,
-        \DateTimeInterface $customDate = null
+        ?\DateTimeInterface $customDate = null,
+        ?string $customAlias = null,
     ): self {
-        $currentDate = is_null($customDate) ? new \DateTimeImmutable() : $customDate;
-        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $paramName = 'date'.$alias.$field.uniqid();
+        $date = $customDate ?? new \DateTimeImmutable();
 
-        $this->qb
-            ->andWhere($this->qb->expr()->gte($alias.'.'.$field, ':'.$paramName))
-            ->setParameter($paramName, $currentDate);
-
-        return $this;
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->gte($field, $date, $customAlias));
     }
 
     public function dateExpired(
         string $field,
-        string $customAlias = null,
-        \DateTimeInterface $customDate = null
+        ?\DateTimeInterface $customDate = null,
+        ?string $customAlias = null,
     ): self {
-        $currentDate = is_null($customDate) ? new \DateTimeImmutable() : $customDate;
-        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $paramName = 'date'.$alias.$field.uniqid();
+        $date = $customDate ?? new \DateTimeImmutable();
 
-        $this->qb
-            ->andWhere($this->qb->expr()->lte($alias.'.'.$field, ':'.$paramName))
-            ->setParameter($paramName, $currentDate);
-
-        return $this;
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->lte($field, $date, $customAlias));
     }
 }

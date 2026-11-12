@@ -3,17 +3,28 @@
 namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria;
 
 use AppoloDev\SFToolboxBundle\Domain\Entity\Concern\Identifiable\IdentifiableInterface;
+use AppoloDev\SFToolboxBundle\Utils\UuidUtils;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Uid\AbstractUid;
+use Symfony\Component\Uid\Uuid;
 
 trait BuilderCriteria
 {
     protected QueryBuilder $qb;
+    protected ?QueryBuilder $parentQb = null;
 
-    public function getQB(string $customAlias = null): self
+    public function getQB(?string $customAlias = null): self
     {
-        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
+        $this->qb = $this->createQueryBuilder($this->getAlias($customAlias));
 
+        return $this;
+    }
+
+    public function getSubQb(QueryBuilder $parentQb, string $alias): self
+    {
         $this->qb = $this->createQueryBuilder($alias);
+        $this::$alias = $alias;
+        $this->parentQb = $parentQb;
 
         return $this;
     }
@@ -23,16 +34,32 @@ trait BuilderCriteria
         return $this->qb;
     }
 
+    /**
+     * @deprecated
+     *
+     * @return BuilderCriteria
+     */
     public function useQBMethod(string $methodName, array $params = []): self
     {
         $this->qb->$methodName(...$params);
 
-        // TODO: Bug quand il est tête
+        return $this;
+    }
+
+    public function set(string $field, int|float|bool|string|null $value, ?string $customAlias = null): self
+    {
+        $this->qb->set($this->getAliasField($customAlias, $field), $value);
 
         return $this;
     }
 
-    // TODO: Add method update
+    public function update(): self
+    {
+        $this->qb->update();
+
+        return $this;
+    }
+
     public function delete(): self
     {
         $this->qb->delete();
@@ -65,9 +92,28 @@ trait BuilderCriteria
         return $this->qb->getQuery()->getResult();
     }
 
+    public function getArrayResults(): array
+    {
+        return $this->qb->getQuery()->getArrayResult();
+    }
+
+    public function getResultsIndexedBy(string $field): array
+    {
+        $results = array_reduce($this->getQB()->getResults(), function (?array $acc, mixed $item) use ($field) {
+            $id = $item->{'get'.ucfirst($field)}();
+            if ($id instanceof Uuid) {
+                $id = (string) $id;
+            }
+            $acc[$id] = $item;
+
+            return $acc;
+        });
+
+        return is_null($results) ? [] : $results;
+    }
+
     public function getResultsIndexedById(): array
     {
-        // TODO: Creer un getResultsIndexedBy
         $results = array_reduce($this->getQB()->getResults(), function (?array $acc, IdentifiableInterface $item) {
             $acc[$item->getId()->__toString()] = $item;
 
@@ -75,5 +121,54 @@ trait BuilderCriteria
         });
 
         return is_null($results) ? [] : $results;
+    }
+
+    public function complexQuery(callable $callable): self
+    {
+        $complexBuilder = new ComplexBuilder($this);
+        $conditions = $callable($complexBuilder);
+
+        if (!is_null($conditions)) {
+            $this->qb->andWhere($conditions);
+        }
+
+        return $this;
+    }
+
+    public function getAlias(?string $customAlias): string
+    {
+        return null !== $customAlias ? $customAlias : self::$alias;
+    }
+
+    public function getAliasField(?string $customAlias, string $field): string
+    {
+        return $this->getAlias($customAlias).'.'.$field;
+    }
+
+    public function setParameter(string $paramName, mixed $value, ?string $type = null): self
+    {
+        $qb = $this->parentQb ?? $this->qb;
+
+        $qb->setParameter($paramName, $value, $type);
+
+        return $this;
+    }
+
+    public function getValue(mixed $value): mixed
+    {
+        if ($value instanceof AbstractUid) {
+            return $value->toBinary();
+        }
+
+        if (!is_string($value) || !UuidUtils::isUuid($value)) {
+            return $value;
+        }
+
+        return Uuid::fromString($value)->toBinary();
+    }
+
+    public function getQueryBuilder(): QueryBuilder
+    {
+        return $this->qb;
     }
 }

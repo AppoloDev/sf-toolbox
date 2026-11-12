@@ -4,11 +4,11 @@ namespace AppoloDev\SFToolboxBundle\Domain\Entity\Concern\Deletable;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 trait Deletable
 {
-    #[ORM\Column(type: Types::BOOLEAN)]
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     #[Groups(['delete'])]
     private bool $deleted = false;
 

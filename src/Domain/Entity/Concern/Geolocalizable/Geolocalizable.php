@@ -4,23 +4,34 @@ namespace AppoloDev\SFToolboxBundle\Domain\Entity\Concern\Geolocalizable;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 trait Geolocalizable
 {
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Groups(['localisation'])]
-    private ?string $address;
+    private ?string $address = null;
 
     #[ORM\Column(type: Types::STRING, length: 5, nullable: true)]
     #[Groups(['localisation'])]
-    private ?string $zipCode;
+    private ?string $zipCode = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     #[Groups(['localisation'])]
-    private ?string $city;
+    private ?string $city = null;
 
-    // TODO: Lat, LNG ?
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    #[Groups(['localisation'])]
+    private ?float $lat = null;
+
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    #[Groups(['localisation'])]
+    private ?float $lng = null;
+
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Groups(['localisation'])]
+    private ?string $formattedAddress = null;
+
     public function getAddress(): ?string
     {
         return $this->address;
@@ -53,6 +64,42 @@ trait Geolocalizable
     public function setCity(?string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(?float $lng): self
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    public function getFormattedAddress(): ?string
+    {
+        return $this->formattedAddress;
+    }
+
+    public function setFormattedAddress(?string $formattedAddress): self
+    {
+        $this->formattedAddress = $formattedAddress;
 
         return $this;
     }

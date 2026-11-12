@@ -1,20 +1,20 @@
 {% extends '_layout/admin.html.twig' %}
 
-{% block title %}Liste des ##ROUTEPATH##s{% endblock %}{# TODO: Wording #}
+{% block title %}{{'list_of_##ROUTEPATH##s'|trans}}{% endblock %}{# TODO: Translation #}
 
 {% block breadcrumb %}
-    {{ component('breadcrumb', {items: [
-        {path: path('##AREALOWER##_dashboard'), label: 'Accueil'},
+    <twig:Breadcrumb items="{{[
+        {path: path('##AREALOWER##_dashboard'), label: 'home'|trans},
         {path: null, label: block('title')},
-    ]}) }}
+    ] }}"/>
 {% endblock %}
 
 {% block body %}
     {# TODO: Implements & wording #}
-    {% component table_list with {
+    {% component TableList with {
         headerTitle: block('title'),
         tableColumns: [
-            knp_pagination_sortable(pagination, 'ID', '##ENTITYLOWER##.id'),
+            knp_pagination_sortable(pagination, 'ID'|trans, '##ENTITYLOWER##.id'),
             ''
         ],
         pagination: pagination,
@@ -22,38 +22,39 @@
         {% block header_actions %}
             <div class="flex gap-4 items-center">
                 {% if is_granted('##AREALOWER##_##PREFIX##_export') %}
-                    {{ component('button_link', {
-                        link: path('##AREALOWER##_##PREFIX##_export', {q: app.request.query.get('q')}),
-                        label: 'Exporter',
-                        color: themeColor,
-                        mode: 'ghost',
-                        icon: source('@SFToolbox/icons/download.svg'),
-                    }) }}
+                    <twig:ButtonLink
+                            link="{{ path('##AREALOWER##_##PREFIX##_export', {q: app.request.query.get('q')}) }}"
+                            label="{{'export'|trans}}"
+                            color="{{ themeColor }}"
+                            mode="ghost"
+                            icon="{{ ux_icon('fa6-solid:download') }}"
+                    />
                 {% endif %}
 
                 {% if is_granted('##AREALOWER##_##PREFIX##_add') %}
-                    {{ component('button_link', {
-                        link: path('##AREALOWER##_##PREFIX##_add'),
-                        label: 'Ajouter',
-                        color: themeColor,
-                        icon: source('@SFToolbox/icons/plus.svg')
-                    }) }}
+                    <twig:ButtonLink
+                            link="{{ path('##AREALOWER##_##PREFIX##_add') }}"
+                            label="{{'add'|trans}}"
+                            color="{{ themeColor }}"
+                            icon="{{ ux_icon('fa6-solid:plus') }}"
+                    />
                 {% endif %}
             </div>
         {% endblock %}
 
         {% block emptyList %}
             {# TODO: Wording #}
-            {{ component('list_empty', {
-                description: 'Essayez d\'ajouter un nouvel ##ROUTEPATH##.',
-                button: component('button_link', {
-                    allowDisplay: is_granted('##AREALOWER##_##PREFIX##_add'),
-                    link: path('##AREALOWER##_##PREFIX##_add'),
-                    label: "Ajouter",
-                    color: themeColor,
-                    icon: source('@SFToolbox/icons/plus.svg'),
-                })
-            }) }}
+            <twig:ListEmpty description="{{ 'try_to_add_a_new_item'|trans }}">
+                <twig:block name="ListEmptyButton">
+                    <twig:ButtonLink
+                            allowDisplay="{{ is_granted('##AREALOWER##_##PREFIX##_add') }}"
+                            icon="{{ ux_icon('fa6-solid:plus') }}"
+                            label="{{'add'|trans}}"
+                            link="{{ path('##AREALOWER##_##PREFIX##_add') }}"
+                            color="{{ themeColor }}"
+                    />
+                </twig:block>
+            </twig:ListEmpty>
         {% endblock %}
 
         {% block table_item %}

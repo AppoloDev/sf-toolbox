@@ -3,16 +3,16 @@
 {% block title %}{{ ##ENTITYCAMEL##.id}}{% endblock %}{# TODO: Implements #}
 
 {% block breadcrumb %}
-    {# TODO: Wording #}
-    {{ component('breadcrumb', {items: [
-        {path: path('##AREALOWER##_dashboard'), label: 'Accueil'},
-        {path: path('##AREALOWER##_##PREFIX##_list'), label: '##ROUTEPATH##s'},
+    {# TODO: Translation #}
+    <twig:Breadcrumb items="{{[
+        {path: path('##AREALOWER##_dashboard'), label: 'home'|trans},
+        {path: path('##AREALOWER##_##PREFIX##_list'), label: 'list_of_##ROUTEPATH##s'|trans},
         {path: null, label: block('title')},
-    ]}) }}
+    ] }}"/>
 {% endblock %}
 
 {% block body %}
-    {% component form_layout with {
+    {% component FormLayout with {
         headerTitle: block('title'),
     } %}
         {% block form_render %}

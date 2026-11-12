@@ -2,23 +2,29 @@
 
 namespace AppoloDev\SFToolboxBundle\Csv;
 
-use League\Csv\AbstractCsv;
+use League\Csv\Bom;
 use League\Csv\CannotInsertRecord;
 use League\Csv\Exception;
-use League\Csv\Reader;
+use League\Csv\InvalidArgument;
 use League\Csv\Writer;
 
-class CsvWriter
+readonly class CsvWriter
 {
-    private AbstractCsv $csv;
+    private Writer $csv;
 
+    /**
+     * @throws InvalidArgument
+     */
     public function __construct()
     {
         $this->csv = Writer::createFromString();
         $this->csv->setDelimiter(';');
-        $this->csv->setOutputBOM(Reader::BOM_UTF8);
+        $this->csv->setOutputBOM(Bom::Utf8);
     }
 
+    /**
+     * @throws InvalidArgument
+     */
     public function setDelimiter(string $delimiter): void
     {
         $this->csv->setDelimiter($delimiter);
@@ -31,6 +37,7 @@ class CsvWriter
     public function setHeaders(array $headers): self
     {
         $this->csv->insertOne($headers);
+
         return $this;
     }
 
@@ -41,6 +48,7 @@ class CsvWriter
     public function setRows(array $rows): self
     {
         $this->csv->insertAll($rows);
+
         return $this;
     }
 
@@ -51,9 +59,13 @@ class CsvWriter
     public function setRow(array $row): self
     {
         $this->csv->insertOne($row);
+
         return $this;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getContent(): string
     {
         return $this->csv->toString();

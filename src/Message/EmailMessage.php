@@ -13,7 +13,10 @@ class EmailMessage
         array $recipients,
         private readonly string $object,
         private readonly string $template,
-        private readonly array $parameters = []
+        private readonly array $parameters = [],
+        private readonly string $locale = 'en',
+        private readonly array $files = [],
+        private readonly ?string $logoPath = null,
     ) {
         $this->recipients = array_map(fn ($recipient): Address => new Address($recipient), $recipients);
     }
@@ -36,5 +39,20 @@ class EmailMessage
     public function getParameters(): array
     {
         return $this->parameters;
+    }
+
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
+    public function getFiles(): array
+    {
+        return $this->files;
+    }
+
+    public function getLogoPath(): ?string
+    {
+        return $this->logoPath;
     }
 }

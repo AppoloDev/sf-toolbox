@@ -17,11 +17,25 @@ class ArrayUtils
         foreach ($haystack as $key => $value) {
             if ($key === $needle) {
                 return $value;
-            } else if (is_array($value)) {
+            } elseif (is_array($value)) {
                 return self::recursiveFind($value, $needle);
             }
         }
 
         return null;
+    }
+
+    public static function flatten(array $array): array
+    {
+        $result = [];
+        foreach ($array as $item) {
+            if (\is_array($item)) {
+                $result = array_merge($result, self::flatten($item));
+            } else {
+                $result[] = $item;
+            }
+        }
+
+        return $result;
     }
 }

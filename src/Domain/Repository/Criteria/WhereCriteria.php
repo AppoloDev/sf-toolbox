@@ -2,174 +2,94 @@
 
 namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria;
 
-use AppoloDev\SFToolboxBundle\Utils\UuidUtils;
-use Doctrine\ORM\Query\Expr\Composite;
-use Symfony\Component\Uid\Uuid;
+use AppoloDev\SFToolboxBundle\Domain\Repository\Criteria\Expression\ExpressionInterface;
+use Symfony\Component\Uid\AbstractUid;
 
-// TODO: Gros refactor: Add method andWhere, orWhere ... Regarder dans les anciens projet où on utilise le useQBMethod
 trait WhereCriteria
 {
-    public function searchIntoFields(?string $querySearch, array $fieldsToSearch, string $customAlias = null): self
+    /**
+     * @param array<int, AbstractUid|int|bool|string|\DateTimeInterface>|string $params
+     */
+    public function in(string $field, array|string $params, ?string $customAlias = null): self
     {
-        if (count($fieldsToSearch) > 0 && !is_null($querySearch) && '' !== $querySearch) {
-            $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-            $andX = $this->qb->expr()->andX();
-            $this->aggregateOrField($andX, $alias, $querySearch, $fieldsToSearch);
-            $this->qb->andWhere($andX);
-        }
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->in($field, $params, $customAlias));
+    }
+
+    /**
+     * @param array<int, AbstractUid|int|bool|string|\DateTimeInterface>|string $params
+     */
+    public function notIn(string $field, array|string $params, ?string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->notIn($field, $params, $customAlias));
+    }
+
+    public function isNull(string $field, ?string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->isNull($field, $customAlias));
+    }
+
+    public function isNotNull(string $field, ?string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->isNotNull($field, $customAlias));
+    }
+
+    public function eq(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->eq($field, $value, $customAlias));
+    }
+
+    public function notEq(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->notEq($field, $value, $customAlias));
+    }
+
+    public function gt(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->gt($field, $value, $customAlias));
+    }
+
+    public function gte(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->gte($field, $value, $customAlias));
+    }
+
+    public function lt(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->lt($field, $value, $customAlias));
+    }
+
+    public function lte(string $field, int|bool|string|\DateTimeInterface|AbstractUid|null $value, ?string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->lte($field, $value, $customAlias));
+    }
+
+    public function between(string $field, string|\DateTimeInterface|null $from, string|\DateTimeInterface|null $to, ?string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->between($field, $from, $to, $customAlias));
+    }
+
+    public function searchIntoFields(?string $query, array $fields, ?string $customAlias = null): self
+    {
+        return $this->complexQuery(fn (ComplexBuilder $cb) => $cb->searchIntoFields($query, $fields, $customAlias));
+    }
+
+    public function whereExpr(ExpressionInterface $selectExpression): self
+    {
+        $this->qb->where($selectExpression->toString($this));
 
         return $this;
     }
 
-    public function orSearchIntoFields(?string $querySearch, array $fieldsToSearch, string $customAlias = null): self
+    public function orWhereExpr(ExpressionInterface $selectExpression): self
     {
-        if (count($fieldsToSearch) > 0 && !is_null($querySearch) && '' !== $querySearch) {
-            $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-            $orX = $this->qb->expr()->orX();
-            $this->aggregateOrField($orX, $alias, $querySearch, $fieldsToSearch);
-            $this->qb->orWhere($orX);
-        }
+        $this->qb->orWhere($selectExpression->toString($this));
 
         return $this;
     }
 
-    private function aggregateOrField(Composite $composite, string $alias, string $querySearch, array $fieldsToSearch): void
+    public function andWhereExpr(ExpressionInterface $selectExpression): self
     {
-        foreach (explode(' ', $querySearch) as $term) {
-            $orX = $this->qb->expr()->orX();
-            $isUuid = UuidUtils::isUuid($term);
-
-            foreach ($fieldsToSearch as $fieldToSearch) {
-                $value = ('id' === $fieldToSearch && $isUuid ? Uuid::fromString($term)->toBinary() : $term);
-                $paramName = 'likeSearchInto'.$alias.$fieldToSearch.uniqid();
-                $orX->add($this->qb->expr()->like('LOWER('.$alias.'.'.$fieldToSearch.')', ':'.$paramName));
-                $orX->add($this->qb->expr()->like($alias.'.'.$fieldToSearch, ':'.$paramName));
-                $this->qb->setParameter($paramName, '%'.strtolower($value).'%', $isUuid ? 'uuid' : null);
-            }
-
-            $composite->add($orX);
-        }
-    }
-
-    public function in(string $field, array $params, string $customAlias = null): self
-    {
-        if (count($params) > 0) {
-            $params = array_map(function (mixed $param) {
-                $isUuid = UuidUtils::isUuid($param);
-
-                return $isUuid ? Uuid::fromString($param)->toBinary() : $param;
-            }, $params);
-
-            $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-            $paramName = 'inParam'.$alias.$field.uniqid();
-            $this->qb
-                ->andWhere($this->qb->expr()->in($alias.'.'.$field, ':'.$paramName))
-                ->setParameter($paramName, $params);
-        }
-
-        return $this;
-    }
-
-    public function notIn(string $field, array $params, string $customAlias = null): self
-    {
-        if (count($params) > 0) {
-            $params = array_map(function (mixed $param) {
-                $isUuid = UuidUtils::isUuid($param);
-
-                return $isUuid ? Uuid::fromString($param)->toBinary() : $param;
-            }, $params);
-
-            $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-            $paramName = 'notInParam'.$alias.$field.uniqid();
-            $this->qb
-                ->andWhere($this->qb->expr()->notIn($alias.'.'.$field, ':'.$paramName))
-                ->setParameter($paramName, $params);
-        }
-
-        return $this;
-    }
-
-    public function isNull(string $field, string $customAlias = null): self
-    {
-        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $this->qb
-            ->andWhere($this->qb->expr()->isNull($alias.'.'.$field));
-
-        return $this;
-    }
-
-    public function isNotNull(string $field, string $customAlias = null): self
-    {
-        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $this->qb
-            ->andWhere($this->qb->expr()->isNotNull($alias.'.'.$field));
-
-        return $this;
-    }
-
-    public function eq(string $field, null|int|bool|string $value, string $customAlias = null): self
-    {
-        if (is_null($value) || '' === $value) {
-            return $this;
-        }
-
-        $isUuid = UuidUtils::isUuid($value);
-        if ($isUuid) {
-            $value = Uuid::fromString($value)->toBinary();
-        }
-
-        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $paramName = 'value'.$alias.$field.uniqid();
-        $this->qb
-            ->andWhere($this->qb->expr()->eq($alias.'.'.$field, ':'.$paramName))
-            ->setParameter($paramName, $value, $isUuid ? 'uuid' : null);
-
-        return $this;
-    }
-
-    public function notEq(string $field, null|int|bool|string $value, string $customAlias = null): self
-    {
-        if (is_null($value)) {
-            return $this;
-        }
-
-        $isUuid = UuidUtils::isUuid($value);
-        if ($isUuid) {
-            $value = Uuid::fromString($value)->toBinary();
-        }
-
-        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-        $paramName = 'value'.$alias.$field.uniqid();
-        $this->qb
-            ->andWhere($this->qb->expr()->neq($alias.'.'.$field, ':'.$paramName))
-            ->setParameter($paramName, $value, $isUuid ? 'uuid' : null);
-
-        return $this;
-    }
-
-    public function comparisonOperator(string $field, string $operator, string $value, string $customAlias = null): self
-    {
-        $alias = null !== $customAlias ? $customAlias : self::$alias;
-        $paramName = 'value'.$alias.$field.uniqid();
-        $this->qb
-            ->andWhere($this->qb->expr()->$operator($alias.'.'.$field, ':'.$paramName))
-            ->setParameter($paramName, $value);
-
-        return $this;
-    }
-
-    public function between(string $field, ?string $from, ?string $to, string $customAlias = null): self
-    {
-        if (is_null($from) || is_null($to)) {
-            return $this;
-        }
-
-        $alias = !is_null($customAlias) ? $customAlias : self::$alias;
-
-        $this->qb
-            ->andWhere($this->qb->expr()->between($alias.'.'.$field, ':from'.$field, ':to'.$field))
-            ->setParameter('from'.$field, $from)
-            ->setParameter('to'.$field, $to);
+        $this->qb->andWhere($selectExpression->toString($this));
 
         return $this;
     }

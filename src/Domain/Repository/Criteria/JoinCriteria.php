@@ -2,18 +2,31 @@
 
 namespace AppoloDev\SFToolboxBundle\Domain\Repository\Criteria;
 
+use Doctrine\ORM\Query\Expr\Join;
+
 trait JoinCriteria
 {
-    // TODO: Add Identity
-    public function with(string $field, string $joinAlias, string $customAlias = null, ?bool $addSelect = false): self
+    public function with(string $field, string $joinAlias, ?string $customAlias = null, ?bool $addSelect = false): self
     {
-        $alias = null !== $customAlias ? $customAlias : self::$alias;
-
         if ($addSelect) {
             $this->qb->addSelect($joinAlias);
         }
 
-        $this->qb->leftJoin($alias.'.'.$field, $joinAlias);
+        $this->qb->leftJoin($this->getAliasField($customAlias, $field), $joinAlias);
+
+        return $this;
+    }
+
+    public function join(string $className, string $joinAlias, string $conditions, string $conditionType = Join::ON): self
+    {
+        $this->qb->join($className, $joinAlias, $conditionType, $conditions);
+
+        return $this;
+    }
+
+    public function leftJoin(string $className, string $joinAlias, string $conditions, string $conditionType = Join::ON): self
+    {
+        $this->qb->leftJoin($className, $joinAlias, $conditionType, $conditions);
 
         return $this;
     }

@@ -6,27 +6,54 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 readonly class ArrayToStringTransformer implements DataTransformerInterface
 {
-    public function __construct(private array $defaultValues)
+    public function __construct(private array $defaultValues, private bool $multiple = false)
     {
     }
 
     public function transform(mixed $value): ?string
     {
+        if (!is_array($value)) {
+            return null;
+        }
+
         foreach ($this->defaultValues as $defaultValue) {
             if (in_array($defaultValue, $value)) {
                 return $defaultValue;
             }
         }
 
-        return is_array($value) ? end($value) : null;
+        if (!$this->multiple) {
+            $v = end($value);
+
+            return is_string($v) ? $v : '';
+        }
+
+        return implode(',', array_map(self::stringifyArrayValue(...), $value));
     }
 
     public function reverseTransform(mixed $value): array
     {
         if (is_string($value)) {
-            return [$value];
+            if (!$this->multiple) {
+                return [$value];
+            }
+
+            return explode(',', $value);
         }
 
         return [];
+    }
+
+    private static function stringifyArrayValue(mixed $value): string
+    {
+        if (is_scalar($value)) {
+            return (string) $value;
+        }
+
+        if ($value instanceof \Stringable) {
+            return (string) $value;
+        }
+
+        return '';
     }
 }

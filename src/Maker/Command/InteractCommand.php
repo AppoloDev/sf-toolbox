@@ -27,7 +27,7 @@ trait InteractCommand
         $domainValue = $io->askQuestion($question);
         $input->setArgument($argName, $domainValue);
         $question->setValidator(function ($answer) {
-            if ($answer !== true) {
+            if (true !== $answer) {
                 throw new \InvalidArgumentException('You should configure the mapping before continue!');
             }
 

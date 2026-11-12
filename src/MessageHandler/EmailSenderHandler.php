@@ -10,6 +10,7 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Mime\Address;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsMessageHandler]
 class EmailSenderHandler extends AbstractController
@@ -22,6 +23,7 @@ class EmailSenderHandler extends AbstractController
         private readonly MailerInterface $mailer,
         #[Autowire('%kernel.project_dir%')]
         private readonly string $projectDir,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -30,16 +32,26 @@ class EmailSenderHandler extends AbstractController
      */
     public function __invoke(EmailMessage $emailMessage): void
     {
-        $logoPath = $this->projectDir.'/public/assets/images/logo.png';
+        $logoPath = !is_null($emailMessage->getLogoPath()) && is_file($emailMessage->getLogoPath())
+            ? $emailMessage->getLogoPath()
+            : $this->projectDir.'/public/assets/images/logo.png';
 
         $email = (new TemplatedEmail())
             ->from(new Address($this->senderEmail, $this->senderName))
             ->to(...$emailMessage->getRecipients())
-            ->subject($emailMessage->getObject())
+            ->subject($this->translator->trans($emailMessage->getObject(), [], 'emails'))
             ->embedFromPath($logoPath, 'logo')
             ->htmlTemplate($emailMessage->getTemplate())
-            ->context($emailMessage->getParameters())
+            ->context(array_merge($emailMessage->getParameters(), ['locale' => $emailMessage->getLocale()]))
         ;
+
+        if (count($emailMessage->getFiles()) > 0) {
+            foreach ($emailMessage->getFiles() as $file) {
+                if (isset($file['file'])) {
+                    $email->attach($file['file']->getContent(), $file['filename'] ?? 'attachment');
+                }
+            }
+        }
 
         $this->mailer->send($email);
     }
